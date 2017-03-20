@@ -1,0 +1,28 @@
+#-*- coding: utf-8 -*-
+{% extends "ER_plotter/home.html" %}
+<!DOCTYPE html>
+{% load widget_tweaks %}
+{% load static %}
+  {% block row %}
+    {% for i in '123' %}
+    <tr>
+      <td>{{ i }}</td>
+      <td>{{ 'regen_UC_'|add:i }}</td>
+      <td>{{ 'regen_0_'|add:i }}</td>
+      <td>{{ 'regen_2_1'|add:i }}</td>
+      <td>{{ 'regen_4_1'|add:i }}</td>
+      <td>{{ 'regen_8_1'|add:i }}</td>
+      <td>{{ 'regen_12_1'|add:i }}</td>
+      <td>{{ 'regen_16_1'|add:i }}</td>
+      <td>{{ 'regen_20_1'|add:i }}</td>
+      <td>{{ 'regen_24_1'|add:i }}</td>
+      <td>{{ 'regen_36_1'|add:i }}</td>
+      <td>{{ 'regen_48_1'|add:i }}</td>
+      <td>{{ 'regen_60_1'|add:i }}</td>
+      <td>{{ 'regen_72_1'|add:i }}</td>
+      <td>{{ 'regen_96_1'|add:i }}</td>
+      <td>{{ 'regen_120_1'|add:i }}</td>
+      <td>{{ 'regen_144_1'|add:i }}</td>
+    </tr>
+    {% endfor %}
+  {% endblock row %}
