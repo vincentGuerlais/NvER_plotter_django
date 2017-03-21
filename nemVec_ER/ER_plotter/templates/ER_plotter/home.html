@@ -20,7 +20,7 @@
     <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'ER_plotter/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'ER_plotter/home2103.css' %}" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -69,7 +69,7 @@
   
         // The intervals data as narrow lines (useful for showing raw source data)
         var options_lines = {
-            title: 'Regeneration expression',
+            title: 'Regeneration expression{% if log2 %} -- log2{% endif %}',
             titleTextStyle: { fontSize: 20 },
             lineWidth: 2,
             intervals: { 'style':'sticks', lineWidth:1.5 },
@@ -93,38 +93,45 @@
         data.addColumn('number', '{{ nvertx_1 }} Helm');
         data.addColumn('number', 'mean');
         data.addColumn({type: 'string', role: 'tooltip'});
+        {% if nvertx_2 %}
+        data.addColumn('number', '{{ nvertx_2 }} Warner');
+        data.addColumn('number', '{{ nvertx_2 }} Fischer');
+        data.addColumn('number', '{{ nvertx_2 }} Helm');
+        data.addColumn('number', 'mean');
+        data.addColumn({type: 'string', role: 'tooltip'});
+        {% endif %}
 
   
         data.addRows([
-            [0, , {{ embryo_fischer_0_1 }}, , {{ embryo_fischer_0_1 }}, '0 HPF\nFischer : {{ embryo_fischer_0_1 }} CPM'],
-            [1, , {{ embryo_fischer_1_1 }}, , {{ embryo_fischer_1_1 }}, '1 HPF\nFischer : {{ embryo_fischer_1_1 }} CPM'],
-            [2, , {{ embryo_fischer_2_1 }}, {{ embryo_helm_2_1 }}, {{ embryo_mean_2_1 }}, '2 HPF\nFischer : {{ embryo_fischer_2_1 }} CPM\nHelm : {{ embryo_helm_2_1 }} CPM'],
-            [3, , {{ embryo_fischer_3_1 }}, , {{ embryo_fischer_3_1 }}, '3 HPF\nFischer : {{ embryo_fischer_3_1 }} CPM'],
-            [4, , {{ embryo_fischer_4_1 }}, , {{ embryo_fischer_4_1 }}, '4 HPF\nFischer : {{ embryo_fischer_4_1 }} CPM'],
-            [5, , {{ embryo_fischer_5_1 }}, , {{ embryo_fischer_5_1 }}, '5 HPF\nFischer : {{ embryo_fischer_5_1 }} CPM'],
-            [6, , {{ embryo_fischer_6_1 }}, , {{ embryo_fischer_6_1 }}, '6 HPF\nFischer : {{ embryo_fischer_6_1 }} CPM'],
-            [7, , {{ embryo_fischer_7_1 }}, {{ embryo_helm_7_1 }}, {{ embryo_mean_7_1 }}, '7 HPF\nFischer : {{ embryo_fischer_7_1 }} CPM\nHelm : {{ embryo_helm_7_1 }} CPM'],
-            [8, , {{ embryo_fischer_8_1 }}, , {{ embryo_fischer_8_1 }}, '8 HPF\nFischer : {{ embryo_fischer_8_1 }} CPM'],
-            [9, , {{ embryo_fischer_9_1 }}, , {{ embryo_fischer_9_1 }}, '9 HPF\nFischer : {{ embryo_fischer_9_1 }} CPM'],
-            [10, , {{ embryo_fischer_10_1 }}, , {{ embryo_fischer_10_1 }}, '10 HPF\nFischer : {{ embryo_fischer_10_1 }} CPM'],
-            [11, , {{ embryo_fischer_11_1 }}, , {{ embryo_fischer_11_1 }}, '11 HPF\nFischer : {{ embryo_fischer_11_1 }} CPM'],
-            [12, , {{ embryo_fischer_12_1 }}, {{ embryo_helm_12_1 }}, {{ embryo_mean_12_1 }}, '12 HPF\nFischer : {{ embryo_fischer_12_1 }} CPM\nHelm : {{ embryo_helm_12_1 }} CPM'],
-            [13, , {{ embryo_fischer_13_1 }}, , {{ embryo_fischer_13_1 }}, '13 HPF\nFischer : {{ embryo_fischer_13_1 }} CPM'],
-            [14, , {{ embryo_fischer_14_1 }}, , {{ embryo_fischer_14_1 }}, '14 HPF\nFischer : {{ embryo_fischer_14_1 }} CPM'],
-            [15, , {{ embryo_fischer_15_1 }}, , {{ embryo_fischer_15_1 }}, '15 HPF\nFischer : {{ embryo_fischer_15_1 }} CPM'],
-            [16, , {{ embryo_fischer_16_1 }}, , {{ embryo_fischer_16_1 }}, '16 HPF\nFischer : {{ embryo_fischer_16_1 }} CPM'],
-            [17, , {{ embryo_fischer_17_1 }}, , {{ embryo_fischer_17_1 }}, '17 HPF\nFischer : {{ embryo_fischer_17_1 }} CPM'],
-            [18, , {{ embryo_fischer_18_1 }}, , {{ embryo_fischer_18_1 }}, '18 HPF\nFischer : {{ embryo_fischer_18_1 }} CPM'],
-            [19, , {{ embryo_fischer_19_1 }}, , {{ embryo_fischer_19_1 }}, '19 HPF\nFischer : {{ embryo_fischer_19_1 }} CPM'],
-            [24, {{ embryo_warner_24_1 }}, , {{ embryo_helm_24_1 }}, {{ embryo_mean_24_1 }}, '24 HPF\nWarner : {{ embryo_warner_24_1 }} CPM\nHelm : {{ embryo_helm_24_1 }} CPM'],
-            [48, {{ embryo_warner_48_1 }}, , , {{ embryo_warner_48_1 }}, '48 HPF\nFischer : {{ embryo_warner_48_1 }} CPM'],
-            [72, {{ embryo_warner_72_1 }}, , , {{ embryo_warner_72_1 }}, '72 HPF\nFischer : {{ embryo_warner_72_1 }} CPM'],
-            [96, {{ embryo_warner_96_1 }}, , , {{ embryo_warner_96_1 }}, '96 HPF\nFischer : {{ embryo_warner_96_1 }} CPM'],
-            [120, {{ embryo_warner_120_1 }}, , {{ embryo_helm_120_1 }}, {{ embryo_mean_120_1 }}, '120 HPF\nFischer : {{ embryo_warner_120_1 }} CPM\nHelm : {{ embryo_helm_120_1 }} CPM'],
-            [144, {{ embryo_warner_144_1 }}, , , {{ embryo_warner_144_1 }}, '144 HPF\nFischer : {{ embryo_warner_144_1 }} CPM'],
-            [168, {{ embryo_warner_168_1 }}, , , {{ embryo_warner_168_1 }}, '168 HPF\nFischer : {{ embryo_warner_168_1 }} CPM'],
-            [192, {{ embryo_warner_192_1 }}, , , {{ embryo_warner_192_1 }}, '192 HPF\nFischer : {{ embryo_warner_192_1 }} CPM'],
-            [240, , , {{ embryo_helm_240_1 }}, {{ embryo_helm_240_1 }}, '240 HPF\nHelm : {{ embryo_helm_240_1 }} CPM']
+            [0, , {{ embryo_fischer_0_1 }}, , {{ embryo_fischer_0_1 }}, '0 HPF\nFischer : {{ embryo_fischer_0_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_0_2 }}, , {{ embryo_fischer_0_2 }}, '0 HPF\nFischer : {{ embryo_fischer_0_2 }} CPM'{% endif %}],
+            [1, , {{ embryo_fischer_1_1 }}, , {{ embryo_fischer_1_1 }}, '1 HPF\nFischer : {{ embryo_fischer_1_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_1_2 }}, , {{ embryo_fischer_1_2 }}, '1 HPF\nFischer : {{ embryo_fischer_1_2 }} CPM'{% endif %}],
+            [2, , {{ embryo_fischer_2_1 }}, {{ embryo_helm_2_1 }}, {{ embryo_mean_2_1 }}, '2 HPF\nFischer : {{ embryo_fischer_2_1 }} CPM\nHelm : {{ embryo_helm_2_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_2_2 }}, {{ embryo_helm_2_2 }}, {{ embryo_mean_2_2 }}, '2 HPF\nFischer : {{ embryo_fischer_2_2 }} CPM\nHelm : {{ embryo_helm_2_2 }} CPM'{% endif %}],
+            [3, , {{ embryo_fischer_3_1 }}, , {{ embryo_fischer_3_1 }}, '3 HPF\nFischer : {{ embryo_fischer_3_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_3_2 }}, , {{ embryo_fischer_3_2 }}, '3 HPF\nFischer : {{ embryo_fischer_3_2 }} CPM'{% endif %}],
+            [4, , {{ embryo_fischer_4_1 }}, , {{ embryo_fischer_4_1 }}, '4 HPF\nFischer : {{ embryo_fischer_4_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_4_2 }}, , {{ embryo_fischer_4_2 }}, '4 HPF\nFischer : {{ embryo_fischer_4_2 }} CPM'{% endif %}],
+            [5, , {{ embryo_fischer_5_1 }}, , {{ embryo_fischer_5_1 }}, '5 HPF\nFischer : {{ embryo_fischer_5_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_5_2 }}, , {{ embryo_fischer_5_2 }}, '5 HPF\nFischer : {{ embryo_fischer_5_2 }} CPM'{% endif %}],
+            [6, , {{ embryo_fischer_6_1 }}, , {{ embryo_fischer_6_1 }}, '6 HPF\nFischer : {{ embryo_fischer_6_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_6_2 }}, , {{ embryo_fischer_6_2 }}, '6 HPF\nFischer : {{ embryo_fischer_6_2 }} CPM'{% endif %}],
+            [7, , {{ embryo_fischer_7_1 }}, {{ embryo_helm_7_1 }}, {{ embryo_mean_7_1 }}, '7 HPF\nFischer : {{ embryo_fischer_7_1 }} CPM\nHelm : {{ embryo_helm_7_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_7_2 }}, {{ embryo_helm_7_2 }}, {{ embryo_mean_7_2 }}, '7 HPF\nFischer : {{ embryo_fischer_7_2 }} CPM\nHelm : {{ embryo_helm_7_2 }} CPM'{% endif %}],
+            [8, , {{ embryo_fischer_8_1 }}, , {{ embryo_fischer_8_1 }}, '8 HPF\nFischer : {{ embryo_fischer_8_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_8_2 }}, , {{ embryo_fischer_8_2 }}, '8 HPF\nFischer : {{ embryo_fischer_8_2 }} CPM'{% endif %}],
+            [9, , {{ embryo_fischer_9_1 }}, , {{ embryo_fischer_9_1 }}, '9 HPF\nFischer : {{ embryo_fischer_9_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_9_2 }}, , {{ embryo_fischer_9_2 }}, '9 HPF\nFischer : {{ embryo_fischer_9_2 }} CPM'{% endif %}],
+            [10, , {{ embryo_fischer_10_1 }}, , {{ embryo_fischer_10_1 }}, '10 HPF\nFischer : {{ embryo_fischer_10_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_10_2 }}, , {{ embryo_fischer_10_2 }}, '10 HPF\nFischer : {{ embryo_fischer_10_2 }} CPM'{% endif %}],
+            [11, , {{ embryo_fischer_11_1 }}, , {{ embryo_fischer_11_1 }}, '11 HPF\nFischer : {{ embryo_fischer_11_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_11_2 }}, , {{ embryo_fischer_11_2 }}, '11 HPF\nFischer : {{ embryo_fischer_11_2 }} CPM'{% endif %}],
+            [12, , {{ embryo_fischer_12_1 }}, {{ embryo_helm_12_1 }}, {{ embryo_mean_12_1 }}, '12 HPF\nFischer : {{ embryo_fischer_12_1 }} CPM\nHelm : {{ embryo_helm_12_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_12_2 }}, {{ embryo_helm_12_2 }}, {{ embryo_mean_12_2 }}, '12 HPF\nFischer : {{ embryo_fischer_12_2 }} CPM\nHelm : {{ embryo_helm_12_2 }} CPM'{% endif %}],
+            [13, , {{ embryo_fischer_13_1 }}, , {{ embryo_fischer_13_1 }}, '13 HPF\nFischer : {{ embryo_fischer_13_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_13_2 }}, , {{ embryo_fischer_13_2 }}, '13 HPF\nFischer : {{ embryo_fischer_13_2 }} CPM'{% endif %}],
+            [14, , {{ embryo_fischer_14_1 }}, , {{ embryo_fischer_14_1 }}, '14 HPF\nFischer : {{ embryo_fischer_14_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_14_2 }}, , {{ embryo_fischer_14_2 }}, '14 HPF\nFischer : {{ embryo_fischer_14_2 }} CPM'{% endif %}],
+            [15, , {{ embryo_fischer_15_1 }}, , {{ embryo_fischer_15_1 }}, '15 HPF\nFischer : {{ embryo_fischer_15_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_15_2 }}, , {{ embryo_fischer_15_2 }}, '15 HPF\nFischer : {{ embryo_fischer_15_2 }} CPM'{% endif %}],
+            [16, , {{ embryo_fischer_16_1 }}, , {{ embryo_fischer_16_1 }}, '16 HPF\nFischer : {{ embryo_fischer_16_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_16_2 }}, , {{ embryo_fischer_16_2 }}, '16 HPF\nFischer : {{ embryo_fischer_16_2 }} CPM'{% endif %}],
+            [17, , {{ embryo_fischer_17_1 }}, , {{ embryo_fischer_17_1 }}, '17 HPF\nFischer : {{ embryo_fischer_17_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_17_2 }}, , {{ embryo_fischer_17_2 }}, '17 HPF\nFischer : {{ embryo_fischer_17_2 }} CPM'{% endif %}],
+            [18, , {{ embryo_fischer_18_1 }}, , {{ embryo_fischer_18_1 }}, '18 HPF\nFischer : {{ embryo_fischer_18_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_18_2 }}, , {{ embryo_fischer_18_2 }}, '18 HPF\nFischer : {{ embryo_fischer_18_2 }} CPM'{% endif %}],
+            [19, , {{ embryo_fischer_19_1 }}, , {{ embryo_fischer_19_1 }}, '19 HPF\nFischer : {{ embryo_fischer_19_1 }} CPM'{% if nvertx_2 %}, , {{ embryo_fischer_19_2 }}, , {{ embryo_fischer_19_2 }}, '19 HPF\nFischer : {{ embryo_fischer_19_2 }} CPM'{% endif %}],
+            [24, {{ embryo_warner_24_1 }}, , {{ embryo_helm_24_1 }}, {{ embryo_mean_24_1 }}, '24 HPF\nWarner : {{ embryo_warner_24_1 }} CPM\nHelm : {{ embryo_helm_24_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_24_2 }}, , {{ embryo_helm_24_2 }}, {{ embryo_mean_24_2 }}, '24 HPF\nWarner : {{ embryo_warner_24_2 }} CPM\nHelm : {{ embryo_helm_24_2 }} CPM'{% endif %}],
+            [48, {{ embryo_warner_48_1 }}, , , {{ embryo_warner_48_1 }}, '48 HPF\nFischer : {{ embryo_warner_48_2 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_48_2 }}, , , {{ embryo_warner_48_2 }}, '48 HPF\nFischer : {{ embryo_warner_48_2 }} CPM'{% endif %}],
+            [72, {{ embryo_warner_72_1 }}, , , {{ embryo_warner_72_1 }}, '72 HPF\nFischer : {{ embryo_warner_72_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_72_2 }}, , , {{ embryo_warner_72_2 }}, '72 HPF\nFischer : {{ embryo_warner_72_2 }} CPM'{% endif %}],
+            [96, {{ embryo_warner_96_1 }}, , , {{ embryo_warner_96_1 }}, '96 HPF\nFischer : {{ embryo_warner_96_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_96_2 }}, , , {{ embryo_warner_96_2 }}, '96 HPF\nFischer : {{ embryo_warner_96_2 }} CPM'{% endif %}],
+            [120, {{ embryo_warner_120_1 }}, , {{ embryo_helm_120_1 }}, {{ embryo_mean_120_1 }}, '120 HPF\nFischer : {{ embryo_warner_120_1 }} CPM\nHelm : {{ embryo_helm_120_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_120_2 }}, , {{ embryo_helm_120_2 }}, {{ embryo_mean_120_2 }}, '120 HPF\nFischer : {{ embryo_warner_120_2 }} CPM\nHelm : {{ embryo_helm_120_2 }} CPM'{% endif %}],
+            [144, {{ embryo_warner_144_1 }}, , , {{ embryo_warner_144_1 }}, '144 HPF\nFischer : {{ embryo_warner_144_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_144_2 }}, , , {{ embryo_warner_144_2 }}, '144 HPF\nFischer : {{ embryo_warner_144_2 }} CPM'{% endif %}],
+            [168, {{ embryo_warner_168_1 }}, , , {{ embryo_warner_168_1 }}, '168 HPF\nFischer : {{ embryo_warner_168_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_168_2 }}, , , {{ embryo_warner_168_2 }}, '168 HPF\nFischer : {{ embryo_warner_168_2 }} CPM'{% endif %}],
+            [192, {{ embryo_warner_192_1 }}, , , {{ embryo_warner_192_1 }}, '192 HPF\nFischer : {{ embryo_warner_192_1 }} CPM'{% if nvertx_2 %}, {{ embryo_warner_192_2 }}, , , {{ embryo_warner_192_2 }}, '192 HPF\nFischer : {{ embryo_warner_192_2 }} CPM'{% endif %}],
+            [240, , , {{ embryo_helm_240_1 }}, {{ embryo_helm_240_1 }}, '240 HPF\nHelm : {{ embryo_helm_240_1 }} CPM'{% if nvertx_2 %}, , , {{ embryo_helm_240_2 }}, {{ embryo_helm_240_2 }}, '240 HPF\nHelm : {{ embryo_helm_240_2 }} CPM'{% endif %}]
             ]);
   
         // The intervals data as narrow lines (useful for showing raw source data)
@@ -141,10 +148,14 @@
             vAxis: { title:'Counts per million' },
             pointSize: 6,
             series: {
-              0: {lineWidth: 0, pointShape: 'circle', color: '#3366cc'},
-              1: {lineWidth: 0, pointShape: 'triangle', color: '#3366cc'},
-              2: {lineWidth: 0, pointShape: 'square', color: '#3366cc'},
-              3: {pointsVisible: false, visibleInLegend: false, color: '#3366cc'}
+              0: {lineWidth: 0, pointShape: 'circle', color: '#3366cc'{% if nvertx_1_embryo_warner_invalid %}, visibleInLegend: false {% endif %}},
+              1: {lineWidth: 0, pointShape: 'triangle', color: '#3366cc'{% if nvertx_1_embryo_fischer_invalid %}, visibleInLegend: false {% endif %}},
+              2: {lineWidth: 0, pointShape: 'square', color: '#3366cc'{% if nvertx_1_embryo_helm_invalid %}, visibleInLegend: false {% endif %}},
+              3: {pointsVisible: false, visibleInLegend: false, color: '#3366cc'{% if nvertx_1_embryo_warner_invalid or nvertx_1_embryo_fischer_invalid or nvertx_1_embryo_helm_invalid %}, lineWidth: 0 {% endif %}},
+              4: {lineWidth: 0, pointShape: 'circle', color: '#dc3912'{% if nvertx_2_embryo_warner_invalid %}, visibleInLegend: false {% endif %}},
+              5: {lineWidth: 0, pointShape: 'triangle', color: '#dc3912'{% if nvertx_2_embryo_fischer_invalid %}, visibleInLegend: false {% endif %}},
+              6: {lineWidth: 0, pointShape: 'square', color: '#dc3912'{% if nvertx_2_embryo_helm_invalid %}, visibleInLegend: false {% endif %}},
+              7: {pointsVisible: false, visibleInLegend: false, color: '#dc3912'{% if nvertx_2_embryo_warner_invalid or nvertx_2_embryo_fischer_invalid or nvertx_2_embryo_helm_invalid %}, lineWidth: 0 {% endif %}}
             }
 
         };
@@ -217,7 +228,7 @@
           <h1 class="sub-header" id="Mfuzz_clusters">Explore Mfuzz Clusters</h1>
           <div class="row placeholders">
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz1.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz1"><img src="{% static 'ER_plotter/Mfuzz1.png' %}" height='250px' width='250px' class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
               <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz2.png' %}" height='250px' width='250px' class="img-responsive"></button>
@@ -254,13 +265,37 @@
             </div>
           </div>
 
-
+          <div id="Mfuzz1" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <p>Some text in the modal.</p>
+                  <img src="{% static 'ER_plotter/Mfuzz1.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/1-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <h2 class="sub-header" id="BLAST">BLAST</h2>
           <div>
-            <p>
+            <p>{% static 'ER_plotter/home.css' %}
               {{ regen_UC_1 }}, {{regen_se_UC_1.0}}, {{ regen_se_UC_1.1 }}, 'UC \n {{ regen_UC_1 }} {% if log2%}log2(CPM+1){% else %}CPM{% endif %}', {{ regen_UC_2 }}, {{regen_se_UC_2.0}}, {{ regen_se_UC_2.1 }}
               {% for nb in regen_point %}a {{ regen_UC_2 }}{{ nb }} a{% endfor %}
+              {% if nvertx_search_1_invalid %} /\/\ nvertx_search_1_invalid /\/\ {% else %} nvertx_search_1 valid ! {% endif %}
+              {% if nvertx_1_regen_invalid %} /\/\ nvertx_1_regen_invalid /\/\ {% else %} nvertx_1_regen_invalid valid ! {% endif %}
+              {% if nvertx_1_embryo_warner_invalid %} /\/\ nvertx_1_embryo_warner_invalid /\/\ {% else %} nvertx_1_embryo_warner_invalid valid ! {% endif %}
+              {% if nvertx_1_embryo_fischer_invalid %} /\/\ nvertx_1_embryo_fischer_invalid /\/\ {% else %} nvertx_1_embryo_fischer_invalid valid ! {% endif %}
+              {% if nvertx_1_embryo_helm_invalid %} /\/\ nvertx_1_embryo_helm_invalid /\/\ {% else %} nvertx_1_embryo_helm_invalid valid ! {% endif %}
+              {% if nvertx_1_embryo_mean_invalid %} /\/\ nvertx_1_embryo_mean_invalid /\/\ {% else %} nvertx_1_embryo_mean_invalid valid ! {% endif %}
+              {% if nvertx_1_annot_invalid %} /\/\ nvertx_1_annot_invalid /\/\ {% else %} nvertx_1_annot_invalid valid ! {% endif %}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis non ligula vitae iaculis. Praesent imperdiet nulla mi, a pharetra eros feugiat eget. Phasellus malesuada, magna non semper suscipit, mi massa rhoncus leo, lobortis eleifend eros augue non enim. Nunc pretium, quam sed feugiat mattis, lacus neque interdum purus, at lacinia lacus magna sit amet tellus. Sed orci nunc, porta in lectus tristique, mattis sagittis urna. Vestibulum sodales maximus pretium. Phasellus id turpis orci. Etiam ornare ac turpis at egestas. Proin ornare eros a metus cursus convallis. Quisque mollis a nunc a tempus. Suspendisse potenti. Morbi vel tempor dui. Pellentesque nec nunc in justo euismod luctus id eu mi.
 
@@ -292,7 +327,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
               <h3>Count tables</h3>
               <div class="table-responsive">
                 <table class="table table-striped">
-                  <h4>Regeneration average counts (hours post amputation) {% if log2 %}-- LOG2{% endif %}</h4>
+                  <h4>Regeneration average counts (hours post amputation) {% if log2 %}-- log2{% endif %}</h4>
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -317,7 +352,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                   <tbody>
                     <tr>
                       <td>{{ nvertx_1 }}</td>
-                      {% if not nvertx_search_1_invalid %}
+                      {% if not nvertx_1_regen_invalid %}
                       <td>{{ regen_UC_1 }}</td>
                       <td>{{ regen_0_1 }}</td>
                       <td>{{ regen_2_1 }}</td>
@@ -335,13 +370,13 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ regen_120_1 }}</td>
                       <td>{{ regen_144_1 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                    </tr>
                    {% if nvertx_2 %}
                     <tr>
                       <td>{{ nvertx_2 }}</td>
-                      {% if not nvertx_search_2_invalid %}
+                      {% if not nvertx_2_regen_invalid %}
                       <td>{{ regen_UC_2 }}</td>
                       <td>{{ regen_0_2 }}</td>
                       <td>{{ regen_2_2 }}</td>
@@ -359,14 +394,14 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ regen_120_2 }}</td>
                       <td>{{ regen_144_2 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% endif %}
                     {% if nvertx_3 %}
                     <tr>
                       <td>{{ nvertx_3 }}</td>
-                      {% if not nvertx_search_3_invalid %}
+                      {% if not nvertx_3_regen_invalid %}
                       <td>{{ regen_UC_3 }}</td>
                       <td>{{ regen_0_3 }}</td>
                       <td>{{ regen_2_3 }}</td>
@@ -384,14 +419,14 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ regen_120_3 }}</td>
                       <td>{{ regen_144_3 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% endif %}
                     {% if nvertx_4 %}
                     <tr>
                       <td>{{ nvertx_4 }}</td>
-                      {% if not nvertx_search_4_invalid %}
+                      {% if not nvertx_4_regen_invalid %}
                       <td>{{ regen_UC_4 }}</td>
                       <td>{{ regen_0_4 }}</td>
                       <td>{{ regen_2_4 }}</td>
@@ -409,14 +444,14 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ regen_120_4 }}</td>
                       <td>{{ regen_144_4 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% endif %}
                     {% if nvertx_5 %}
                     <tr>
                       <td>{{ nvertx_5 }}</td>
-                      {% if not nvertx_search_5_invalid %}
+                      {% if not nvertx_5_regen_invalid %}
                       <td>{{ regen_UC_5 }}</td>
                       <td>{{ regen_0_5 }}</td>
                       <td>{{ regen_2_5 }}</td>
@@ -434,7 +469,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ regen_120_5 }}</td>
                       <td>{{ regen_144_5 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% endif %}
@@ -459,7 +494,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                   <tbody>
                     <tr>
                       <td>{{ nvertx_1 }}</td>
-                      {% if not nvertx_search_1_invalid %}
+                      {% if not nvertx_1_embryo_warner_invalid %}
                       <td>{{ embryo_warner_24_1 }}</td>
                       <td>{{ embryo_warner_48_1 }}</td>
                       <td>{{ embryo_warner_72_1 }}</td>
@@ -469,7 +504,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ embryo_warner_168_1 }}</td>
                       <td>{{ embryo_warner_192_1 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% if nvertx_2 %}
@@ -522,7 +557,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                  <tbody>
                     <tr>
                       <td>{{ nvertx_1 }}</td>
-                      {% if not nvertx_search_1_invalid %}
+                      {% if not nvertx_1_embryo_fischer_invalid %}
                       <td>{{ embryo_fischer_0_1 }}</td>
                       <td>{{ embryo_fischer_1_1 }}</td>
                       <td>{{ embryo_fischer_2_1 }}</td>
@@ -544,7 +579,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ embryo_fischer_18_1 }}</td>
                       <td>{{ embryo_fischer_19_1 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% if nvertx_2 %}
@@ -595,7 +630,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                  <tbody>
                     <tr>
                       <td>{{ nvertx_1 }}</td>
-                      {% if not nvertx_search_1_invalid %}
+                      {% if not nvertx_1_embryo_helm_invalid %}
                       <td>{{ embryo_helm_2_1 }}</td>
                       <td>{{ embryo_helm_7_1 }}</td>
                       <td>{{ embryo_helm_12_1 }}</td>
@@ -603,7 +638,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                       <td>{{ embryo_helm_120_1 }}</td>
                       <td>{{ embryo_helm_240_1 }}</td>
                       {% else %}
-                      <td>INVALID NvERTx number</td>
+                      <td>No data</td>
                       {% endif %}
                     </tr>
                     {% if nvertx_2 %}
@@ -684,22 +719,14 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
                     <th >>{{ nvertx_1 }}</th>
                 </tr>
                 <tr>
-                  {% if not nvertx_search_1_invalid %}
                   <td class="fasta_results">{{ sequence_fasta_1 }}</td>
-                  {% else %}
-                  <td>INVALID NvERTx number</td>
-                  {% endif %}
                 </tr>
                 {% if nvertx_2 %}
                 <tr>
                     <th >>{{ nvertx_2 }}</th>
                 </tr>
                 <tr>
-                  {% if not nvertx_search_2_invalid %}
                   <td class="fasta_results">{{ sequence_fasta_2 }}</td>
-                  {% else %}
-                  <td>INVALID NvERTx number</td>
-                  {% endif %}
                 </tr>
                 {% endif %}
               </table>

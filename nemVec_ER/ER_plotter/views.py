@@ -21,6 +21,9 @@ def home(request):
 		nvertx_search = True
 		try :
 			sequence_fasta_1 = Fasta.objects.get(nvertx_id=nvertx_1).fasta_sequence
+		except :
+			sequence_fasta_1 = 'No fasta sequence'
+		try :
 			if log2 :
 				regen_UC_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_UC+1,2),2)
 				regen_0_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_0HPA+1,2),2)
@@ -87,6 +90,9 @@ def home(request):
 				regen_se_96_1 = [round(regen_96_1 - Standard_Error.objects.get(nvertx_id=nvertx_1).regen_se_96HPA,2),round(regen_96_1 + Standard_Error.objects.get(nvertx_id=nvertx_1).regen_se_96HPA,2)]
 				regen_se_120_1 = [round(regen_120_1 - Standard_Error.objects.get(nvertx_id=nvertx_1).regen_se_120HPA,2),round(regen_120_1 + Standard_Error.objects.get(nvertx_id=nvertx_1).regen_se_120HPA,2)]
 				regen_se_144_1 = [round(regen_144_1 - Standard_Error.objects.get(nvertx_id=nvertx_1).regen_se_144HPA,2),round(regen_144_1 + Standard_Error.objects.get(nvertx_id=nvertx_1).regen_se_144HPA,2)]
+		except :
+			nvertx_1_regen_invalid = True
+		try :
 			embryo_warner_24_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_24HPF,2)
 			embryo_warner_48_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_48HPF,2)
 			embryo_warner_72_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_72HPF,2)
@@ -95,6 +101,9 @@ def home(request):
 			embryo_warner_144_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_144HPF,2)
 			embryo_warner_168_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_168HPF,2)
 			embryo_warner_192_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_192HPF,2)
+		except :
+			nvertx_1_embryo_warner_invalid = True
+		try :
 			embryo_fischer_0_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_0HPF,2)
 			embryo_fischer_1_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_1HPF,2)
 			embryo_fischer_2_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_2HPF,2)
@@ -115,17 +124,26 @@ def home(request):
 			embryo_fischer_17_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_17HPF,2)
 			embryo_fischer_18_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_18HPF,2)
 			embryo_fischer_19_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_19HPF,2)
+		except :
+			nvertx_1_embryo_fischer_invalid = True
+		try :
 			embryo_helm_2_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_2HPF,2)
 			embryo_helm_7_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_7HPF,2)
 			embryo_helm_12_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_12HPF,2)
 			embryo_helm_24_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_24HPF,2)
 			embryo_helm_120_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_120HPF,2)
 			embryo_helm_240_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_240HPF,2)
+		except :
+			nvertx_1_embryo_helm_invalid = True
+		try :
 			embryo_mean_2_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_2HPF,2)
 			embryo_mean_7_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_7HPF,2)
 			embryo_mean_12_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_12HPF,2)
 			embryo_mean_24_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_24HPF,2)
 			embryo_mean_120_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_120HPF,2)
+		except :
+			nvertx_1_embryo_mean_invalid = True
+		try :
 			annot_nve_hit_1 = Annotation.objects.get(nvertx_id=nvertx_1).nve_hit
 			annot_nve_eval_1 = round(Annotation.objects.get(nvertx_id=nvertx_1).nve_eval,2)
 			annot_mfuzz_clust_1 = Annotation.objects.get(nvertx_id=nvertx_1).mfuzz_clust
@@ -135,10 +153,13 @@ def home(request):
 			annot_top_nr_hit_eval_1 = Annotation.objects.get(nvertx_id=nvertx_1).top_nr_hit_eval
 			annot_other_nr_hits_1 = Annotation.objects.get(nvertx_id=nvertx_1).other_nr_hits
 		except :
-			nvertx_search_1_invalid = True
+			nvertx_1_annot_invalid = True
 		if nvertx_2 :
 			try :
 				sequence_fasta_2 = Fasta.objects.get(nvertx_id=nvertx_2).fasta_sequence
+			except :
+				sequence_fasta_2 = 'No fasta sequence'
+			try :
 				if log2 :
 					regen_UC_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_UC+1,2),2)
 					regen_0_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_0HPA+1,2),2)
@@ -239,6 +260,11 @@ def home(request):
 				embryo_helm_24_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_24HPF,2)
 				embryo_helm_120_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_120HPF,2)
 				embryo_helm_240_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_240HPF,2)
+				embryo_mean_2_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_2HPF,2)
+				embryo_mean_7_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_7HPF,2)
+				embryo_mean_12_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_12HPF,2)
+				embryo_mean_24_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_24HPF,2)
+				embryo_mean_120_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_120HPF,2)
 				annot_nve_hit_2 = Annotation.objects.get(nvertx_id=nvertx_2).nve_hit
 				annot_nve_eval_2 = round(Annotation.objects.get(nvertx_id=nvertx_2).nve_eval,2)
 				annot_mfuzz_clust_2 = Annotation.objects.get(nvertx_id=nvertx_2).mfuzz_clust
