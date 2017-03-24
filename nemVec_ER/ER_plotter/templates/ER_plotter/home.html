@@ -37,12 +37,12 @@
       function drawRegenChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'x');
-        data.addColumn('number', '{{ nvertx_1 }}');
+        data.addColumn('number', '{{ nvertx_1 }}{% if nvertx_1_regen_invalid %}\nNO DATA{% endif %}');
         data.addColumn({id:'i0', type:'number', role:'interval'});
         data.addColumn({id:'i1', type:'number', role:'interval'});
         data.addColumn({type: 'string', role: 'tooltip'});
         {% if nvertx_2 %}
-        data.addColumn('number', '{{ nvertx_2 }}');
+        data.addColumn('number', '{{ nvertx_2 }}{% if nvertx_2_regen_invalid %} NO DATA{% endif %}');
         data.addColumn({id:'i2', type:'number', role:'interval'});
         data.addColumn({id:'i3', type:'number', role:'interval'});
         data.addColumn({type: 'string', role: 'tooltip'});
@@ -210,7 +210,7 @@
           <form class="nav nav-sidebar" action="" method="post">
           <h3 class="NvERTxInput">Input NvERTx Number</h3>
           {% csrf_token %}
-          {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.2.133024' %}
+          {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.2.133024 or 133024' %}
           <h3 class="NvERTxInput">Input other numbers or leave blank</h3>
           {% render_field nvertx_form.nvertx_2 class+='form-control' placeholder='eg : NvERTx.2.133025' %}<br/>
           {% render_field nvertx_form.nvertx_3 class+='form-control' placeholder='eg : NvERTx.2.133026' %}<br/>
@@ -228,40 +228,40 @@
           <h1 class="sub-header" id="Mfuzz_clusters">Explore Mfuzz Clusters</h1>
           <div class="row placeholders">
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz1"><img src="{% static 'ER_plotter/Mfuzz1.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz1"><img src="{% static 'ER_plotter/Mfuzz1small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz2.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz2"><img src="{% static 'ER_plotter/Mfuzz2small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz3.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz3"><img src="{% static 'ER_plotter/Mfuzz3small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz4.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz4"><img src="{% static 'ER_plotter/Mfuzz4small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz5.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz5"><img src="{% static 'ER_plotter/Mfuzz5small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz6.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz6"><img src="{% static 'ER_plotter/Mfuzz6small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz7.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz7"><img src="{% static 'ER_plotter/Mfuzz7small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz8.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz8"><img src="{% static 'ER_plotter/Mfuzz8small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz9.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz9"><img src="{% static 'ER_plotter/Mfuzz9small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz10.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz10"><img src="{% static 'ER_plotter/Mfuzz10small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz11.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz11"><img src="{% static 'ER_plotter/Mfuzz11small.png' %}" class="img-responsive"></button>
             </div>
             <div class="col-xs-2 col-sm-2 imageButton">
-              <button type="button" class="btn btn-lg btn-default"><img src="{% static 'ER_plotter/Mfuzz12.png' %}" height='250px' width='250px' class="img-responsive"></button>
+              <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#Mfuzz12"><img src="{% static 'ER_plotter/Mfuzz12small.png' %}" class="img-responsive"></button>
             </div>
           </div>
 
@@ -273,7 +273,6 @@
                   <h3 class="modal-title">Mfuzz cluster 1</h3>
                 </div>
                 <div class="modal-body">
-                  <p>Some text in the modal.</p>
                   <img src="{% static 'ER_plotter/Mfuzz1.png' %}" height='400px' width='500px' class="img-responsive">
                   <img src="{% static 'ER_plotter/1-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
                 </div>
@@ -283,6 +282,194 @@
               </div>
             </div>
           </div>
+          <div id="Mfuzz2" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz2.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/2-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz3" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz3.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/3-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz4" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz4.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/4-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz5" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz5.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/5-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz6" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz6.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/6-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz7" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz7.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/7-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz8" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz8.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/8-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz9" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz9.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/9-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz10" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz10.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/10-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz11" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz11.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/11-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Mfuzz12" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Mfuzz cluster 1</h3>
+                </div>
+                <div class="modal-body">
+                  <img src="{% static 'ER_plotter/Mfuzz12.png' %}" height='400px' width='500px' class="img-responsive">
+                  <img src="{% static 'ER_plotter/12-BP-plot-2.png' %}" height='600px' width='500px' class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
           <h2 class="sub-header" id="BLAST">BLAST</h2>
           <div>
@@ -732,7 +919,7 @@ Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Eti
               </table>
             </div>
           </div>
-            
+
 {% endif %}
         </div>
       </div>
