@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Standard_Error
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Standard_Error, Mfuzz
 from .forms import Gene_searchForm, NvERTxForm
 import math
 
@@ -352,7 +353,48 @@ def resultats(request,nvertx_id):
 		}
 		)
 
+def mfuzz(request):
+	gene_search_form = Gene_searchForm(request.POST or None)
+	if gene_search_form.is_valid():
+		gene_name = gene_search_form.cleaned_data['gene_name']
+		gene_search = True
+	nvertx_form = NvERTxForm(request.POST or None)
+	if nvertx_form.is_valid():
+		nvertx_1 = nvertx_form.cleaned_data['nvertx_1']
+		if nvertx_1[0] != 'N' :
+			nvertx_1 = 'NvERTx.2.' + nvertx_1
+		nvertx_2 = nvertx_form.cleaned_data['nvertx_2']
+		if nvertx_2 and nvertx_2[0] != 'N' :
+			nvertx_2 = 'NvERTx.2.' + nvertx_2
+		nvertx_3 = nvertx_form.cleaned_data['nvertx_3']
+		if nvertx_3 and nvertx_3[0] != 'N' :
+			nvertx_3 = 'NvERTx.2.' + nvertx_3
+		nvertx_4 = nvertx_form.cleaned_data['nvertx_4']
+		if nvertx_4 and nvertx_4[0] != 'N' :
+			nvertx_4 = 'NvERTx.2.' + nvertx_4
+		nvertx_5 = nvertx_form.cleaned_data['nvertx_5']
+		if nvertx_5 and nvertx_5[0] != 'N' :
+			nvertx_5 = 'NvERTx.2.' + nvertx_5
+		log2 = nvertx_form.cleaned_data['log2']
+		nvertx_search = True
+	clusters_list = Mfuzz.objects.all()
+	mfuzz_all = Annotation.objects.all()
+	mfuzz1_all = mfuzz_all.filter(mfuzz_clust=1)
+	mfuzz2_all = mfuzz_all.filter(mfuzz_clust=2)
+	mfuzz3_all = mfuzz_all.filter(mfuzz_clust=3)
+	mfuzz4_all = mfuzz_all.filter(mfuzz_clust=4)
+	mfuzz5_all = mfuzz_all.filter(mfuzz_clust=5)
+	mfuzz6_all = mfuzz_all.filter(mfuzz_clust=6)
+	mfuzz7_all = mfuzz_all.filter(mfuzz_clust=7)
+	mfuzz8_all = mfuzz_all.filter(mfuzz_clust=8)
+	mfuzz9_all = mfuzz_all.filter(mfuzz_clust=9)
+	mfuzz10_all = mfuzz_all.filter(mfuzz_clust=10)
+	mfuzz11_all = mfuzz_all.filter(mfuzz_clust=11)
+	mfuzz12_all = mfuzz_all.filter(mfuzz_clust=12)
+	return render(request, 'ER_plotter/mfuzz.html', locals())
+
 def test(request):
+	mfuzz1_all = Annotation.objects.filter(mfuzz_clust=1)
 	return render(request, 'ER_plotter/test.html', locals())
 
 

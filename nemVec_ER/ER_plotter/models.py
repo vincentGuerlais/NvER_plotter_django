@@ -124,7 +124,13 @@ class Standard_Error(models.Model) :
 	def __str__(self) :
 		return self.nvertx_id
 
-
+class Mfuzz(models.Model) :
+	name = models.CharField(max_length=20,primary_key=True)
+	modal_title = models.CharField(max_length=40)
+	cluster_image = models.CharField(max_length=50)
+	bp_plot_image = models.CharField(max_length=50)
+	def __str__(self) :
+		return self.name
 
 
 
