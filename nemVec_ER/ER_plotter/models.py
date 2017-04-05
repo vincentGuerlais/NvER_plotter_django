@@ -126,7 +126,7 @@ class Standard_Error(models.Model) :
 
 class Mfuzz(models.Model) :
 	name = models.CharField(max_length=20,primary_key=True)
-	modal_title = models.CharField(max_length=40)
+	mfuzz_cluster_nb = models.IntegerField()
 	cluster_image = models.CharField(max_length=50)
 	bp_plot_image = models.CharField(max_length=50)
 	def __str__(self) :

@@ -1,0 +1,29 @@
+.blockTitle {
+    text-align: center;
+}
+
+.img-responsive {
+    height: 50%;
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+#blast_textarea {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.block {
+	background: #F5F5F5;
+	box-shadow: 3px 3px 6px 0 #A9A9A9;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.img-responsive {
+	height: 70%;
+	width: 70%;
+
+}

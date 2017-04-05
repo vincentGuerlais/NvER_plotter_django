@@ -1,0 +1,15 @@
+.table {
+	font-size: small;
+}
+.table > thead > tr > td {
+	font-size: large;
+	padding : 8px;
+}
+.table > tbody > tr > td {
+	padding: 0px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+.h1 {
+	color: red;
+}

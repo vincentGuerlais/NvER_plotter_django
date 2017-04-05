@@ -2,8 +2,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^home$', views.home, name='home'),
-    url(r'^res/(NvERTx.2.\d+)$', views.resultats, name='resultats'),
-    url(r'^mfuzz$', views.mfuzz, name='mfuzz'),
+    url(r'^newHome$', views.newHome, name='newHome'),
+    url(r'^mfuzz$', views.mfuzzHome, name='mfuzz'),
+    url(r'^mfuzz/(?P<mfuzz_nb>[0-9]+)$', views.mfuzzResults, name='mfuzzResults'),
+    url(r'^results$', views.results, name='results'),
     url(r'^test$', views.test, name='test'),
 ]

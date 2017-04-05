@@ -10,3 +10,6 @@ class NvERTxForm(forms.Form):
     nvertx_4 = forms.CharField(max_length=25, required=False)
     nvertx_5 = forms.CharField(max_length=25, required=False)
     log2 = forms.BooleanField(initial=False, required=False)
+
+class NvERTx_singleForm(forms.Form):
+    nvertx = forms.CharField(max_length=25)

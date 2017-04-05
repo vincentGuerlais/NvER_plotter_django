@@ -139,5 +139,12 @@
   padding: 6% 6%;
   }
 .modal-header {
-    text-align: center;
+  text-align: center;
+}
+#sidebarTitle {
+  text-align: center;
+  font-size: x-large;
+}
+#annot_table {
+  background-color : white;
 }

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'ER_plotter/bootStrap/css/bootstrap.min.css' %}" />
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'ER_plotter/home2103.css' %}" />
+    <link rel="stylesheet" href="{% static 'ER_plotter/home2104.css' %}" />
     {% block head %}{% endblock %}
   </head>
 
@@ -35,7 +35,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'newHome' %}">Home</a></li>
+            <li><a href="{% url 'mfuzz' %}">Mfuzz clusters</a></li>
+            <li><a href="#BLAST">BLAST</a></li>
             <li><a href="#">Login</a></li>
           </ul>
         </div>
@@ -44,20 +46,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'mfuzz' %}">Mfuzz clusters</a></li>
-            <li><a href="#BLAST">BLAST</a></li>
-            <li><a href="#Results">Results</a></li>
-          </ul>
-          <br/>
+          <h2 id="sidebarTitle">Advanced search tools</h2>
           <form class="nav nav-sidebar" action="test" method="post">
             <h3 class="NvERTxInput">Search for a gene</h3>
             {% csrf_token %}
             {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF' %}
             <input type="submit" class="btn btn-primary" value="Search !">
           </form>
-          <form class="nav nav-sidebar" action="" method="post">
+          <form class="nav nav-sidebar" action="{% url 'results' %}" method="post">
           <h3 class="NvERTxInput">Input NvERTx Number</h3>
           {% csrf_token %}
           {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.2.133024 or 133024' %}

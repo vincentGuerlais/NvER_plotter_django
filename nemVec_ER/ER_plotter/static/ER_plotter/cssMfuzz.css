@@ -1,0 +1,15 @@
+.h3 {
+	color: red;
+}
+.table {
+	font-size: small;
+}
+.thead {
+	font-size: large;
+	padding : 8px;
+}
+.hiden_row {
+	padding: 0px;
+	padding-left: 8px;
+	padding-right: 8px;
+}

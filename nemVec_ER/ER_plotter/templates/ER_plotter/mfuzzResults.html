@@ -1,0 +1,112 @@
+#-*- coding: utf-8 -*-
+<!DOCTYPE html>
+{% extends "ER_plotter/base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css_mfuzz4.css' %}" />
+{% endblock head %}
+
+{% block content %}
+
+  <!-- Buttons -->
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="sub-header" id="Mfuzz_clusters">Explore Mfuzz Clusters</h1>
+    <div class="row placeholders">
+      {% for cluster in clusters_list %}
+      <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1 imageButton">
+        <a href="{{ cluster.mfuzz_cluster_nb }}"><button type="button" class="btn btn-lg btn-default"><img src="{% static cluster.cluster_image %}" class="img-responsive"></button></a>
+        <p>Cluster {{ cluster.mfuzz_cluster_nb }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h1 class="sub-header" id="Mfuzz_clusters">Mfuzz cluster {{ mfuzz_cluster_nb }}</h1>
+    <div class="row">
+      <img src="{% static mfuzz_graph %}" class="img-responsive col-lg-offset-1 col-lg-4">
+      <img src="{% static mfuzz_bp_plot %}" class="img-responsive col-lg-offset-1 col-lg-5">
+    </div>
+
+    <h2 class="sub-header" id="Mfuzz_clusters">Details</h1>
+    <p class="text-info">click on a row to view the other nr hits</p>
+    <div class="row">
+      <div class="table-responsive">
+        <table id="cluster_annot" class="table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>nve hit</th>
+              <th>nve eval</th>
+              <th>mfuzz clust</th>
+              <th>mfuzz score</th>
+              <th>uniprot id</th>
+              <th>uniprot description</th>
+              <th>top nr_hit eval</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for id in cluster_table %}
+            <tr>
+              <td>{{ id.nvertx_id }}</td>
+              <td>{{ id.nve_hit }}</td>
+              <td>{{ id.nve_eval }}</td>
+              <td>{{ id.mfuzz_clust }}</td>
+              <td>{{ id.mfuzz_score }}</td>
+              <td>{{ id.uniprot_id }}</td>
+              <td>{{ id.uniprot_description }}</td>
+              <td>{{ id.top_nr_hit_eval }}</td>
+            </tr>
+            <tr>
+              <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+              <td colspan="7" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% if cluster_table.has_other_pages %}
+    <div class="text-center">
+      <ul class="pagination">
+        {% if cluster_table.has_previous %}
+          <li><a href="?page={{ cluster_table.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in cluster_table.paginator.page_range %}
+          {% if cluster_table.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if cluster_table.has_next %}
+          <li><a href="?page={{ cluster_table.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript">
+$(function() {
+    $("td[colspan=1]").find("p").hide();
+    $("td[colspan=7]").find("p").hide();
+    $("table").click(function(event) {
+        event.stopPropagation();
+        var $target = $(event.target);
+        if ( $target.closest("td").attr("colspan") < 2 ) {
+            $target.closest("tr").next().find("p").slideToggle();
+        } else {
+            $target.closest("tr").next().find("p").slideToggle();
+        }                    
+    });
+});
+</script>
+{% endblock js %}
