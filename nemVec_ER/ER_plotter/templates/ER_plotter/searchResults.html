@@ -1,0 +1,84 @@
+#-*- coding: utf-8 -*-
+<!DOCTYPE html>
+{% extends "ER_plotter/base.html" %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Buttons -->
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="sub-header" id="Mfuzz_clusters">Search results</h1>
+    <p class="text-info">click on a row to view the other nr hits</p>
+    <div class="row">
+      <div class="table-responsive">
+        <table id="cluster_annot" class="table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>uniprot description</th>
+              <th>top nr_hit eval</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for id in search_result %}
+            <tr>
+              <td>{{ id.nvertx_id }}</td>
+              <td>{{ id.uniprot_description }}</td>
+              <td>{{ id.top_nr_hit_eval }}</td>
+            </tr>
+            <tr>
+              <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+              <td colspan="2" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% if search_result.has_other_pages %}
+    <div class="text-center">
+      <ul class="pagination">
+        {% if search_result.has_previous %}
+          <li><a href="?page={{ search_result.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in search_result.paginator.page_range %}
+          {% if search_result.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if search_result.has_next %}
+          <li><a href="?page={{ search_result.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+  </div>
+
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript">
+$(function() {
+    $("td[colspan=1]").find("p").hide();
+    $("td[colspan=2]").find("p").hide();
+    $("table").click(function(event) {
+        event.stopPropagation();
+        var $target = $(event.target);
+        if ( $target.closest("td").attr("colspan") < 2 ) {
+            $target.closest("tr").next().find("p").slideToggle();
+        } else {
+            $target.closest("tr").next().find("p").slideToggle();
+        }                    
+    });
+});
+</script>
+{% endblock js %}

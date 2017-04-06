@@ -8,9 +8,6 @@ import math
 def results(request):
 	regen_point = [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
 	gene_search_form = Gene_searchForm(request.POST or None)
-	if gene_search_form.is_valid():
-		gene_name = gene_search_form.cleaned_data['gene_name']
-		gene_search = True
 	nvertx_form = NvERTxForm(request.POST or None)
 	if nvertx_form.is_valid():
 		nvertx_1 = nvertx_form.cleaned_data['nvertx_1']
@@ -791,6 +788,25 @@ def newHome(request):
 	nvertx_form = NvERTxForm(request.POST or None)
 
 	return render(request, 'ER_plotter/newHome.html', locals())
+
+def searchResults(request):
+	gene_search_form = Gene_searchForm(request.POST or None)
+	nvertx_form = NvERTxForm(request.POST or None)
+	if gene_search_form.is_valid():
+		search_input = gene_search_form.cleaned_data['gene_name']
+	search_result_all = Annotation.objects.filter(nvertx_id__icontains=search_input) | Annotation.objects.filter(nve_hit__icontains=search_input) | Annotation.objects.filter(uniprot_id__icontains=search_input) | Annotation.objects.filter(uniprot_description__icontains=search_input) | Annotation.objects.filter(top_nr_hit_eval__icontains=search_input) | Annotation.objects.filter(other_nr_hits__icontains=search_input)
+
+	#pagination for the details
+	page = request.GET.get('page', 1)
+	paginator = Paginator(search_result_all, 25)
+	try:
+		search_result = paginator.page(page)
+	except PageNotAnInteger:
+		search_result = paginator.page(1)
+	except EmptyPage:
+		search_result = paginator.page(paginator.num_pages)
+
+	return render(request, 'ER_plotter/searchResults.html', locals())
 
 def test(request):
 
