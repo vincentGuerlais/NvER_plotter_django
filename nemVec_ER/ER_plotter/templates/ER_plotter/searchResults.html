@@ -49,19 +49,23 @@
     <div class="text-center">
       <ul class="pagination">
         {% if search_result.has_previous %}
-          <li><a href="?page={{ search_result.previous_page_number }}">&laquo;</a></li>
+          <li><a href="?gene_name={{ search_query }}&page={{ search_result.previous_page_number }}">&laquo;</a></li>
         {% else %}
           <li class="disabled"><span>&laquo;</span></li>
         {% endif %}
-        {% for i in search_result.paginator.page_range %}
-          {% if search_result.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-          {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
-          {% endif %}
-        {% endfor %}
+
+        {% if search_result.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          {% for num in search_result.page_range %}
+            {% if not num %}<li><a>...</a></li>
+            {% else %}<li><a href="?gene_name={{ search_query }}&page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
         {% if search_result.has_next %}
-          <li><a href="?page={{ search_result.next_page_number }}">&raquo;</a></li>
+          <li><a href="?gene_name={{ search_query }}&page={{ search_result.next_page_number }}">&raquo;</a></li>
         {% else %}
           <li class="disabled"><span>&raquo;</span></li>
         {% endif %}

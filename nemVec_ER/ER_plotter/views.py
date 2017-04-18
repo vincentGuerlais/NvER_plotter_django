@@ -4,7 +4,7 @@ from django.forms import formset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Standard_Error, Mfuzz
 from .forms import Gene_searchForm, NvERTxForm
-import math, re
+import math, re, diggPaginator
 
 def results(request):
 	regen_point = [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
@@ -804,7 +804,7 @@ def mfuzzResults(request,mfuzz_nb):
 
 	#pagination for the details
 	page = request.GET.get('page', 1)
-	paginator = Paginator(cluster_list, 50)
+	paginator = diggPaginator.DiggPaginator(cluster_list, 50, body=5)
 	try:
 		cluster_table = paginator.page(page)
 	except PageNotAnInteger:
@@ -821,15 +821,16 @@ def newHome(request):
 	return render(request, 'ER_plotter/newHome.html', locals())
 
 def searchResults(request):
-	gene_search_form = Gene_searchForm(request.POST or None)
+	gene_search_form = Gene_searchForm(request.GET or None)
 	nvertx_form = NvERTxForm(request.POST or None)
 	if gene_search_form.is_valid():
-		search_input = gene_search_form.cleaned_data['gene_name']
-	search_result_all = Annotation.objects.filter(nvertx_id__icontains=search_input) | Annotation.objects.filter(nve_hit__icontains=search_input) | Annotation.objects.filter(uniprot_id__icontains=search_input) | Annotation.objects.filter(uniprot_description__icontains=search_input) | Annotation.objects.filter(top_nr_hit_eval__icontains=search_input) | Annotation.objects.filter(other_nr_hits__icontains=search_input)
+		search_query = gene_search_form.cleaned_data['gene_name']
+
+	search_result_all = Annotation.objects.filter(nvertx_id__icontains=search_query) | Annotation.objects.filter(nve_hit__icontains=search_query) | Annotation.objects.filter(uniprot_id__icontains=search_query) | Annotation.objects.filter(uniprot_description__icontains=search_query) | Annotation.objects.filter(top_nr_hit_eval__icontains=search_query) | Annotation.objects.filter(other_nr_hits__icontains=search_query)
 
 	#pagination for the details
 	page = request.GET.get('page', 1)
-	paginator = Paginator(search_result_all, 50)
+	paginator = diggPaginator.DiggPaginator(search_result_all, 50, body=5)
 	try:
 		search_result = paginator.page(page)
 	except PageNotAnInteger:
@@ -844,9 +845,12 @@ def test(request):
 	gene_search_form = Gene_searchForm(request.POST or None)
 	nvertx_form = NvERTxForm(request.POST or None)
 
-	nvid = request.GET.getlist('Nvid', '')
+	cluster_list = Annotation.objects.filter(mfuzz_clust=1)
+	paginator = diggPaginator.DiggPaginator(cluster_list, 10, body=6, padding=2)
 
-	return render(request, 'ER_plotter/test.html', locals())
+	return render(request, 'ER_plotter/test.html', {'page': paginator.page(1)})
+
+	#return render(request, 'ER_plotter/test.html', locals())
 
 
 

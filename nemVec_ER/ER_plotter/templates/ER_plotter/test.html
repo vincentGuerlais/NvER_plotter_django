@@ -8,29 +8,17 @@
 
   <!-- Buttons -->
   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="sub-header" id="Mfuzz_clusters">tests checkboxes</h1>
-      <a href="http://127.0.0.1:8000/ER_plotter/mfuzz/1?page=3#Details">click here to go to details</a>
-    {% for elem in nvid %}
-    <p>{{ elem }}</p><br/>
-    {% endfor %}
+    <h1 class="sub-header" id="Mfuzz_clusters">test new pagination</h1>
+
+	{% if page.has_next %}<li><a href="?page={{ cluster_table.next_page_number }}#Details">&raquo;</a></li>{% endif %}
+	{% for num in page.page_range %}
+	   {% if not num %} ...  {# literally dots #}
+	   {% else %}<li><a href="?page={{ i }}#Details">{{ i }}</a></li>
+	   {% endif %}
+	{% endfor %}
+
+
 
   </div>
 
 {% endblock content %}
-
-{% block js %}
-
-<!-- limits the amount of checkboxes that can be checked -->
-
-<script type="text/javascript">
-jQuery(function(){
-    var max = 2;
-    var checkboxes = $('input[class="nvInput_checkboxes"]');
-
-    checkboxes.change(function(){
-        var current = checkboxes.filter(':checked').length;
-        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
-    });
-});
-</script>
-{% endblock js %}

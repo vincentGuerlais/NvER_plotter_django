@@ -30,8 +30,7 @@
     <div class="row">
       <div class ="block col-md-4">
         <h3 class="blockTitle">Search for a gene</h3></br>
-        <form class="nav nav-sidebar" action="{% url 'search' %}" method="post">
-          {% csrf_token %}
+        <form class="nav nav-sidebar" action="{% url 'search' %}" method="get">
           {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF' %}</br>
           <input type="submit" class="btn btn-primary" value="Search !">
         </form>

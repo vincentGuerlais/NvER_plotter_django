@@ -73,13 +73,17 @@
         {% else %}
           <li class="disabled"><span>&laquo;</span></li>
         {% endif %}
-        {% for i in cluster_table.paginator.page_range %}
-          {% if cluster_table.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-          {% else %}
-            <li><a href="?page={{ i }}#Details">{{ i }}</a></li>
-          {% endif %}
-        {% endfor %}
+
+        {% if cluster_table.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          {% for num in cluster_table.page_range %}
+            {% if not num %}<li><a>...</a></li>
+            {% else %}<li><a href="?page={{ num }}#Details">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
         {% if cluster_table.has_next %}
           <li><a href="?page={{ cluster_table.next_page_number }}#Details">&raquo;</a></li>
         {% else %}
@@ -88,6 +92,7 @@
       </ul>
     </div>
     {% endif %}
+
   </div>
 
 {% endblock content %}
@@ -105,6 +110,17 @@ $(function() {
         } else {
             $target.closest("tr").next().find("p").slideToggle();
         }                    
+    });
+});
+</script>
+<script type="text/javascript">
+jQuery(function(){
+    var max = 5;
+    var checkboxes = $('input[class="nvInput_checkboxes"]');
+
+    checkboxes.change(function(){
+        var current = checkboxes.filter(':checked').length;
+        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
     });
 });
 </script>

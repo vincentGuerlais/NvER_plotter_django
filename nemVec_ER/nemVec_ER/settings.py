@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'widget_tweaks',
+    'blastplus',
     'ER_plotter.apps.ErPlotterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks',
-    'blastplus',
 ]
 
 MIDDLEWARE = [
