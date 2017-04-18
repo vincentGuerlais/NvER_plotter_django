@@ -15,30 +15,30 @@
   function drawRegenChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('number', 'x');
-    data.addColumn('number', '{{ nvertx_1 }}{% if nvertx_1_regen_invalid %}\nNO DATA{% endif %}');
+    data.addColumn('number', '{{ nvertx_1 }}{% if not nvertx_1_regen_invalid %}\n{{ nr_hit_graph_1 }}{% else %}\nNO DATA{% endif %}');
     data.addColumn({id:'i0', type:'number', role:'interval'});
     data.addColumn({id:'i1', type:'number', role:'interval'});
     data.addColumn({type: 'string', role: 'tooltip'});
     {% if nvertx_2 %}
-    data.addColumn('number', '{{ nvertx_2 }}{% if nvertx_2_regen_invalid %}\nNO DATA{% endif %}');
+    data.addColumn('number', '{{ nvertx_2 }}{% if not nvertx_2_regen_invalid %}\n{{ nr_hit_graph_2 }}{% else %}\nNO DATA{% endif %}');
     data.addColumn({id:'i2', type:'number', role:'interval'});
     data.addColumn({id:'i3', type:'number', role:'interval'});
     data.addColumn({type: 'string', role: 'tooltip'});
     {% endif %}
     {% if nvertx_3 %}
-    data.addColumn('number', '{{ nvertx_3 }}{% if nvertx_3_regen_invalid %}\nNO DATA{% endif %}');
+    data.addColumn('number', '{{ nvertx_3 }}{% if not nvertx_3_regen_invalid %}\n{{ nr_hit_graph_3 }}{% else %}\nNO DATA{% endif %}');
     data.addColumn({id:'i4', type:'number', role:'interval'});
     data.addColumn({id:'i5', type:'number', role:'interval'});
     data.addColumn({type: 'string', role: 'tooltip'});
     {% endif %}
     {% if nvertx_4 %}
-    data.addColumn('number', '{{ nvertx_4 }}{% if nvertx_4_regen_invalid %}\nNO DATA{% endif %}');
+    data.addColumn('number', '{{ nvertx_4 }}{% if not nvertx_4_regen_invalid %}\n{{ nr_hit_graph_4 }}{% else %}\nNO DATA{% endif %}');
     data.addColumn({id:'i6', type:'number', role:'interval'});
     data.addColumn({id:'i7', type:'number', role:'interval'});
     data.addColumn({type: 'string', role: 'tooltip'});
     {% endif %}
     {% if nvertx_5 %}
-    data.addColumn('number', '{{ nvertx_5 }}{% if nvertx_5_regen_invalid %}\nNO DATA{% endif %}');
+    data.addColumn('number', '{{ nvertx_5 }}{% if not nvertx_5_regen_invalid %}\n{{ nr_hit_graph_5 }}{% else %}\nNO DATA{% endif %}');
     data.addColumn({id:'i8', type:'number', role:'interval'});
     data.addColumn({id:'i9', type:'number', role:'interval'});
     data.addColumn({type: 'string', role: 'tooltip'});
@@ -70,6 +70,7 @@
         lineWidth: 2,
         intervals: { 'style':'sticks', lineWidth:1.5 },
         legend: 'right',
+        chartArea: {width: '60%'},
         hAxis: {
           title: 'Hours post amputation',
           ticks : [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
@@ -156,6 +157,7 @@
         title: 'Embryonic expression',
         titleTextStyle: { fontSize: 20 },
         lineWidth: 2,
+        chartArea: {width: '60%'},
         intervals: { 'style':'sticks' },
         legend: 'right',
         hAxis: {
@@ -212,8 +214,8 @@
     <div class="tab-content">
       <div id="Plots" class="tab-pane fade in active">
         <h3>Plots</h3>
-        <div id="regen_plot" style="width: 85%; height: 700px;"></div>
-        <div id="embryo_plot" style="width: 85%; height: 700px;"></div>
+        <div id="regen_plot" style="width: 95%; height: 700px;"></div>
+        <div id="embryo_plot" style="width: 95%; height: 700px;"></div>
       </div>
       <div id="Count_table" class="tab-pane fade">
         <h3>Count tables</h3>
@@ -902,7 +904,6 @@
               </table>
             </div>
           </div>
-
 
   </div>
 {% endblock content %}

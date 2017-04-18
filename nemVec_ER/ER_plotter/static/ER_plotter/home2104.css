@@ -148,3 +148,29 @@
 #annot_table {
   background-color : white;
 }
+#navbar_logo {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  display: block;
+  margin-top: -30px;
+}
+.navbar {
+  padding-top: 35px;
+  font-size: large;
+}
+.sub-header {
+  padding-top: 40px;
+}
+.sidebar {
+  margin-top: 20px;
+}
+.navbar-brand {
+  padding-top: 0px;
+}
+.navbar-right {
+  margin-top: -15px;
+}
+.td_id {
+  min-width: 160px;
+}

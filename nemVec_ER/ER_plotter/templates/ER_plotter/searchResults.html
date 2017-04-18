@@ -15,22 +15,31 @@
           <thead>
             <tr>
               <th>ID</th>
+              <th>mfuzz clust</th>
+              <th>mfuzz score</th>
+              <th>uniprot id</th>
               <th>uniprot description</th>
               <th>top nr_hit eval</th>
             </tr>
           </thead>
           <tbody>
+            <form action="{% url 'results' %}" method="get">
             {% for id in search_result %}
             <tr>
-              <td>{{ id.nvertx_id }}</td>
+              <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
+              <td>{{ id.mfuzz_clust }}</td>
+              <td>{{ id.mfuzz_score }}</td>
+              <td>{% if id.uniprot_id == 'No_Uniprotmatch' %}{{ id.uniprot_id }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.uniprot_id }}">{{ id.uniprot_id }}</a>{% endif %}</td>
               <td>{{ id.uniprot_description }}</td>
               <td>{{ id.top_nr_hit_eval }}</td>
             </tr>
             <tr>
               <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-              <td colspan="2" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
+              <td colspan="6" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
             </tr>
             {% endfor %}
+            <input type="submit" value="Compare !">
+            </form>
           </tbody>
         </table>
       </div>
@@ -69,7 +78,7 @@
 <script type="text/javascript">
 $(function() {
     $("td[colspan=1]").find("p").hide();
-    $("td[colspan=2]").find("p").hide();
+    $("td[colspan=6]").find("p").hide();
     $("table").click(function(event) {
         event.stopPropagation();
         var $target = $(event.target);
@@ -78,6 +87,17 @@ $(function() {
         } else {
             $target.closest("tr").next().find("p").slideToggle();
         }                    
+    });
+});
+</script>
+<script type="text/javascript">
+jQuery(function(){
+    var max = 5;
+    var checkboxes = $('input[class="nvInput_checkboxes"]');
+
+    checkboxes.change(function(){
+        var current = checkboxes.filter(':checked').length;
+        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
     });
 });
 </script>

@@ -1,71 +1,36 @@
+#-*- coding: utf-8 -*-
 <!DOCTYPE html>
 {% extends "ER_plotter/base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
-{% block head %}
-
-{% endblock head %}
 {% block content %}
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="sub-header" id="Mfuzz_clusters">Explore Mfuzz Clusters</h1>
 
-<div class="prev_next">
-    {% if blogs.has_previous %}
-        <a class="prev btn btn-info" href="?page={{blogs.previous_page_number}}">Prev</a>
-    {% endif %}
-    {% if blogs.has_next %}
-        <a class="next btn btn-info" href="?page={{blogs.next_page_number}}">Next</a>
-    {% endif %}
-    <div class="pages">
-        <ul>
-        {% for pg in page_range %}
-            {% if blogs.number == pg %}
-                <li><a href="?page={{pg}}" class="btn btn-default">{{pg}}</a></li>
-            {% else %}
-                <li><a href="?page={{pg}}" class="btn">{{pg}}</a></li>
-            {% endif %}
-        {% endfor %}
-        </ul>
-    </div>
-    <span class="clear_both"></span>
-</div>
-        </div>
+  <!-- Buttons -->
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="sub-header" id="Mfuzz_clusters">tests checkboxes</h1>
+      <a href="http://127.0.0.1:8000/ER_plotter/mfuzz/1?page=3#Details">click here to go to details</a>
+    {% for elem in nvid %}
+    <p>{{ elem }}</p><br/>
+    {% endfor %}
+
+  </div>
+
 {% endblock content %}
 
+{% block js %}
 
-<!--
+<!-- limits the amount of checkboxes that can be checked -->
 
+<script type="text/javascript">
+jQuery(function(){
+    var max = 2;
+    var checkboxes = $('input[class="nvInput_checkboxes"]');
 
-                    <div class="table-responsive">
-                      attention l'un ou l'autre
-                      <table class="table table-striped">
-                      <table id="WTF" class="display" cellspacing="0" width="100%">
-                        <h4>titre</h4>
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>nve_hit</th>
-                            <th>nve_eval</th>
-                            <th>mfuzz_clust</th>
-                            <th>mfuzz_score</th>
-                            <th>uniprot_id</th>
-                            <th>uniprot_description</th>
-                            <th>top_nr_hit_eval</th>
-                            <th>other_nr_hits</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for id in mfuzz1_all %}
-                          <tr>
-                            <td>{{ id }}</td>
-                          </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                    </div>
-
-
-
--->
-
-
+    checkboxes.change(function(){
+        var current = checkboxes.filter(':checked').length;
+        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+    });
+});
+</script>
+{% endblock js %}

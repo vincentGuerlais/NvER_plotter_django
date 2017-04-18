@@ -114,7 +114,7 @@ def queryCreate(splitLine, DBTableName):
 			query += ", mean_120HPF = " + splitLine[39]
 		query += ").save()"
 	
-	elif DBTableName == 'Annotation' :
+	elif DBTableName == 'Annotation' : #!!!!! add a col to allow link to ncbi !!!!!#
 		query = "Annotation(nvertx_id = " + splitLine[0]
 		if splitLine[2] != 'NA' :
 			query += ", nve_hit = " + splitLine[2]
@@ -130,6 +130,7 @@ def queryCreate(splitLine, DBTableName):
 			query += ", uniprot_description = " + splitLine[7]
 		if splitLine[8] != 'NA' :
 			query += ", top_nr_hit_eval = " + splitLine[8]
+			#someting like that query += link = regex |id|
 		if splitLine[9] != 'NA' :
 			query += ", other_nr_hits = " + splitLine[9]
 		query += ").save()"

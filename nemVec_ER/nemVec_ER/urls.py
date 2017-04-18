@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^ER_plotter/', include('ER_plotter.urls')),
+    url(r'^blast/', include('blastplus.urls')),
 ]

@@ -1,14 +1,38 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.forms import formset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Standard_Error, Mfuzz
 from .forms import Gene_searchForm, NvERTxForm
-import math
+import math, re
 
 def results(request):
 	regen_point = [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
 	gene_search_form = Gene_searchForm(request.POST or None)
 	nvertx_form = NvERTxForm(request.POST or None)
+	#get id
+	nvid = request.GET.getlist('Nvid', '')
+
+	nvertx_1 = False
+	nvertx_2 = False
+	nvertx_3 = False
+	nvertx_4 = False
+	nvertx_5 = False
+	log2 = False
+
+	if nvid :
+		nvertx_1 = nvid[0]
+		if len(nvid) >= 2 :
+			nvertx_2 = nvid[1]
+		if len(nvid) >= 3 :
+			nvertx_3 = nvid[2]
+		if len(nvid) >= 4 :
+			nvertx_4 = nvid[3]
+		if len(nvid) == 5 :
+			nvertx_5 = nvid[4]
+		nvertx_search = True
+
+
 	if nvertx_form.is_valid():
 		nvertx_1 = nvertx_form.cleaned_data['nvertx_1']
 		if nvertx_1[0] != 'N' :
@@ -27,6 +51,8 @@ def results(request):
 			nvertx_5 = 'NvERTx.2.' + nvertx_5
 		log2 = nvertx_form.cleaned_data['log2']
 		nvertx_search = True
+		
+	if nvertx_1 :
 		try :
 			sequence_fasta_1 = Fasta.objects.get(nvertx_id=nvertx_1).fasta_sequence
 		except :
@@ -160,6 +186,7 @@ def results(request):
 			annot_uniprot_description_1 = Annotation.objects.get(nvertx_id=nvertx_1).uniprot_description
 			annot_top_nr_hit_eval_1 = Annotation.objects.get(nvertx_id=nvertx_1).top_nr_hit_eval
 			annot_other_nr_hits_1 = Annotation.objects.get(nvertx_id=nvertx_1).other_nr_hits
+			nr_hit_graph_1 = re.search('\| (.+),', annot_top_nr_hit_eval_1).group(1) + ']'
 		except :
 			nvertx_1_annot_invalid = True
 
@@ -297,6 +324,7 @@ def results(request):
 				annot_uniprot_description_2 = Annotation.objects.get(nvertx_id=nvertx_2).uniprot_description
 				annot_top_nr_hit_eval_2 = Annotation.objects.get(nvertx_id=nvertx_2).top_nr_hit_eval
 				annot_other_nr_hits_2 = Annotation.objects.get(nvertx_id=nvertx_2).other_nr_hits
+				nr_hit_graph_2 = re.search('\| (.+),', annot_top_nr_hit_eval_2).group(1) + ']'
 			except :
 				nvertx_2_annot_invalid = True
 
@@ -434,6 +462,7 @@ def results(request):
 				annot_uniprot_description_3 = Annotation.objects.get(nvertx_id=nvertx_3).uniprot_description
 				annot_top_nr_hit_eval_3 = Annotation.objects.get(nvertx_id=nvertx_3).top_nr_hit_eval
 				annot_other_nr_hits_3 = Annotation.objects.get(nvertx_id=nvertx_3).other_nr_hits
+				nr_hit_graph_3 = re.search('\| (.+),', annot_top_nr_hit_eval_3).group(1) + ']'
 			except :
 				nvertx_3_annot_invalid = True
 
@@ -571,6 +600,7 @@ def results(request):
 				annot_uniprot_description_4 = Annotation.objects.get(nvertx_id=nvertx_4).uniprot_description
 				annot_top_nr_hit_eval_4 = Annotation.objects.get(nvertx_id=nvertx_4).top_nr_hit_eval
 				annot_other_nr_hits_4 = Annotation.objects.get(nvertx_id=nvertx_4).other_nr_hits
+				nr_hit_graph_4 = re.search('\| (.+),', annot_top_nr_hit_eval_4).group(1) + ']'
 			except :
 				nvertx_4_annot_invalid = True
 
@@ -708,6 +738,7 @@ def results(request):
 				annot_uniprot_description_5 = Annotation.objects.get(nvertx_id=nvertx_5).uniprot_description
 				annot_top_nr_hit_eval_5 = Annotation.objects.get(nvertx_id=nvertx_5).top_nr_hit_eval
 				annot_other_nr_hits_5 = Annotation.objects.get(nvertx_id=nvertx_5).other_nr_hits
+				nr_hit_graph_5 = re.search('\| (.+),', annot_top_nr_hit_eval_5).group(1) + ']'
 			except :
 				nvertx_5_annot_invalid = True
 
@@ -773,7 +804,7 @@ def mfuzzResults(request,mfuzz_nb):
 
 	#pagination for the details
 	page = request.GET.get('page', 1)
-	paginator = Paginator(cluster_list, 25)
+	paginator = Paginator(cluster_list, 50)
 	try:
 		cluster_table = paginator.page(page)
 	except PageNotAnInteger:
@@ -798,7 +829,7 @@ def searchResults(request):
 
 	#pagination for the details
 	page = request.GET.get('page', 1)
-	paginator = Paginator(search_result_all, 25)
+	paginator = Paginator(search_result_all, 50)
 	try:
 		search_result = paginator.page(page)
 	except PageNotAnInteger:
@@ -808,24 +839,14 @@ def searchResults(request):
 
 	return render(request, 'ER_plotter/searchResults.html', locals())
 
+
 def test(request):
+	gene_search_form = Gene_searchForm(request.POST or None)
+	nvertx_form = NvERTxForm(request.POST or None)
 
-	#list of clusters. Used to create the buttons
-	clusters_list = Mfuzz.objects.all()
+	nvid = request.GET.getlist('Nvid', '')
 
-	#Title and plots for the selected cluster
-	mfuzz_cluster_nb = clusters_list.get(name='Mfuzz1').mfuzz_cluster_nb
-	mfuzz_graph = clusters_list.get(name='Mfuzz1').cluster_image
-	mfuzz_bp_plot = clusters_list.get(name='Mfuzz1').bp_plot_image
-
-	#Details of the selected cluster
-	cluster_list = Annotation.objects.filter(mfuzz_clust=1)
-
-	#pagination for the details
-	####
-
-
-	return render(request, 'ER_plotter/mfuzzResults.html', locals())
+	return render(request, 'ER_plotter/test.html', locals())
 
 
 

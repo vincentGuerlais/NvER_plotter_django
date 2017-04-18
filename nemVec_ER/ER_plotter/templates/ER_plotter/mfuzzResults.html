@@ -27,7 +27,7 @@
       <img src="{% static mfuzz_bp_plot %}" class="img-responsive col-lg-offset-1 col-lg-5">
     </div>
 
-    <h2 class="sub-header" id="Mfuzz_clusters">Details</h1>
+    <h2 class="sub-header" id="Details">Details</h1>
     <p class="text-info">click on a row to view the other nr hits</p>
     <div class="row">
       <div class="table-responsive">
@@ -35,8 +35,6 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>nve hit</th>
-              <th>nve eval</th>
               <th>mfuzz clust</th>
               <th>mfuzz score</th>
               <th>uniprot id</th>
@@ -45,22 +43,23 @@
             </tr>
           </thead>
           <tbody>
+            <form action="{% url 'results' %}" method="get">
             {% for id in cluster_table %}
             <tr>
-              <td>{{ id.nvertx_id }}</td>
-              <td>{{ id.nve_hit }}</td>
-              <td>{{ id.nve_eval }}</td>
+              <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
               <td>{{ id.mfuzz_clust }}</td>
               <td>{{ id.mfuzz_score }}</td>
-              <td>{{ id.uniprot_id }}</td>
+              <td>{% if id.uniprot_id == 'No_Uniprotmatch' %}{{ id.uniprot_id }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.uniprot_id }}">{{ id.uniprot_id }}</a>{% endif %}</td>
               <td>{{ id.uniprot_description }}</td>
               <td>{{ id.top_nr_hit_eval }}</td>
             </tr>
             <tr>
               <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-              <td colspan="7" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
+              <td colspan="5" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
             </tr>
             {% endfor %}
+            <input type="submit" value="Compare !">
+            </form>
           </tbody>
         </table>
       </div>
@@ -70,7 +69,7 @@
     <div class="text-center">
       <ul class="pagination">
         {% if cluster_table.has_previous %}
-          <li><a href="?page={{ cluster_table.previous_page_number }}">&laquo;</a></li>
+          <li><a href="?page={{ cluster_table.previous_page_number }}#Details">&laquo;</a></li>
         {% else %}
           <li class="disabled"><span>&laquo;</span></li>
         {% endif %}
@@ -78,11 +77,11 @@
           {% if cluster_table.number == i %}
             <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
           {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            <li><a href="?page={{ i }}#Details">{{ i }}</a></li>
           {% endif %}
         {% endfor %}
         {% if cluster_table.has_next %}
-          <li><a href="?page={{ cluster_table.next_page_number }}">&raquo;</a></li>
+          <li><a href="?page={{ cluster_table.next_page_number }}#Details">&raquo;</a></li>
         {% else %}
           <li class="disabled"><span>&raquo;</span></li>
         {% endif %}
@@ -97,7 +96,7 @@
 <script type="text/javascript">
 $(function() {
     $("td[colspan=1]").find("p").hide();
-    $("td[colspan=7]").find("p").hide();
+    $("td[colspan=5]").find("p").hide();
     $("table").click(function(event) {
         event.stopPropagation();
         var $target = $(event.target);
