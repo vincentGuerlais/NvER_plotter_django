@@ -29,7 +29,38 @@
 
     <h2 class="sub-header" id="Details">Details</h1>
     <p class="text-info">click on a row to view the other nr hits</p>
+
+    {% if cluster_table.has_other_pages %}
+    <div class="text-center">
+      <ul class="pagination">
+        {% if cluster_table.has_previous %}
+          <li><a href="?page={{ cluster_table.previous_page_number }}#Details">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+
+        {% if cluster_table.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          {% for num in cluster_table.page_range %}
+            {% if not num %}<li><a>...</a></li>
+            {% else %}<li><a href="?page={{ num }}#Details">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if cluster_table.has_next %}
+          <li><a href="?page={{ cluster_table.next_page_number }}#Details">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+
     <div class="row">
+      <form action="{% url 'results' %}" method="get">
+      <input type="submit" value="Compare !">
       <div class="table-responsive">
         <table id="cluster_annot" class="table table-striped" cellspacing="0" width="100%">
           <thead>
@@ -43,7 +74,6 @@
             </tr>
           </thead>
           <tbody>
-            <form action="{% url 'results' %}" method="get">
             {% for id in cluster_table %}
             <tr>
               <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
@@ -58,10 +88,12 @@
               <td colspan="5" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
             </tr>
             {% endfor %}
-            <input type="submit" value="Compare !">
-            </form>
+            <div>
+            </div>
           </tbody>
         </table>
+        <input type="submit" value="Compare !">
+        </form>
       </div>
     </div>
 

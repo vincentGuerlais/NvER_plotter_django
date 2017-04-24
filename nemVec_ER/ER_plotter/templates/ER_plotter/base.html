@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'ER_plotter/bootStrap/css/bootstrap.min.css' %}" />
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'ER_plotter/home2104.css' %}" />
+    <link rel="stylesheet" href="{% static 'ER_plotter/home0421.css' %}" />
     {% block head %}{% endblock %}
   </head>
 
@@ -40,7 +40,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'newHome' %}">Home</a></li>
             <li><a href="{% url 'mfuzz' %}">Mfuzz clusters</a></li>
-            <li><a href="#BLAST">BLAST</a></li>
+            <li><a href="{% url 'blast' %}">BLAST</a></li>
             <li><a href="#">Login</a></li>
           </ul>
         </div>
