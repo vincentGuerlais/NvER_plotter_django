@@ -3,13 +3,15 @@ from django.shortcuts import render
 from django.forms import formset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Standard_Error, Mfuzz
-from .forms import Gene_searchForm, NvERTxForm
+from .forms import Gene_searchForm, NvERTxForm, ConvertForm
 import math, re, diggPaginator
 
 def results(request):
 	regen_point = [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
 	gene_search_form = Gene_searchForm(request.POST or None)
 	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
+	
 	#get id
 	nvid = request.GET.getlist('Nvid', '')
 
@@ -778,6 +780,7 @@ def mfuzzHome(request):
 	#Side panel forms
 	gene_search_form = Gene_searchForm(request.POST or None)
 	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
 
 	#list of clusters. Used to create the buttons
 	clusters_list = Mfuzz.objects.all()
@@ -790,6 +793,7 @@ def mfuzzResults(request,mfuzz_nb):
 	#Side panel forms
 	gene_search_form = Gene_searchForm(request.POST or None)
 	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
 
 	#list of clusters. Used to create the buttons
 	clusters_list = Mfuzz.objects.all()
@@ -814,15 +818,18 @@ def mfuzzResults(request,mfuzz_nb):
 
 	return render(request, 'ER_plotter/mfuzzResults.html', locals())
 
-def newHome(request):
-	gene_search_form = Gene_searchForm(request.POST or None)
+def home(request):
+	gene_search_form = Gene_searchForm(request.GET or None)
 	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
 
-	return render(request, 'ER_plotter/newHome.html', locals())
+	return render(request, 'ER_plotter/home.html', locals())
 
 def searchResults(request):
 	gene_search_form = Gene_searchForm(request.GET or None)
 	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
+
 	if gene_search_form.is_valid():
 		search_query = gene_search_form.cleaned_data['gene_name']
 

@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="{% static 'ER_plotter/bootStrap/css/bootstrap.min.css' %}" />
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'ER_plotter/home0421.css' %}" />
+    {% block css %}{% endblock css %}
+    <link rel="stylesheet" href="{% static 'ER_plotter/home0424e.css' %}" />
     {% block head %}{% endblock %}
   </head>
 
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -31,35 +31,60 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">NvERTx Embryo-Regen plotter</a>
         </div>
-        <div id="navbar_logo" class="navbar-brand">
-          <a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/logo_white.png' %}" width='80px'></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'newHome' %}">Home</a></li>
-            <li><a href="{% url 'mfuzz' %}">Mfuzz clusters</a></li>
-            <li><a href="{% url 'blast' %}">BLAST</a></li>
-            <li><a href="#">Login</a></li>
-          </ul>
+<!--        <div class="row">
+          <div class="col-md-2 col-md-offset-5">
+            <a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/logo_cropped.png' %}" width='80px'></a>
+          </div>
+        </div>-->
+        <div class="row">
+          <div id="navbar" class="navbar-collapse collapse">
+            <div class="col-md-2 col-md-offset-3 link_wo_image">
+              <a class="top_link" href="{% url 'home' %}">NvERTx - HOME</a>
+            </div>
+            <div class="col-md-2">
+              <a href="http://www.kahikai.org/"><img id="top_image" src="{% static 'ER_plotter/logo_cropped.png' %}" width='70px'></a><br>
+              <a class="top_link" href="{% url 'mfuzz' %}">M-Fuzz clusters</a>
+            </div>
+            <div class="col-md-2 link_wo_image">
+              <a class="top_link" href="{% url 'blast' %}">BLAST</a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
+    <div class="row">
+      <div class="col-sm-3 col-md-2"><img src="{% static 'ER_plotter/test.png' %}" width='80px'></div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">{% block presentation_text %}
+        <h1 class="sub-header" id="Mfuzz_clusters">Welcome to NvERTx plotter !</h1>
+        <div class="row">
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis non ligula vitae iaculis. Praesent imperdiet nulla mi, a pharetra eros feugiat eget. Phasellus malesuada, magna non semper suscipit, mi massa rhoncus leo, lobortis eleifend eros augue non enim. Nunc pretium, quam sed feugiat mattis, lacus neque interdum purus, at lacinia lacus magna sit amet tellus. Sed orci nunc, porta in lectus tristique, mattis sagittis urna. Vestibulum sodales maximus pretium. Phasellus id turpis orci. Etiam ornare ac turpis at egestas. Proin ornare eros a metus cursus convallis. Quisque mollis a nunc a tempus. Suspendisse potenti. Morbi vel tempor dui. Pellentesque nec nunc in justo euismod luctus id eu mi.
+
+        Nulla aliquam efficitur magna id hendrerit. Praesent ligula nisl, gravida vitae arcu nec, mollis imperdiet eros. Sed blandit et ligula a rhoncus. Cras viverra scelerisque ante, euismod auctor felis. Donec posuere mollis lectus at volutpat. In hac habitasse platea dictumst. Vestibulum vulputate, orci quis vulputate dapibus, velit nulla sodales arcu, vel hendrerit lorem ex at enim. Ut tempus lectus vitae magna commodo interdum. Nam tristique sapien quis lobortis tincidunt. Pellentesque id ligula cursus, rutrum arcu eget, hendrerit eros. Duis non quam id dui dignissim mollis. Nullam pharetra purus vel massa finibus bibendum. Nullam scelerisque arcu nec ex suscipit, non ultricies ipsum molestie.
+
+        Mauris eu nisl sed purus maximus elementum eget tincidunt nibh. Aenean erat lacus, consectetur sit amet lacinia in, dapibus in est. Pellentesque in enim cursus, auctor neque nec, cursus sem. Donec velit dolor, fringilla eu viverra at, pellentesque vitae lacus. Vivamus cursus eleifend porta. Aliquam justo enim, sollicitudin vitae augue non, condimentum suscipit purus. Pellentesque bibendum ante aliquam, scelerisque erat et, dictum nibh. Suspendisse ex mi, porta non lacus ut, semper sodales orci. Integer vehicula mattis felis, vitae consectetur ante mattis ut. Curabitur malesuada, nulla nec elementum volutpat, lacus velit tristique sapien, et rutrum felis tortor commodo augue. Nullam luctus ipsum a justo semper mattis ut in arcu.
+
+        Ut euismod metus nec eleifend sollicitudin. Sed sagittis pharetra arcu ac tempor. Duis tincidunt non ligula vel consectetur. Donec mollis eget eros eget vehicula. Mauris porttitor vestibulum velit, quis semper dolor pretium non. Cras auctor gravida porttitor. Aliquam malesuada erat dolor, eget porttitor dui tincidunt id. Fusce sed hendrerit justo, vel facilisis neque. Nullam vitae porta elit. Ut finibus pretium elit eu facilisis.
+
+        Vivamus ligula tellus, fermentum vitae semper fringilla, volutpat vel justo. Etiam et accumsan tortor, ac efficitur purus. Nunc laoreet arcu ac erat viverra ornare. Aliquam pellentesque ligula a viverra posuere. Donec fringilla odio id ultricies feugiat. Fusce arcu purus, facilisis nec quam in, mollis aliquam dolor. Pellentesque ligula augue, malesuada in tincidunt ut, varius at lacus. Donec sed hendrerit nisl, id varius elit. Praesent id sodales nunc. Cras justo arcu, rutrum quis metus nec, vulputate cursus sem. Praesent tempor congue magna consectetur iaculis. Praesent faucibus tincidunt libero, id blandit mauris mollis ac. Maecenas rutrum diam nec nisi placerat, non efficitur lacus posuere. Pellentesque consectetur nibh sapien. Nulla sit amet accumsan sapien.
+        </p>
+        </div>
+        {% endblock presentation_text %}
+      </div>
+    </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <h2 id="sidebarTitle">Advanced search tools</h2>
           <form class="nav nav-sidebar" action="{% url 'search' %}" method="get">
-            <h3 class="NvERTxInput">Search for a gene</h3>
-            {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF' %}
-            <input type="submit" class="btn btn-primary" value="Search !">
+            <h3 class="NvERTxInput">Search by gene name</h3>
+            {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF' %}<br/>
+            <input type="submit" class="btn btn-primary" value="Search!">
           </form>
           <form class="nav nav-sidebar" action="{% url 'results' %}" method="post">
-          <h3 class="NvERTxInput">Input NvERTx Number</h3>
+          <h3 class="NvERTxInput">Search by NvERTx ID</h3>
           {% csrf_token %}
-          {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.2.133024 or 133024' %}
-          <h3 class="NvERTxInput">Input other numbers or leave blank</h3>
+          {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.2.133024 or 133024' %}<br/>
           {% render_field nvertx_form.nvertx_2 class+='form-control' placeholder='eg : NvERTx.2.133025' %}<br/>
           {% render_field nvertx_form.nvertx_3 class+='form-control' placeholder='eg : NvERTx.2.133026' %}<br/>
           {% render_field nvertx_form.nvertx_4 class+='form-control' placeholder='eg : NvERTx.2.133027' %}<br/>
@@ -69,7 +94,13 @@
                 {{ nvertx_form.log2 }} Check for log2
               </label>
             </div>
-            <input type="submit" class="btn btn-primary" value="Evaluate !">
+            <input type="submit" class="btn btn-primary" value="Plot!">
+          </form>
+          <form class="nav nav-sidebar" action="" method="post">
+            <h3 class="NvERTxInput">Convert NvERTx ID’s</h3>
+            {% csrf_token %}
+            {% render_field convert_form.nvertx class+='form-control' placeholder='Add Nemvec Id, NvERTx.2. etc...' %}<br/>
+            <input type="submit" class="btn btn-primary" value="Search!">
           </form>
         </div>
         {% block content %}{% endblock %}
