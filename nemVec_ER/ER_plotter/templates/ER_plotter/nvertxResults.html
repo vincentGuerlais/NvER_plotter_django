@@ -4,6 +4,9 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block presentation_text %}
+{% endblock presentation_text %}
+
 {% block head %}
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -614,7 +617,7 @@
                       {% endif %}
                     </tr>
                     {% endif %}
-                    {% if nvertx_2 %}
+                    {% if nvertx_5 %}
                     <tr>
                       <td>{{ nvertx_5 }}</td>
                       {% if not nvertx_5_embryo_fischer_invalid %}
@@ -772,6 +775,10 @@
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
+                  <tr>
+                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  </tr>
                     {% endif %}
                   {% if nvertx_2 %}
                   <tr>
@@ -791,6 +798,10 @@
                   </tr>
                     {% else %}
                     <td colspan='8'>No data</td>
+                  </tr>
+                  <tr>
+                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+                    <td colspan="7" class="hidden_row"><p>No data</p></td>
                   </tr>
                     {% endif %}
                   {% endif %}
@@ -813,6 +824,10 @@
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
+                  <tr>
+                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  </tr>
                     {% endif %}
                   {% endif %}
                   {% if nvertx_4 %}
@@ -834,6 +849,10 @@
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
+                  <tr>
+                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  </tr>
                     {% endif %}
                   {% endif %}
                   {% if nvertx_5 %}
@@ -854,6 +873,10 @@
                   </tr>
                     {% else %}
                     <td colspan='8'>No data</td>
+                  </tr>
+                  <tr>
+                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
+                    <td colspan="7" class="hidden_row"><p>No data</p></td>
                   </tr>
                     {% endif %}
                   {% endif %}

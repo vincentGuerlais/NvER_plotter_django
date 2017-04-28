@@ -5,6 +5,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Standard_Error, Mfuzz
 from .forms import Gene_searchForm, NvERTxForm, ConvertForm
 import math, re, diggPaginator
+from blastplus import utils
+from blastplus.forms import BlastForm, TBlastnForm, BlastpForm, BlastxForm
+from blastplus.settings import BLAST_CORRECT_PARAMS
+from blastplus.settings import EVALUE_BLAST_DEFAULT, BLAST_MAX_NUMBER_SEQ_IN_INPUT
+from blastplus.settings import EXAMPLE_FASTA_NUCL_FILE_PATH, EXAMPLE_FASTA_PROT_FILE_PATH
+from blastplus.settings import BLAST_DB_NUCL_LIST
 
 def results(request):
 	regen_point = [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
@@ -822,6 +828,8 @@ def home(request):
 	gene_search_form = Gene_searchForm(request.GET or None)
 	nvertx_form = NvERTxForm(request.POST or None)
 	convert_form = ConvertForm(request.POST or None)
+	
+	form = BlastForm(initial={'sequence_in_form': '', 'evalue_in_form': EVALUE_BLAST_DEFAULT})
 
 	return render(request, 'ER_plotter/home.html', locals())
 
@@ -858,6 +866,4 @@ def test(request):
 	return render(request, 'ER_plotter/test.html', {'page': paginator.page(1)})
 
 	#return render(request, 'ER_plotter/test.html', locals())
-
-
 

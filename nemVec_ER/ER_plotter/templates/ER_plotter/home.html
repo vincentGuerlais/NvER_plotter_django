@@ -9,12 +9,16 @@
 
 
 {% block presentation_text %}
-<h2 class="sub-header" id="Mfuzz_clusters">NvERTx - A comparative embryogenesis & regeneration temporal gene expression plotter</h2>
-<div class="row">
-  <p class="text">Understanding the relationship between embryogenesis and regeneration is a long lasting question in regenerative biology as both developmental strategies lead to fully functional organisms. Modern functional genomics enables us today to re-address this question using integrative approaches that enable us to identify the similarities as well as importantly the regeneration specific elements that are potential candidates for regenerative medicine.</p>
-  <p class="text">The starlet sea anemone <em class="sp_name">Nematostella vectensis</em> (Anthozoa, Cnidaria) is a unique model to study <em class="em_blue">embryonic development</em> and <em class="em_blue">whole body regeneration</em> in the same organism. In complement to an existing <em class="em_blue">spatial gene expression</em> database, we present here a novel tool to mine simultaneously (re)-analyzed/normalized temporal RNAseq datasets for embryonic development and oral regeneration of <em class="sp_name">Nematostella vectensis</em>. Data can be accessed by searching for your gene of interest using a gene name or the NvERTx ID of your gene of interest, scrolling trough the gene list corresponding to a given expression clusters, or by using the integrated BLAST ® function.</p>
-  <p class="text">More information about:  <em class="sp_name">Nematostella vectensis</em> | <em class="em_blue">Embryogenesis</em> | <em class="em_blue">Regeneration</em> | <em class="em_blue">Spatial gene expression</em></p>
-  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <em class="em_blue">Helm et al. 2013, Tulin et al. 2013</em> </p>
+<h2 class="sub-header delimiter"></h2>
+<div class="col-md-3"><img class="img-responsive image_text" src="{% static 'ER_plotter/nvImage.png' %}"></div>
+<div class="col-md-9">
+  <h2 class="sub-header" id="Mfuzz_clusters">NvERTx - A comparative embryogenesis & regeneration temporal gene expression plotter</h2>
+  <div class="row">
+    <p class="text">Understanding the relationship between embryogenesis and regeneration is a long lasting question in regenerative biology as both developmental strategies lead to fully functional organisms. Modern functional genomics enables us today to re-address this question using integrative approaches that enable us to identify the similarities as well as importantly the regeneration specific elements that are potential candidates for regenerative medicine.</p>
+    <p class="text">The starlet sea anemone <em class="sp_name">Nematostella vectensis</em> (Anthozoa, Cnidaria) is a unique model to study <em class="em_blue">embryonic development</em> and <em class="em_blue">whole body regeneration</em> in the same organism. In complement to an existing <em class="em_blue">spatial gene expression</em> database, we present here a novel tool to mine simultaneously (re)-analyzed/normalized temporal RNAseq datasets for embryonic development and oral regeneration of <em class="sp_name">Nematostella vectensis</em>. Data can be accessed by searching for your gene of interest using a gene name or the NvERTx ID of your gene of interest, scrolling trough the gene list corresponding to a given expression clusters, or by using the integrated BLAST ® function.</p>
+    <p class="text">More information about:  <em class="sp_name">Nematostella vectensis</em> | <em class="em_blue">Embryogenesis</em> | <em class="em_blue">Regeneration</em> | <em class="em_blue">Spatial gene expression</em></p>
+    <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <em class="em_blue">Helm et al. 2013, Tulin et al. 2013</em> </p>
+  </div>
 </div>
 {% endblock presentation_text %}
 
@@ -26,7 +30,7 @@
     <div class="row">
 
       <div class="col-md-12">
-        <div class="block col-md-7">
+        <div class="block col-md-7" id="cluster_block">
           <h3 class="blockTitle">Mine co-expression clusters</h3>
           <div class="col-md-12">
             <div class="col-md-1 div_image_clust">
@@ -121,8 +125,24 @@
     <div class="row">
       <div class="block">
         <h3 class="blockTitle" id="blast">BLAST</h3>
-        <textarea id="blast_textarea" rows="10" cols="200">
-        </textarea> 
+
+        <div>
+          {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+              Please correct errors: {{form.errors}}
+            </div>
+            {% endif %}
+            <form action="{% url 'blast' %}" method="post">
+              {% csrf_token %}
+              <p>{% render_field form.sequence_in_form class+='form-control' %}</p>
+              <input type="hidden" id="id_blast_db_in_form" name="blast_db_in_form" value="/Users/vincent/Desktop/dER_plotter/NvER_plotter_django/nemVec_ER/db/NvERTx.3.fasta">
+              <input type="hidden" id="id_evalue_in_form" name="evalue_in_form" value="0.001">
+              <input type="hidden" id="id_word_size_in_form" name="word_size_in_form" value="11">
+              <input type="hidden" id="id_search_sensitivity_in_form" name="search_sensitivity_in_form" value="{&#39;gapopen&#39;: 5, &#39;gapextend&#39;: 2, &#39;penalty&#39;: -3, &#39;reward&#39;: 2}">
+              <input type="submit" class="btn btn-primary" value="Submit!">
+            </form>
+        </div>
+
       </div>
     </div>
   </div>

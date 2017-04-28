@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template -->
     {% block css %}{% endblock css %}
-    <link rel="stylesheet" href="{% static 'ER_plotter/home0424e.css' %}" />
+    <link rel="stylesheet" href="{% static 'ER_plotter/home0424h.css' %}" />
     {% block head %}{% endblock %}
   </head>
 
@@ -32,29 +32,26 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-<!--        <div class="row">
-          <div class="col-md-2 col-md-offset-5">
-            <a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/logo_cropped.png' %}" width='80px'></a>
-          </div>
-        </div>-->
+
         <div class="row">
           <div id="navbar" class="navbar-collapse collapse">
-            <div class="col-md-2 col-md-offset-3 link_wo_image">
-              <a class="top_link" href="{% url 'home' %}">NvERTx - HOME</a>
-            </div>
-            <div class="col-md-2">
-              <a href="http://www.kahikai.org/"><img id="top_image" src="{% static 'ER_plotter/logo_cropped.png' %}" width='70px'></a><br>
-              <a class="top_link" href="{% url 'mfuzz' %}">M-Fuzz clusters</a>
-            </div>
-            <div class="col-md-2 link_wo_image">
-              <a class="top_link" href="{% url 'blast' %}">BLAST</a>
+            <div class="col-md-10 col-md-offset-1">
+              <div class="col-md-2 col-md-offset-3 link_wo_image">
+                <a class="top_link" href="{% url 'home' %}">NvERTx - HOME</a>
+              </div>
+              <div class="col-md-2">
+                <a href="http://www.kahikai.org/"><img id="top_image" src="{% static 'ER_plotter/logo_cropped.png' %}" width='70px'></a><br>
+                <a class="top_link" href="{% url 'mfuzz' %}">M-Fuzz clusters</a>
+              </div>
+              <div class="col-md-2 link_wo_image">
+                <a class="top_link" href="{% url 'blast' %}">BLAST</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </nav>
     <div class="row">
-      <div class="col-sm-3 col-md-2"><img src="{% static 'ER_plotter/test.png' %}" width='80px'></div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">{% block presentation_text %}
         <h1 class="sub-header" id="Mfuzz_clusters">Welcome to NvERTx plotter !</h1>
         <div class="row">
