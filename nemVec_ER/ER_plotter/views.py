@@ -193,10 +193,18 @@ def results(request):
 			annot_uniprot_id_1 = Annotation.objects.get(nvertx_id=nvertx_1).uniprot_id
 			annot_uniprot_description_1 = Annotation.objects.get(nvertx_id=nvertx_1).uniprot_description
 			annot_top_nr_hit_eval_1 = Annotation.objects.get(nvertx_id=nvertx_1).top_nr_hit_eval
+			annot_top_nr_hit_eval_1_split = annot_top_nr_hit_eval_1.split('|',2)
+			annot_nr_beg_1 = annot_top_nr_hit_eval_1_split[0]
+			annot_nr_link_1 = annot_top_nr_hit_eval_1_split[1]
+			annot_nr_end_1 = annot_top_nr_hit_eval_1_split[2]
 			annot_other_nr_hits_1 = Annotation.objects.get(nvertx_id=nvertx_1).other_nr_hits
 			nr_hit_graph_1 = re.search('\| (.+),', annot_top_nr_hit_eval_1).group(1) + ']'
 		except :
 			nvertx_1_annot_invalid = True
+		try :
+			ncbi_1 = annot_top_nr_hit_eval_1.split('|')[1]
+		except :
+			nvertx_1_links_invalid = True
 
 		if nvertx_2 :
 			try :
@@ -331,6 +339,10 @@ def results(request):
 				annot_uniprot_id_2 = Annotation.objects.get(nvertx_id=nvertx_2).uniprot_id
 				annot_uniprot_description_2 = Annotation.objects.get(nvertx_id=nvertx_2).uniprot_description
 				annot_top_nr_hit_eval_2 = Annotation.objects.get(nvertx_id=nvertx_2).top_nr_hit_eval
+				annot_top_nr_hit_eval_2_split = annot_top_nr_hit_eval_2.split('|',2)
+				annot_nr_beg_2 = annot_top_nr_hit_eval_2_split[0]
+				annot_nr_link_2 = annot_top_nr_hit_eval_2_split[1]
+				annot_nr_end_2 = annot_top_nr_hit_eval_2_split[2]
 				annot_other_nr_hits_2 = Annotation.objects.get(nvertx_id=nvertx_2).other_nr_hits
 				nr_hit_graph_2 = re.search('\| (.+),', annot_top_nr_hit_eval_2).group(1) + ']'
 			except :
@@ -469,6 +481,10 @@ def results(request):
 				annot_uniprot_id_3 = Annotation.objects.get(nvertx_id=nvertx_3).uniprot_id
 				annot_uniprot_description_3 = Annotation.objects.get(nvertx_id=nvertx_3).uniprot_description
 				annot_top_nr_hit_eval_3 = Annotation.objects.get(nvertx_id=nvertx_3).top_nr_hit_eval
+				annot_top_nr_hit_eval_3_split = annot_top_nr_hit_eval_3.split('|',2)
+				annot_nr_beg_3 = annot_top_nr_hit_eval_3_split[0]
+				annot_nr_link_3 = annot_top_nr_hit_eval_3_split[1]
+				annot_nr_end_3 = annot_top_nr_hit_eval_3_split[2]
 				annot_other_nr_hits_3 = Annotation.objects.get(nvertx_id=nvertx_3).other_nr_hits
 				nr_hit_graph_3 = re.search('\| (.+),', annot_top_nr_hit_eval_3).group(1) + ']'
 			except :
@@ -607,6 +623,10 @@ def results(request):
 				annot_uniprot_id_4 = Annotation.objects.get(nvertx_id=nvertx_4).uniprot_id
 				annot_uniprot_description_4 = Annotation.objects.get(nvertx_id=nvertx_4).uniprot_description
 				annot_top_nr_hit_eval_4 = Annotation.objects.get(nvertx_id=nvertx_4).top_nr_hit_eval
+				annot_top_nr_hit_eval_4_split = annot_top_nr_hit_eval_4.split('|',2)
+				annot_nr_beg_4 = annot_top_nr_hit_eval_4_split[0]
+				annot_nr_link_4 = annot_top_nr_hit_eval_4_split[1]
+				annot_nr_end_4 = annot_top_nr_hit_eval_4_split[2]
 				annot_other_nr_hits_4 = Annotation.objects.get(nvertx_id=nvertx_4).other_nr_hits
 				nr_hit_graph_4 = re.search('\| (.+),', annot_top_nr_hit_eval_4).group(1) + ']'
 			except :
@@ -745,6 +765,10 @@ def results(request):
 				annot_uniprot_id_5 = Annotation.objects.get(nvertx_id=nvertx_5).uniprot_id
 				annot_uniprot_description_5 = Annotation.objects.get(nvertx_id=nvertx_5).uniprot_description
 				annot_top_nr_hit_eval_5 = Annotation.objects.get(nvertx_id=nvertx_5).top_nr_hit_eval
+				annot_top_nr_hit_eval_5_split = annot_top_nr_hit_eval_5.split('|',2)
+				annot_nr_beg_5 = annot_top_nr_hit_eval_5_split[0]
+				annot_nr_link_5 = annot_top_nr_hit_eval_5_split[1]
+				annot_nr_end_5 = annot_top_nr_hit_eval_5_split[2]
 				annot_other_nr_hits_5 = Annotation.objects.get(nvertx_id=nvertx_5).other_nr_hits
 				nr_hit_graph_5 = re.search('\| (.+),', annot_top_nr_hit_eval_5).group(1) + ']'
 			except :
@@ -843,6 +867,15 @@ def searchResults(request):
 
 	search_result_all = Annotation.objects.filter(nvertx_id__icontains=search_query) | Annotation.objects.filter(nve_hit__icontains=search_query) | Annotation.objects.filter(uniprot_id__icontains=search_query) | Annotation.objects.filter(uniprot_description__icontains=search_query) | Annotation.objects.filter(top_nr_hit_eval__icontains=search_query) | Annotation.objects.filter(other_nr_hits__icontains=search_query)
 
+	for elem in search_result_all :
+		try :
+			split = elem.top_nr_hit_eval.split('|',2)
+			elem.ncbi_wo_link_beg = split[0]
+			elem.ncbi_link = split[1]
+			elem.ncbi_wo_link_end = split[2]
+		except :
+			pass
+
 	#pagination for the details
 	page = request.GET.get('page', 1)
 	paginator = diggPaginator.DiggPaginator(search_result_all, 50, body=5)
@@ -855,6 +888,12 @@ def searchResults(request):
 
 	return render(request, 'ER_plotter/searchResults.html', locals())
 
+def about(request):
+	gene_search_form = Gene_searchForm(request.GET or None)
+	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
+	
+	return render(request, 'ER_plotter/about.html', locals())
 
 def test(request):
 	gene_search_form = Gene_searchForm(request.POST or None)

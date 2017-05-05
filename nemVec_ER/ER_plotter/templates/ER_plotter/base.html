@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template -->
     {% block css %}{% endblock css %}
-    <link rel="stylesheet" href="{% static 'ER_plotter/home0424h.css' %}" />
+    <link rel="stylesheet" href="{% static 'ER_plotter/home0424i.css' %}" />
     {% block head %}{% endblock %}
   </head>
 
@@ -73,6 +73,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+        <div><img class="img-responsive image_text" src="{% static 'ER_plotter/nvImage.png' %}"></div>
           <form class="nav nav-sidebar" action="{% url 'search' %}" method="get">
             <h3 class="NvERTxInput">Search by gene name</h3>
             {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF' %}<br/>
@@ -100,7 +101,7 @@
             <input type="submit" class="btn btn-primary" value="Search!">
           </form>
         </div>
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock content %}
         </div>
       </div>
     </div>
