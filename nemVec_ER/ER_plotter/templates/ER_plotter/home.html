@@ -29,52 +29,8 @@
       <div class="col-md-12">
         <div class="block col-md-7" id="cluster_block">
           <h3 class="blockTitle">Mine co-expression clusters</h3>
-          <div class="col-md-12">
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz1.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz2.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz3.png' %}">
-            </div>            
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz4.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz5.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz6.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz7.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz8.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz9.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz10.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz11.png' %}">
-            </div>
-            <div class="col-md-1 div_image_clust">
-              <img class="img-responsive" src="{% static 'ER_plotter/Mfuzz12.png' %}">
-            </div>
-          </div>
-          <div class="col-md-5">
-            <a href="{% url 'mfuzz' %}"><button type="button" class="btn btn-default"><img class="img-responsive" src="{% static 'ER_plotter/embryo_cropped.png' %}"></button></a>
-            <h4 class="image_label">Embryonic development</h4>
-          </div>
-          <div class="col-md-5 col-md-offset-2">
-            <a href="{% url 'mfuzz' %}"><button type="button" class="btn btn-default mfuzz_button"><img class="img-responsive" src="{% static 'ER_plotter/regen_cropped.png' %}"></button></a>
-            <h4 class="image_label">Regeneration</h4>
-          </div>
+          <a href="{% url 'mfuzz' %}"><button type="button" class="btn btn-default mfuzz_button"><img class="img-responsive" id="image_clust_home" src="{% static 'ER_plotter/home_clusters.png' %}"></button></a>
+          </br>
         </div>
 
         <div class="col-md-4 col-md-offset-1">
@@ -118,10 +74,10 @@
     </div>
     </br>
     </br>
-    </br>
     <div class="row">
       <div class="block">
-        <h3 class="blockTitle" id="blast">BLAST</h3>
+        <h3 class="blockTitle" id="blast">BLASTn</h3>
+        <a href="/blast/tblastn"><button type="button" class="btn btn-primary">Switch to tBLASTn</button></a><br/>
 
         <div>
           {% if form.errors %}
@@ -132,10 +88,16 @@
             <form action="{% url 'blast' %}" method="post">
               {% csrf_token %}
               <p>{% render_field form.sequence_in_form class+='form-control' %}</p>
-              <input type="hidden" id="id_blast_db_in_form" name="blast_db_in_form" value="/Users/vincent/Desktop/dER_plotter/NvER_plotter_django/nemVec_ER/db/NvERTx.3.fasta">
-              <input type="hidden" id="id_evalue_in_form" name="evalue_in_form" value="0.001">
-              <input type="hidden" id="id_word_size_in_form" name="word_size_in_form" value="11">
-              <input type="hidden" id="id_search_sensitivity_in_form" name="search_sensitivity_in_form" value="{&#39;gapopen&#39;: 5, &#39;gapextend&#39;: 2, &#39;penalty&#39;: -3, &#39;reward&#39;: 2}">
+              <div class='blast_div'>
+                <p><strong>Database:</strong> {{form.blast_db_in_form}}</p>
+                <p><strong>E-value:</strong> {{form.evalue_in_form}}</p>
+                {% if form.matrix_in_form %}
+                  <p><strong>Matrix:</strong> {{form.matrix_in_form}}</p>
+                  <!--<p><strong>{{form.matrix_in_form.label}}</strong> {{form.matrix_in_form}}</p>-->
+                {% endif %}
+                <p><strong>Word size:</strong> {{form.word_size_in_form}}</p>
+                <p><strong>Sensitivity:</strong> {{form.search_sensitivity_in_form}}</p>
+              </div>
               <input type="submit" class="btn btn-primary" value="Submit!">
             </form>
         </div>

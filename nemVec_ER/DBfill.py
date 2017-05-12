@@ -3,11 +3,9 @@
 #	1. run the shell via python (in the /dER_plotter/nemVec_ER dir) : python manage.py shell
 #	2. import this script in python : import DBfill
 #	3. execute with the name of the file and the name of the table : DBfill.DBFill('fileName','table')
-#	the tables are : Regen_cpm ; Fasta ; ; ; ; you can chek them in the admin panel
-#	4. It may take a while depending on the size of you file 'done filling the DB' should print when done
-#For now, it works for :
-#SQLite DB ; cpm (regen) data
-#Doesn't work if datas are missing !!!
+#	the tables are : Regen_cpm ; Fasta ; Embryo_cpm ; Annotation ; Standard_Error ; you can check for their name in the admin panel
+#	4. It may take a while depending on the size of your file 'done filling the DB' should print when done
+#The tables Annotation and Embryo_cpm can handle missing data. they should be replaced by 'NA'
 
 ##################
 ### Var
@@ -114,7 +112,7 @@ def queryCreate(splitLine, DBTableName):
 			query += ", mean_120HPF = " + splitLine[39]
 		query += ").save()"
 	
-	elif DBTableName == 'Annotation' : #!!!!! add a col to allow link to ncbi !!!!!#
+	elif DBTableName == 'Annotation' :
 		query = "Annotation(nvertx_id = " + splitLine[0]
 		if splitLine[2] != 'NA' :
 			query += ", nve_hit = " + splitLine[2]
@@ -130,7 +128,6 @@ def queryCreate(splitLine, DBTableName):
 			query += ", uniprot_description = " + splitLine[7]
 		if splitLine[8] != 'NA' :
 			query += ", top_nr_hit_eval = " + splitLine[8]
-			#someting like that query += link = regex |id|
 		if splitLine[9] != 'NA' :
 			query += ", other_nr_hits = " + splitLine[9]
 		query += ").save()"

@@ -61,12 +61,15 @@ def results(request):
 		nvertx_search = True
 		
 	if nvertx_1 :
+		nvertx_1_embryo_warner_invalid = False
+		nvertx_1_embryo_fischer_invalid = False
+		nvertx_1_embryo_helm_invalid = False
 		try :
 			sequence_fasta_1 = Fasta.objects.get(nvertx_id=nvertx_1).fasta_sequence
 		except :
 			sequence_fasta_1 = 'No fasta sequence'
 		try :
-			if log2 :
+			if not log2 :
 				regen_UC_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_UC+1,2),2)
 				regen_0_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_0HPA+1,2),2)
 				regen_2_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_2HPA+1,2),2)
@@ -177,13 +180,40 @@ def results(request):
 			embryo_helm_240_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_240HPF,2)
 		except :
 			nvertx_1_embryo_helm_invalid = True
-		try :
-			embryo_mean_2_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_2HPF,2)
-			embryo_mean_7_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_7HPF,2)
-			embryo_mean_12_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_12HPF,2)
-			embryo_mean_24_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_24HPF,2)
-			embryo_mean_120_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_120HPF,2)
-		except :
+		if not nvertx_1_embryo_warner_invalid and not nvertx_1_embryo_fischer_invalid and not nvertx_1_embryo_helm_invalid :
+			try :
+				embryo_mean_2_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_2HPF,2)
+				embryo_mean_7_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_7HPF,2)
+				embryo_mean_12_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_12HPF,2)
+				embryo_mean_24_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_24HPF,2)
+				embryo_mean_120_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).mean_120HPF,2)
+				embryo_mean_0_1 = embryo_fischer_0_1
+				embryo_mean_1_1 = embryo_fischer_1_1
+				embryo_mean_3_1 = embryo_fischer_3_1
+				embryo_mean_4_1 = embryo_fischer_4_1
+				embryo_mean_5_1 = embryo_fischer_5_1
+				embryo_mean_6_1 = embryo_fischer_6_1
+				embryo_mean_8_1 = embryo_fischer_8_1
+				embryo_mean_9_1 = embryo_fischer_9_1
+				embryo_mean_10_1 = embryo_fischer_10_1
+				embryo_mean_11_1 = embryo_fischer_11_1
+				embryo_mean_13_1 = embryo_fischer_13_1
+				embryo_mean_14_1 = embryo_fischer_14_1
+				embryo_mean_15_1 = embryo_fischer_15_1
+				embryo_mean_16_1 = embryo_fischer_16_1
+				embryo_mean_17_1 = embryo_fischer_17_1
+				embryo_mean_18_1 = embryo_fischer_18_1
+				embryo_mean_19_1 = embryo_fischer_19_1
+				embryo_mean_48_1 = embryo_warner_48_1
+				embryo_mean_72_1 = embryo_warner_72_1
+				embryo_mean_96_1 = embryo_warner_96_1
+				embryo_mean_144_1 = embryo_warner_144_1
+				embryo_mean_168_1 = embryo_warner_168_1
+				embryo_mean_192_1 = embryo_warner_192_1
+				embryo_mean_240_1 = embryo_helm_240_1
+			except :
+				nvertx_1_embryo_mean_invalid = True
+		else :
 			nvertx_1_embryo_mean_invalid = True
 		try :
 			annot_nve_hit_1 = Annotation.objects.get(nvertx_id=nvertx_1).nve_hit
@@ -207,12 +237,15 @@ def results(request):
 			nvertx_1_links_invalid = True
 
 		if nvertx_2 :
+			nvertx_2_embryo_warner_invalid = False
+			nvertx_2_embryo_fischer_invalid = False
+			nvertx_2_embryo_helm_invalid = False
 			try :
 				sequence_fasta_2 = Fasta.objects.get(nvertx_id=nvertx_2).fasta_sequence
 			except :
 				sequence_fasta_2 = 'No fasta sequence'
 			try :
-				if log2 :
+				if not log2 :
 					regen_UC_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_UC+1,2),2)
 					regen_0_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_0HPA+1,2),2)
 					regen_2_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_2HPA+1,2),2)
@@ -323,13 +356,40 @@ def results(request):
 				embryo_helm_240_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_240HPF,2)
 			except :
 				nvertx_2_embryo_helm_invalid = True
-			try :
-				embryo_mean_2_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_2HPF,2)
-				embryo_mean_7_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_7HPF,2)
-				embryo_mean_12_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_12HPF,2)
-				embryo_mean_24_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_24HPF,2)
-				embryo_mean_120_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_120HPF,2)
-			except :
+			if not nvertx_2_embryo_warner_invalid and not nvertx_2_embryo_fischer_invalid and not nvertx_2_embryo_helm_invalid :
+				try :
+					embryo_mean_2_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_2HPF,2)
+					embryo_mean_7_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_7HPF,2)
+					embryo_mean_12_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_12HPF,2)
+					embryo_mean_24_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_24HPF,2)
+					embryo_mean_120_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).mean_120HPF,2)
+					embryo_mean_0_2 = embryo_fischer_0_2
+					embryo_mean_1_2 = embryo_fischer_1_2
+					embryo_mean_3_2 = embryo_fischer_3_2
+					embryo_mean_4_2 = embryo_fischer_4_2
+					embryo_mean_5_2 = embryo_fischer_5_2
+					embryo_mean_6_2 = embryo_fischer_6_2
+					embryo_mean_8_2 = embryo_fischer_8_2
+					embryo_mean_9_2 = embryo_fischer_9_2
+					embryo_mean_10_2 = embryo_fischer_10_2
+					embryo_mean_11_2 = embryo_fischer_11_2
+					embryo_mean_13_2 = embryo_fischer_13_2
+					embryo_mean_14_2 = embryo_fischer_14_2
+					embryo_mean_15_2 = embryo_fischer_15_2
+					embryo_mean_16_2 = embryo_fischer_16_2
+					embryo_mean_17_2 = embryo_fischer_17_2
+					embryo_mean_18_2 = embryo_fischer_18_2
+					embryo_mean_19_2 = embryo_fischer_19_2
+					embryo_mean_48_2 = embryo_warner_48_2
+					embryo_mean_72_2 = embryo_warner_72_2
+					embryo_mean_96_2 = embryo_warner_96_2
+					embryo_mean_144_2 = embryo_warner_144_2
+					embryo_mean_168_2 = embryo_warner_168_2
+					embryo_mean_192_2 = embryo_warner_192_2
+					embryo_mean_240_2 = embryo_helm_240_2					
+				except :
+					nvertx_2_embryo_mean_invalid = True
+			else :
 				nvertx_2_embryo_mean_invalid = True
 			try :
 				annot_nve_hit_2 = Annotation.objects.get(nvertx_id=nvertx_2).nve_hit
@@ -349,12 +409,15 @@ def results(request):
 				nvertx_2_annot_invalid = True
 
 		if nvertx_3 :
+			nvertx_3_embryo_warner_invalid = False
+			nvertx_3_embryo_fischer_invalid = False
+			nvertx_3_embryo_helm_invalid = False
 			try :
 				sequence_fasta_3 = Fasta.objects.get(nvertx_id=nvertx_3).fasta_sequence
 			except :
 				sequence_fasta_3 = 'No fasta sequence'
 			try :
-				if log2 :
+				if not log2 :
 					regen_UC_3 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_UC+1,2),2)
 					regen_0_3 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_0HPA+1,2),2)
 					regen_2_3 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_2HPA+1,2),2)
@@ -465,13 +528,40 @@ def results(request):
 				embryo_helm_240_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).helm_anc_240HPF,2)
 			except :
 				nvertx_3_embryo_helm_invalid = True
-			try :
-				embryo_mean_2_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_2HPF,2)
-				embryo_mean_7_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_7HPF,2)
-				embryo_mean_12_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_12HPF,2)
-				embryo_mean_24_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_24HPF,2)
-				embryo_mean_120_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_120HPF,2)
-			except :
+			if not nvertx_3_embryo_warner_invalid and not nvertx_3_embryo_fischer_invalid and not nvertx_3_embryo_helm_invalid :
+				try :
+					embryo_mean_2_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_2HPF,2)
+					embryo_mean_7_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_7HPF,2)
+					embryo_mean_12_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_12HPF,2)
+					embryo_mean_24_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_24HPF,2)
+					embryo_mean_120_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).mean_120HPF,2)
+					embryo_mean_0_3 = embryo_fischer_0_3
+					embryo_mean_1_3 = embryo_fischer_1_3
+					embryo_mean_3_3 = embryo_fischer_3_3
+					embryo_mean_4_3 = embryo_fischer_4_3
+					embryo_mean_5_3 = embryo_fischer_5_3
+					embryo_mean_6_3 = embryo_fischer_6_3
+					embryo_mean_8_3 = embryo_fischer_8_3
+					embryo_mean_9_3 = embryo_fischer_9_3
+					embryo_mean_10_3 = embryo_fischer_10_3
+					embryo_mean_11_3 = embryo_fischer_11_3
+					embryo_mean_13_3 = embryo_fischer_13_3
+					embryo_mean_14_3 = embryo_fischer_14_3
+					embryo_mean_15_3 = embryo_fischer_15_3
+					embryo_mean_16_3 = embryo_fischer_16_3
+					embryo_mean_17_3 = embryo_fischer_17_3
+					embryo_mean_18_3 = embryo_fischer_18_3
+					embryo_mean_19_3 = embryo_fischer_19_3
+					embryo_mean_48_3 = embryo_warner_48_3
+					embryo_mean_72_3 = embryo_warner_72_3
+					embryo_mean_96_3 = embryo_warner_96_3
+					embryo_mean_144_3 = embryo_warner_144_3
+					embryo_mean_168_3 = embryo_warner_168_3
+					embryo_mean_192_3 = embryo_warner_192_3
+					embryo_mean_240_3 = embryo_helm_240_3
+				except :
+					nvertx_3_embryo_mean_invalid = True
+			else :
 				nvertx_3_embryo_mean_invalid = True
 			try :
 				annot_nve_hit_3 = Annotation.objects.get(nvertx_id=nvertx_3).nve_hit
@@ -491,12 +581,15 @@ def results(request):
 				nvertx_3_annot_invalid = True
 
 		if nvertx_4 :
+			nvertx_4_embryo_warner_invalid = False
+			nvertx_4_embryo_fischer_invalid = False
+			nvertx_4_embryo_helm_invalid = False
 			try :
 				sequence_fasta_4 = Fasta.objects.get(nvertx_id=nvertx_4).fasta_sequence
 			except :
 				sequence_fasta_4 = 'No fasta sequence'
 			try :
-				if log2 :
+				if not log2 :
 					regen_UC_4 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_UC+1,2),2)
 					regen_0_4 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_0HPA+1,2),2)
 					regen_2_4 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_2HPA+1,2),2)
@@ -607,13 +700,40 @@ def results(request):
 				embryo_helm_240_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).helm_anc_240HPF,2)
 			except :
 				nvertx_4_embryo_helm_invalid = True
-			try :
-				embryo_mean_2_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_2HPF,2)
-				embryo_mean_7_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_7HPF,2)
-				embryo_mean_12_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_12HPF,2)
-				embryo_mean_24_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_24HPF,2)
-				embryo_mean_120_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_120HPF,2)
-			except :
+			if not nvertx_4_embryo_warner_invalid and not nvertx_4_embryo_fischer_invalid and not nvertx_4_embryo_helm_invalid :
+				try :
+					embryo_mean_2_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_2HPF,2)
+					embryo_mean_7_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_7HPF,2)
+					embryo_mean_12_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_12HPF,2)
+					embryo_mean_24_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_24HPF,2)
+					embryo_mean_120_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).mean_120HPF,2)
+					embryo_mean_0_4 = embryo_fischer_0_4
+					embryo_mean_1_4 = embryo_fischer_1_4
+					embryo_mean_3_4 = embryo_fischer_3_4
+					embryo_mean_4_4 = embryo_fischer_4_4
+					embryo_mean_5_4 = embryo_fischer_5_4
+					embryo_mean_6_4 = embryo_fischer_6_4
+					embryo_mean_8_4 = embryo_fischer_8_4
+					embryo_mean_9_4 = embryo_fischer_9_4
+					embryo_mean_10_4 = embryo_fischer_10_4
+					embryo_mean_11_4 = embryo_fischer_11_4
+					embryo_mean_13_4 = embryo_fischer_13_4
+					embryo_mean_14_4 = embryo_fischer_14_4
+					embryo_mean_15_4 = embryo_fischer_15_4
+					embryo_mean_16_4 = embryo_fischer_16_4
+					embryo_mean_17_4 = embryo_fischer_17_4
+					embryo_mean_18_4 = embryo_fischer_18_4
+					embryo_mean_19_4 = embryo_fischer_19_4
+					embryo_mean_48_4 = embryo_warner_48_4
+					embryo_mean_72_4 = embryo_warner_72_4
+					embryo_mean_96_4 = embryo_warner_96_4
+					embryo_mean_144_4 = embryo_warner_144_4
+					embryo_mean_168_4 = embryo_warner_168_4
+					embryo_mean_192_4 = embryo_warner_192_4
+					embryo_mean_240_4 = embryo_helm_240_4
+				except :
+					nvertx_4_embryo_mean_invalid = True
+			else :
 				nvertx_4_embryo_mean_invalid = True
 			try :
 				annot_nve_hit_4 = Annotation.objects.get(nvertx_id=nvertx_4).nve_hit
@@ -633,12 +753,15 @@ def results(request):
 				nvertx_4_annot_invalid = True
 
 		if nvertx_5 :
+			nvertx_5_embryo_warner_invalid = False
+			nvertx_5_embryo_fischer_invalid = False
+			nvertx_5_embryo_helm_invalid = False
 			try :
 				sequence_fasta_5 = Fasta.objects.get(nvertx_id=nvertx_5).fasta_sequence
 			except :
 				sequence_fasta_5 = 'No fasta sequence'
 			try :
-				if log2 :
+				if not log2 :
 					regen_UC_5 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_UC+1,2),2)
 					regen_0_5 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_0HPA+1,2),2)
 					regen_2_5 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_2HPA+1,2),2)
@@ -749,13 +872,40 @@ def results(request):
 				embryo_helm_240_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).helm_anc_240HPF,2)
 			except :
 				nvertx_5_embryo_helm_invalid = True
-			try :
-				embryo_mean_2_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_2HPF,2)
-				embryo_mean_7_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_7HPF,2)
-				embryo_mean_12_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_12HPF,2)
-				embryo_mean_24_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_24HPF,2)
-				embryo_mean_120_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_120HPF,2)
-			except :
+			if not nvertx_5_embryo_warner_invalid and not nvertx_5_embryo_fischer_invalid and not nvertx_5_embryo_helm_invalid :
+				try :
+					embryo_mean_2_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_2HPF,2)
+					embryo_mean_7_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_7HPF,2)
+					embryo_mean_12_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_12HPF,2)
+					embryo_mean_24_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_24HPF,2)
+					embryo_mean_120_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).mean_120HPF,2)
+					embryo_mean_0_5 = embryo_fischer_0_5
+					embryo_mean_1_5 = embryo_fischer_1_5
+					embryo_mean_3_5 = embryo_fischer_3_5
+					embryo_mean_4_5 = embryo_fischer_4_5
+					embryo_mean_5_5 = embryo_fischer_5_5
+					embryo_mean_6_5 = embryo_fischer_6_5
+					embryo_mean_8_5 = embryo_fischer_8_5
+					embryo_mean_9_5 = embryo_fischer_9_5
+					embryo_mean_10_5 = embryo_fischer_10_5
+					embryo_mean_11_5 = embryo_fischer_11_5
+					embryo_mean_13_5 = embryo_fischer_13_5
+					embryo_mean_14_5 = embryo_fischer_14_5
+					embryo_mean_15_5 = embryo_fischer_15_5
+					embryo_mean_16_5 = embryo_fischer_16_5
+					embryo_mean_17_5 = embryo_fischer_17_5
+					embryo_mean_18_5 = embryo_fischer_18_5
+					embryo_mean_19_5 = embryo_fischer_19_5
+					embryo_mean_48_5 = embryo_warner_48_5
+					embryo_mean_72_5 = embryo_warner_72_5
+					embryo_mean_96_5 = embryo_warner_96_5
+					embryo_mean_144_5 = embryo_warner_144_5
+					embryo_mean_168_5 = embryo_warner_168_5
+					embryo_mean_192_5 = embryo_warner_192_5
+					embryo_mean_240_5 = embryo_helm_240_5
+				except :
+					nvertx_5_embryo_mean_invalid = True
+			else :
 				nvertx_5_embryo_mean_invalid = True
 			try :
 				annot_nve_hit_5 = Annotation.objects.get(nvertx_id=nvertx_5).nve_hit

@@ -29,7 +29,25 @@
 .navbar-fixed-top {
   border: 0;
 }
-
+nav.shrink a.navbar_links{
+  margin-top: 0px;
+}
+nav.shrink img{
+  padding: 0;
+  width: 0;
+}
+.navbar_links {
+  margin-top: 25px;
+}
+.navbar-default .navbar-nav>li>a {
+  color: black;
+  font-weight: bold;
+}
+.navbar-default .navbar-nav>li>a:hover {
+  text-decoration: none;
+  color: #337ab7;
+  background-color: transparent;
+}
 /*
  * Sidebar
  */
@@ -47,6 +65,7 @@
     z-index: 1000;
     display: block;
     padding: 20px;
+    padding-top: 50px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
@@ -59,50 +78,20 @@
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
-  margin-top: 25px;
 }
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  color: #fff;
-  background-color: #428bca;
-}
 
-/* top bar */
 
-.navbar-inverse .navbar-nav>a {
-    color: black;
-}
-
-.navbar-inverse .navbar-nav>a:focus, .navbar-inverse .navbar-nav>a:hover {
-    color: #337ab7;
-    background-color: transparent;
-}
-
-.top_link {
-  color: black;
-  font-weight: bold;
-}
-.top_link:hover {
-  text-decoration: none;
-  color: #337ab7;
-  background-color: transparent;
-}
-.link_wo_image{
-  margin-top: 80px;
-  margin-bottom: 10px;
-}
-#top_image{
-  margin-bottom: 10px;
-}
 /*
  * Main content
  */
 
+.png_button{
+  max-width: 150px;
+}
 .main {
   padding: 20px;
 }
@@ -123,14 +112,16 @@
 }
 
 .image_text{
-  margin-top: 40px;
+  margin-top: 15px;
+  width: 85%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .text{
   color: 818181;
   margin-right: 15px;
   margin-left: 15px;
-  font-size: larger;
   text-align: justify;
 }
 
@@ -195,7 +186,27 @@
   padding-right: 8px;
   padding-bottom: 15px;
 }
+#image_clust_home {
+  max-height: 170px;
+}
+.blast_div{
+  margin-left: 40px;
+}
 /*  */
+
+/* Mfuzz */
+.mfuzz_div{
+  border-right-width: 1px;
+  border-right-color: #eee;
+  border-right-style: solid;
+}
+
+.Mfuzz_clusters{
+  text-align: center;
+}
+/*  */
+
+
 
 .placeholders {
   margin-bottom: 30px;
@@ -270,11 +281,8 @@
 }
 .sub-header {
   padding-top: 40px;
+  font-size: 26px;
 }
-.sidebar {
-  margin-top: 20px;
-}
-
 .td_id {
   min-width: 160px;
 }

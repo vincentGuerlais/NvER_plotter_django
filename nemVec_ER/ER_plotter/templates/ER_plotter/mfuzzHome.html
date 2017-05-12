@@ -5,14 +5,10 @@
 
 {% block presentation_text %}
 <h2 class="sub-header delimiter"></h2>
-<div class="col-md-3"><img class="img-responsive image_text" src="{% static 'ER_plotter/nvImage.png' %}"></div>
-<div class="col-md-9">
-  <h2 class="sub-header" id="Mfuzz_clusters">Embryogenesis and Regeneration Mfuzz clusters </h2>
-  <div class="row">
-    <p class="text">Using M-Fuzz clustering algorithms (Ref), we have regrouped temporal expression patterns.</p>
-    <p class="text">The starlet sea anemone <em class="sp_name">Nematostella vectensis</em> (Anthozoa, Cnidaria) is a unique model to study <em class="em_blue">embryonic development</em> and <em class="em_blue">whole body regeneration</em> in the same organism. In complement to an existing <em class="em_blue">spatial gene expression</em> database, we present here a novel tool to mine simultaneously (re)-analyzed/normalized temporal RNAseq datasets for embryonic development and oral regeneration of <em class="sp_name">Nematostella vectensis</em>. Data can be accessed by searching for your gene of interest using a gene name or the NvERTx ID of your gene of interest, scrolling trough the gene list corresponding to a given expression clusters, or by using the integrated BLAST ® function.</p>
-    <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <em class="em_blue">Helm et al. 2013, Tulin et al. 2013</em> </p>
-  </div>
+<h2 class="sub-header" id="Mfuzz_clusters">Embryogenesis and Regeneration Mfuzz clusters </h2>
+<div class="row">
+  <p class="text">Using M-Fuzz clustering algorithms (Ref), we have regrouped temporal expression patterns during <em class="em_blue">embryonic, larval and post-metamorphic development</em> as well as during the process of sub-pharyngeal oral <em class="em_blue">Regeneration</em> of <em class="sp_name">Nematostella vectensis</em>. By clicking on the cluster representing the expression profiles of interest, you will be able to scroll through all associated genes . The checkboxes on the left will enable you to visualize the specific expression pattern of a given gene (up to five genes simultaneously, max) and by clicking on the highlighted accessions numbers you will be directed to the best BLAST hit.</p>
+  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <em class="em_blue">Helm et al. 2013, Tulin et al. 2013</em> </p>
 </div>
 {% endblock presentation_text %}
 
@@ -22,17 +18,30 @@
   <!-- Buttons -->
   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h2 class="sub-header delimiter"></h2>
-    <h2 class="sub-header" id="Mfuzz_clusters">Embryogenesis</h2>
-
-
-    <h2 class="sub-header" id="Mfuzz_clusters">Regeneration</h2>
-    <div class="row placeholders">
-      {% for cluster in clusters_list %}
-      <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 imageButton">
-        <a href="mfuzz/{{ cluster.mfuzz_cluster_nb }}"><button type="button" class="btn btn-lg btn-default"><img src="{% static cluster.cluster_image %}" class="img-responsive"></button></a>
+    <div class="col-md-6 mfuzz_div">
+      <h2 class="sub-header Mfuzz_clusters">Embryogenesis</h2>
+      <img class="img-responsive image_text" src="{% static 'ER_plotter/embryo_cropped.png' %}">
+      <div class="row placeholders">
+        {% for cluster in clusters_list %}
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 imageButton">
+          <a href="mfuzz/{{ cluster.mfuzz_cluster_nb }}"><button type="button" class="btn btn-lg btn-default"><img src="{% static cluster.cluster_image %}" class="img-responsive"></button></a>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
+    
+    <div class="col-md-6 mfuzz_div">
+      <h2 class="sub-header Mfuzz_clusters">Regeneration</h2>
+      <img class="img-responsive image_text" src="{% static 'ER_plotter/regen_cropped.png' %}">
+      <div class="row placeholders">
+        {% for cluster in clusters_list %}
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 imageButton">
+          <a href="mfuzz/{{ cluster.mfuzz_cluster_nb }}"><button type="button" class="btn btn-lg btn-default"><img src="{% static cluster.cluster_image %}" class="img-responsive"></button></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
   </div>
 
 {% endblock content %}
