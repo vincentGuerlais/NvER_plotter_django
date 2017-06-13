@@ -81,11 +81,11 @@
             {% for id in cluster_table %}
             <tr>
               <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
-              <td>{{ id.mfuzz_clust }}</td>
+              <td>{% if not id.mfuzz_clust %}{{ id.mfuzz_clust }}{% else %}<a href="mfuzz/{{ id.mfuzz_clust }}">{{ id.mfuzz_clust }}</a>{% endif %}</td>
               <td>{{ id.mfuzz_score }}</td>
               <td>{% if id.uniprot_id == 'No_Uniprotmatch' %}{{ id.uniprot_id }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.uniprot_id }}">{{ id.uniprot_id }}</a>{% endif %}</td>
               <td>{{ id.uniprot_description }}</td>
-              <td>{{ id.top_nr_hit_eval }}</td>
+              <td>{% if id.ncbi_link %}{{ id.ncbi_wo_link_beg }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ id.ncbi_link }}">{{ id.ncbi_link }}</a>|{{ id.ncbi_wo_link_end }}{% else %}None{% endif %}</td>
             </tr>
             <tr>
               <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>

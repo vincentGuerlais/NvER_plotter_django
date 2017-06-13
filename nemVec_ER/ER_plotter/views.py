@@ -985,6 +985,15 @@ def mfuzzResults(request,mfuzz_nb):
 
 	#Details of the selected cluster
 	cluster_list = Annotation.objects.filter(mfuzz_clust=mfuzz_nb)
+	for elem in cluster_list :
+		try :
+			split = elem.top_nr_hit_eval.split('|',2)
+			elem.ncbi_wo_link_beg = split[0]
+			elem.ncbi_link = split[1]
+			elem.ncbi_wo_link_end = split[2]
+		except :
+			pass
+
 
 	#pagination for the details
 	page = request.GET.get('page', 1)

@@ -92,12 +92,6 @@
             </div>
             <input type="submit" class="btn btn-primary" value="Plot!">
           </form>
-          <form class="nav nav-sidebar" action="" method="post">
-            <h3 class="NvERTxInput">Convert NvERTx ID’s</h3>
-            {% csrf_token %}
-            {% render_field convert_form.nvertx class+='form-control' placeholder='Add Nemvec Id, NvERTx.2. etc...' %}<br/>
-            <input type="submit" class="btn btn-primary" value="Search!">
-          </form>
         </div>
         {% block content %}{% endblock content %}
         </div>
