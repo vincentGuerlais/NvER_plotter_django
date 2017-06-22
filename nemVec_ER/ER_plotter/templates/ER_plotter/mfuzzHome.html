@@ -22,7 +22,7 @@
       <h2 class="sub-header Mfuzz_clusters">Embryogenesis</h2>
       <img class="img-responsive image_text" src="{% static 'ER_plotter/embryo_cropped.png' %}">
       <div class="row placeholders">
-        {% for cluster in clusters_list %}
+        {% for cluster in clusters_list_embryo %}
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 imageButton">
           <a href="mfuzz/{{ cluster.mfuzz_cluster_nb }}"><button type="button" class="btn btn-lg btn-default"><img src="{% static cluster.cluster_image %}" class="img-responsive"></button></a>
         </div>
@@ -34,7 +34,7 @@
       <h2 class="sub-header Mfuzz_clusters">Regeneration</h2>
       <img class="img-responsive image_text" src="{% static 'ER_plotter/regen_cropped.png' %}">
       <div class="row placeholders">
-        {% for cluster in clusters_list %}
+        {% for cluster in clusters_list_regen %}
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 imageButton">
           <a href="mfuzz/{{ cluster.mfuzz_cluster_nb }}"><button type="button" class="btn btn-lg btn-default"><img src="{% static cluster.cluster_image %}" class="img-responsive"></button></a>
         </div>

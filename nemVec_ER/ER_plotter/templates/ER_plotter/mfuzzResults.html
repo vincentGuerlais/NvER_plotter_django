@@ -70,26 +70,32 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>mfuzz clust</th>
-              <th>mfuzz score</th>
-              <th>uniprot id</th>
-              <th>uniprot description</th>
+              <th>mfuzz regen clust</th>
+              <th>mfuzz regen score</th>
+              <th>mfuzz embryo clust</th>
+              <th>mfuzz embryo score</th>
+              <th>Uniprot ID</th>
+              <th>Uniprot description</th>
               <th>top nr_hit eval</th>
             </tr>
           </thead>
+          
+
           <tbody>
             {% for id in cluster_table %}
             <tr>
               <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
-              <td>{% if not id.mfuzz_clust %}{{ id.mfuzz_clust }}{% else %}<a href="mfuzz/{{ id.mfuzz_clust }}">{{ id.mfuzz_clust }}</a>{% endif %}</td>
-              <td>{{ id.mfuzz_score }}</td>
-              <td>{% if id.uniprot_id == 'No_Uniprotmatch' %}{{ id.uniprot_id }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.uniprot_id }}">{{ id.uniprot_id }}</a>{% endif %}</td>
-              <td>{{ id.uniprot_description }}</td>
+              <td>{% if not id.Mfuzz_R_Clust or id.Mfuzz_R_Clust == "NA" %}{{ id.Mfuzz_R_Clust }}{% else %}<a href="mfuzz/{{ id.Mfuzz_R_Clust }}">{{ id.Mfuzz_R_Clust }}</a>{% endif %}</td>
+              <td>{% if id.Mfuzz_R_Score == -1 %}NA{% else %}{{ id.Mfuzz_R_Score }}{% endif %}</td>
+              <td>{% if not id.Mfuzz_E_Clust or id.Mfuzz_E_Clust == "NA" %}{{ id.Mfuzz_E_Clust }}{% else %}<a href="mfuzz/{{ id.Mfuzz_E_Clust }}">{{ id.Mfuzz_E_Clust }}</a>{% endif %}</td>
+              <td>{% if id.Mfuzz_E_Score == -1 %}NA{% else %}{{ id.Mfuzz_E_Score }}{% endif %}</td>
+              <td>{% if id.Uniprot_ID == 'No_Uniprotmatch' %}{{ id.Uniprot_ID }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.Uniprot_ID }}">{{ id.Uniprot_ID }}</a>{% endif %}</td>
+              <td>{{ id.Uniprot_Description }}</td>
               <td>{% if id.ncbi_link %}{{ id.ncbi_wo_link_beg }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ id.ncbi_link }}">{{ id.ncbi_link }}</a>|{{ id.ncbi_wo_link_end }}{% else %}None{% endif %}</td>
             </tr>
             <tr>
               <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-              <td colspan="5" class="hidden_row"><p>{{ id.other_nr_hits }}</p></td>
+              <td colspan="7" class="hidden_row"><p>{{ id.Other_nr_hits }}</p></td>
             </tr>
             {% endfor %}
             <div>
@@ -128,7 +134,7 @@
       </ul>
     </div>
     {% endif %}
-
+<!----->
   </div>
 
 {% endblock content %}
@@ -137,7 +143,7 @@
 <script type="text/javascript">
 $(function() {
     $("td[colspan=1]").find("p").hide();
-    $("td[colspan=5]").find("p").hide();
+    $("td[colspan=7]").find("p").hide();
     $("table").click(function(event) {
         event.stopPropagation();
         var $target = $(event.target);
