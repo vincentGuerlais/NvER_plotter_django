@@ -1,4 +1,5 @@
 #DBfill allows to fill the NvERTx Database ;
+#Use it on files with columns separated with tabulations (export table from R for example)
 #how to use it : 
 #	1. run the shell via python (in the /dER_plotter/nemVec_ER dir) : python manage.py shell
 #	2. import this script in python : import DBfill
