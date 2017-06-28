@@ -315,7 +315,7 @@ def queryCreate(splitLine, DBTableName):
 		query += ").save()"
 
 	else :
-		print 'error in DBTableName'
+		print "error in DBTableName. Valid inputs are : Regen_cpm ; Fasta ; Embryo_cpm ; Annotation ; Regen_SE ; Embryo_SE"
 	return query
 
 #execute the code
