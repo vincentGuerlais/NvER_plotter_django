@@ -975,11 +975,64 @@
             </div>
             <div id="Links" class="tab-pane fade">
               <h3>Links</h3>
-              {% if nvertx_1_links_invalid %}
-              <p>No reference to NCBI found</p>
-              {% else %}
-              <p><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_1 }}'>Link to PubMed ({{ ncbi_1 }})</p>
-              {% endif %}
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ nvertx_1 }}</td>
+                    {% if nvertx_1_links_invalid %}
+                    <td>No reference to NCBI found</td>
+                    {% else %}
+                    <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_1 }}'>Link to PubMed ({{ ncbi_1 }})</a></td>
+                    {% endif %}
+                  </tr>
+                  {% if nvertx_2 %}
+                  <tr>
+                    <td>{{ nvertx_2 }}</td>
+                      {% if nvertx_2_links_invalid %}
+                      <td>No reference to NCBI found</td>
+                      {% else %}
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_2 }}'>Link to PubMed ({{ ncbi_2 }})</a></td>
+                      {% endif %}
+                  </tr>
+                  {% endif %}
+                  {% if nvertx_3 %}
+                  <tr>
+                    <td>{{ nvertx_3 }}</td>
+                      {% if nvertx_3_links_invalid %}
+                      <td>No reference to NCBI found</td>
+                      {% else %}
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_3 }}'>Link to PubMed ({{ ncbi_3 }})</a></td>
+                      {% endif %}
+                  </tr>
+                  {% endif %}
+                  {% if nvertx_4 %}
+                  <tr>
+                    <td>{{ nvertx_4 }}</td>
+                      {% if nvertx_4_links_invalid %}
+                      <td>No reference to NCBI found</td>
+                      {% else %}
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_4 }}'>Link to PubMed ({{ ncbi_4 }})</a></td>
+                      {% endif %}
+                  </tr>
+                  {% endif %}
+                  {% if nvertx_5 %}
+                  <tr>
+                    <td>{{ nvertx_5 }}</td>
+                      {% if nvertx_5_links_invalid %}
+                      <td>No reference to NCBI found</td>
+                      {% else %}
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_5 }}'>Link to PubMed ({{ ncbi_5 }})</a></td>
+                      {% endif %}
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
             </div>
           </div>
 
