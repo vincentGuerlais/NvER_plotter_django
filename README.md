@@ -9,39 +9,35 @@ The starlet sea anemone Nematostella vectensis (Anthozoa, Cnidaria) is a unique 
 # Getting Started with Django
 
 ## system requirements
-numpy==1.8.0rc1
-Unix-like OS (we have run this on MacOSX, and SUSELinux)
+numpy==1.8.0rc1  
+Unix-like OS (we have run this on MacOSX, and SUSELinux)  
 
 ## Other dependencies 
-*Python 2.7 or higher 
-*Apache/2.4 or higher (Other servers could work with minor tweaks.) 
-*mod_wgsi 
-*[BLAST executables 2.4 or higher](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) 
+*Python 2.7 or higher  
+*Apache/2.4 or higher (Other servers could work with minor tweaks.)  
+*mod_wgsi  
+*[BLAST executables 2.4 or higher](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)  
 ### python packages
-django 
-biopython 
+django  
+django-widget-tweaks  
+biopython  
 
+## Installation  
+#### This tutorial is for MacOSX. For SUSELinux scroll down.
 
-## Install Dependencies
-
-First we install pip to make our life easier:
-
+First we install pip to make our life easier:  
 ``` sh
 sudo easy_install pip ;
 pip --version ;
 sudo pip install --upgrade pip
 ```
-
+Next we install the python packages
 ```
 sudo pip install django ;
 sudo pip install django-widget-tweaks ;
-#might not need the blastplus
-sudo pip install django-blastplus ;
 sudo pip install biopython
 ```
-
-Need NCBI dependencies
-
+Next we get the NCBI dependencies
 ```
 ftp ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ ;
 get ncbi-blast-2.6.0+-x64-macosx.tar.gz ;
@@ -51,28 +47,52 @@ sudo mv ncbi-blast-2.6.0+/bin/* /usr/local/bin/ ;
 #test that they work
 blastx -h
 ```
-
+Now we install the Django app
 ```
-#might not need this
-#python-dev -version
+sudo git clone https://github.com/vincentGuerlais/NvER_plotter_django
+#run it
+cd NvER_plotter_django/nemVec_ER/
+python manage.py
 ```
-
+Get the databases one:
 ```
-pip freeze
-cd /Library/Python/2.7/site-packages/
-#see if I can do this without cd-ing to the directory
-sudo git clone https://github.com/vincentGuerlais/NvERtx_blastplus.git
-sudo mv NvERtx_blastplus/blastplus/ ./
-
-#modify this to point at the blast db!!!
-vi /Library/Python/2.7/site-packages/blastplus/settings.py
-
+scp -v db.sqlite3 user@host:NvER_plotter_django/nemVec_ER/db.sqlite3
+scp -v -r nemVec_ER/blast_db user@host:/NvER_plotter_django/nemVec_ER/
 ```
-
-# run the server
-
-python manage.py runserver
-
+Configure the server:  
+```
+# MacOSX has apache2 installed already
+# Check the version
+sudo httpd -v
+```
+Install wgsi
+```
+pip install apache2-mod_wsgi
+```
+Edit the httpd file:
+```
+cp /etc/apache2/httpd.conf /etc/apache2/httpd.bak
+sudo vi /etc/apache2/httpd.conf
+#######add these lines to the bottom of ~/../../etc/apache2/httpd.conf
+#this serves the static content
+Alias /static/ /home/ec2-user/NvER_plotter_django/nemVec_ER/ER_plotter/static/
+<Directory /home/ec2-user/NvER_plotter_django/nemVec_ER/ER_plotter/static>
+Require all granted
+</Directory>
+#this serves the site
+WSGIScriptAlias / /home/ec2-user/NvER_plotter_django/nemVec_ER/nemVec_ER/wsgi.py 
+WSGIPythonPath /home/ec2-user/NvER_plotter_django/nemVec_ER/
+<Directory /home/ec2-user/NvER_plotter_django/nemVec_ER/>
+<Files wsgi.py>
+Require all granted
+</Files>
+</Directory> 
+######## end edit to ~/../../etc/apache2/httpd.conf
+```
+Start the server
+```
+apachectl start
+```
 
 ##
 ##
