@@ -1,0 +1,177 @@
+#-*- coding: utf-8 -*-
+<!DOCTYPE html>
+{% extends "ER_plotter/base.html" %}
+{% load static %} {% load extras %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block presentation_text %}
+{% endblock presentation_text %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'ER_plotter/home2.css' %}" />
+{% endblock head %}
+
+{% block content %}
+  <!-- Buttons -->
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="sub-header" id="Mfuzz_clusters">Blastplus results</h1>
+
+<!--<div class="row" >-->
+<div class='blastplus_input_body' style="width:90%; margin:0 auto;" >
+
+    {% if blast_error %}
+    <h4>
+        <div class="alert alert-warning text-center" role="alert"> {{ blast_error }}</div>
+    </h4>
+    {% elif blast_records and blast_records.0.alignments|length == 0 %}
+    <h4>
+        <div class="alert alert-warning text-center" role="alert"> Sorry, No blast matches found for your sequence</div>
+    </h4>
+    {% else %}
+    <div>
+        <h4><b><u> {{ application }} {{ version }} </u></b></h4>
+    </div>
+
+    <br>
+    <h4><b>Description</b></h4>
+
+    <form action="{% url 'results' %}" method="get">
+    <input type="submit" value="Compare !">
+    <div class="nbsite_boxstyle">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>contig</th>
+                <th>query</th>
+                <th>length</th>
+                <th>e-value</th>
+                <th>score</th>
+                <th>ident %</th>
+                <!--<th>gene name / protein name</th>-->
+
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for br in blast_records %}
+            {% for alignment in br.alignments %}
+            <tr>
+                <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ alignment.hit_def }}">{{ alignment.hit_def }}</td>
+                <td>{{ br.query }}</td>
+                <td>{{ alignment.length }}</td>
+                <td>{{ alignment.best_evalue }}
+                <td><a href='#{{ alignment.get_id }}'>{{ alignment.best_score }}</a></td>
+                <td>{{ alignment.best_identities }}</td>
+                <!--<td>{{ alignment.hit_protein_name }}</td>-->
+
+            </tr>
+            {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Compare !">
+    </form>
+
+    <br><br>
+    <h4><b>Alignments</b></h4>
+    <hr class="small">
+
+    {% for br in blast_records %}
+    {% for alignment in br.alignments %}
+    <!--<br>-->
+
+    <h4><p id="{{ alignment.get_id }}"><b>{{ alignment.hit_def }} length = {{ alignment.length }}</b></p></h4>
+
+    {% for hsp in alignment.hsp_list %}
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 nbsite_sourcebox_outpadds">
+            <div class="nbsite_boxstyle_nonborder nbsite_sourcebox">
+                <table class="table table-hover table-condensed">
+                    <tbody>
+                    <tr>
+                        <th>hsp</th>
+                        <td>{{ forloop.counter }}</td>
+                    <tr>
+                    <tr>
+                        <th>length</th>
+                        <td>{{ hsp.align_length }}</td>
+                    <tr>
+                    <tr>
+                        <th>e-value</th>
+                        <td>{{ hsp.expect }}</td>
+                    <tr>
+                    <tr>
+                        <th>score</th>
+                        <td>{{ hsp.score }}</td>
+                    <tr>
+                    <tr>
+                        <th>identities</th>
+                        <td>{{ hsp.identities }}</td>
+                    <tr>
+                    <tr>
+                        <th>positives</th>
+                        <td>{{ hsp.positives }}</td>
+                    <tr>
+                    <tr>
+                        <th>bits</th>
+                        <td>{{ hsp.bits }}</td>
+                    <tr>
+                    <tr>
+                        <th>query start</th>
+                        <td>{{ hsp.query_start }}</td>
+                    <tr>
+                    <tr>
+                        <th>query end</th>
+                        <td>{{ hsp.query_end }}</td>
+                    <tr>
+                    <tr>
+                        <th>subject start</th>
+                        <td>{{ hsp.sbjct_start }}</td>
+                    <tr>
+                    <tr>
+                        <th>subject end</th>
+                        <td>{{ hsp.sbjct_end }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 nbsite_sourcebox_outpadds">
+            <div class="nbsite_boxstyle_nonborder nbsite_sourcebox">
+                <pre>
+                    {% for idx in hsp.chop_query %}
+    Q: {{ hsp.chop_query|get_at_index:forloop.counter0 }}
+    M: {{ hsp.chop_match|get_at_index:forloop.counter0 }}
+    S: {{ hsp.chop_sbjct|get_at_index:forloop.counter0 }}
+                        {% endfor %}
+                </pre>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+
+</div>
+{% endif %}
+
+  </div>
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript">
+jQuery(function(){
+    var max = 5;
+    var checkboxes = $('input[class="nvInput_checkboxes"]');
+
+    checkboxes.change(function(){
+        var current = checkboxes.filter(':checked').length;
+        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+    });
+});
+</script>
+{% endblock js %}

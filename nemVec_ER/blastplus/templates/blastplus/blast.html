@@ -1,0 +1,52 @@
+#-*- coding: utf-8 -*-
+<!DOCTYPE html>
+{% extends "ER_plotter/base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block presentation_text %}
+<h2 class="sub-header delimiter"></h2>
+<h2 class="sub-header" id="Mfuzz_clusters">Blast your favorite sequence against the latest NvERTx transcriptome</h2>
+<div class="row">
+  <p class="text">Your query (protein or RNA FASTA sequence) will be blasted against the latest version of the NvERTx transcriptome that was obtained by combining novel and existing RNAseq datasets from <em class="em_blue">embryonic, larval and post-metamorphic development (Helm et al, 2013, Tulin et al, 2013, Warner et al, 2017 (b))</em> as well as oral <em class="sp_name">regeneration</em> after sub-pharyngeal bisection <em class="sp_name">Warner et al, 2017 (a))</em>. The results page will display the best <em class="sp_name">Nematostella vectensis</em> sequence hit with its annotation as well as its embryonic and/or regeneration expression profiles.</p>
+  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <em class="em_blue">Helm et al. 2013, Tulin et al. 2013</em> </p>
+</div>
+{% endblock presentation_text %}
+
+{% block content %}
+  <!-- Buttons -->
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    {% if form.matrix_in_form %}
+      <h1 class="sub-header" id="Mfuzz_clusters">tBLASTn</h1>
+      <a href="/blast/blast"><button type="button" class="btn btn-primary">Switch to BLASTn</button></a>
+    {% else %}
+      <h1 class="sub-header" id="Mfuzz_clusters">BLASTn</h1>
+      <a href="/blast/tblastn"><button type="button" class="btn btn-primary">Switch to tBLASTn</button></a>
+    {% endif %}
+    <br/>
+    <div>
+      {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+          Please correct errors: {{form.errors}}
+        </div>
+        {% endif %}
+        <form action="" method="post">
+          {% csrf_token %}
+          <p>{% render_field form.sequence_in_form class+='form-control' %}</p><br/>
+            <p><strong>Database:</strong> {{form.blast_db_in_form}}</p>
+            <p><strong>E-value:</strong> {{form.evalue_in_form}}</p>
+            {% if form.matrix_in_form %}
+              <p><strong>Matrix:</strong> {{form.matrix_in_form}}</p>
+              <!--<p><strong>{{form.matrix_in_form.label}}</strong> {{form.matrix_in_form}}</p>-->
+            {% endif %}
+            <p><strong>Word size:</strong> {{form.word_size_in_form}}</p>
+            <p><strong>Sensitivity:</strong> {{form.search_sensitivity_in_form}}</p>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+  </div>
+{% endblock content %}
+
+
