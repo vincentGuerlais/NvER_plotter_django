@@ -10,6 +10,16 @@ The starlet sea anemone Nematostella vectensis (Anthozoa, Cnidaria) is a unique 
 
 ## system requirements
 numpy==1.8.0rc1
+Unix-like OS (we have run this on MacOSX, and SUSELinux)
+
+## Other dependencies 
+*Python 2.7 or higher 
+*Apache/2.4 or higher (Other servers could work with minor tweaks.) 
+*mod_wgsi 
+*[BLAST executables 2.4 or higher](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) 
+### python packages
+django 
+biopython 
 
 
 ## Install Dependencies
