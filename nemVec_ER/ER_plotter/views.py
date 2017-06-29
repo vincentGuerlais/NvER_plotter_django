@@ -493,6 +493,10 @@ def results(request):
 					nr_hit_graph_2 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_2).group(0)
 			except :
 				nvertx_2_annot_invalid = True
+			try :
+				ncbi_2 = annot_top_nr_hit_eval_2.split('|')[1]
+			except :
+				nvertx_2_links_invalid = True
 
 		if nvertx_3 :
 			nvertx_3_embryo_warner_invalid = False
@@ -708,6 +712,10 @@ def results(request):
 					nr_hit_graph_3 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_3).group(0)
 			except :
 				nvertx_3_annot_invalid = True
+			try :
+				ncbi_3 = annot_top_nr_hit_eval_3.split('|')[1]
+			except :
+				nvertx_3_links_invalid = True
 
 		if nvertx_4 :
 			nvertx_4_embryo_warner_invalid = False
@@ -923,6 +931,10 @@ def results(request):
 					nr_hit_graph_4 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_4).group(0)
 			except :
 				nvertx_4_annot_invalid = True
+			try :
+				ncbi_4 = annot_top_nr_hit_eval_4.split('|')[1]
+			except :
+				nvertx_4_links_invalid = True
 
 		if nvertx_5 :
 			nvertx_5_embryo_warner_invalid = False
@@ -1138,6 +1150,10 @@ def results(request):
 					nr_hit_graph_5 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_5).group(0)
 			except :
 				nvertx_5_annot_invalid = True
+			try :
+				ncbi_5 = annot_top_nr_hit_eval_5.split('|')[1]
+			except :
+				nvertx_5_links_invalid = True
 
 	return render(request, 'ER_plotter/nvertxResults.html', locals())
 
