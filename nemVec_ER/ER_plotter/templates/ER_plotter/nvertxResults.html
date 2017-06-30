@@ -86,7 +86,7 @@
 
     // Wait for the chart to finish drawing before calling the getImageURI() method.
     google.visualization.events.addListener(regen_plot, 'ready', function () {
-      document.getElementById('pngRegen').outerHTML = '<a class="btn btn-primary png_button" href="' + regen_plot.getImageURI() + '" download="regenPlot">Download <span class="glyphicon glyphicon-download"></span></a>';
+      document.getElementById('pngRegen').outerHTML = '<a class="btn btn-primary png_button" href="' + regen_plot.getImageURI() + '" download="regenPlot.png">Download <span class="glyphicon glyphicon-download"></span></a>';
     });
 
     regen_plot.draw(data, options_lines);
@@ -225,7 +225,7 @@
 
     // Wait for the chart to finish drawing before calling the getImageURI() method.
     google.visualization.events.addListener(embryo_plot, 'ready', function () {
-      document.getElementById('pngEmbryo').outerHTML = '<a class="btn btn-primary png_button" href="' + embryo_plot.getImageURI() + '" download="embryoPlot">Download <span class="glyphicon glyphicon-download"></span></a>';
+      document.getElementById('pngEmbryo').outerHTML = '<a class="btn btn-primary png_button" href="' + embryo_plot.getImageURI() + '" download="embryoPlot.png">Download <span class="glyphicon glyphicon-download"></span></a>';
     });
 
     embryo_plot.draw(data, options_lines);
