@@ -80,11 +80,11 @@
           <form class="nav nav-sidebar" action="{% url 'results' %}" method="post">
           <h3 class="NvERTxInput">Search by NvERTx ID</h3>
           {% csrf_token %}
-          {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.2.133024 or 133024' %}<br/>
-          {% render_field nvertx_form.nvertx_2 class+='form-control' placeholder='eg : NvERTx.2.133025' %}<br/>
-          {% render_field nvertx_form.nvertx_3 class+='form-control' placeholder='eg : NvERTx.2.133026' %}<br/>
-          {% render_field nvertx_form.nvertx_4 class+='form-control' placeholder='eg : NvERTx.2.133027' %}<br/>
-          {% render_field nvertx_form.nvertx_5 class+='form-control' placeholder='eg : NvERTx.2.133028' %}
+          {% render_field nvertx_form.nvertx_1 class+='form-control' placeholder='eg : NvERTx.4.100046 or 100046' %}<br/>
+          {% render_field nvertx_form.nvertx_2 class+='form-control' placeholder='eg : NvERTx.4.100046' %}<br/>
+          {% render_field nvertx_form.nvertx_3 class+='form-control' placeholder='eg : NvERTx.4.100046' %}<br/>
+          {% render_field nvertx_form.nvertx_4 class+='form-control' placeholder='eg : NvERTx.4.100046' %}<br/>
+          {% render_field nvertx_form.nvertx_5 class+='form-control' placeholder='eg : NvERTx.4.100046' %}
             <div class="checkbox">
               <label>
                 {{ nvertx_form.log2 }} Check for CPM (Counts per million)
