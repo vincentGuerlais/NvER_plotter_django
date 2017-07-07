@@ -43,6 +43,7 @@
             <li><a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/logo_cropped.png' %}" width='70px'></a></li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'mfuzz' %}">M-Fuzz clusters</a></li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'about' %}">About</a></li>
+            <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'faq' %}">FAQ - How to cite</a></li>
           </ul>
         </div>
       </div>
@@ -74,7 +75,7 @@
         <div><img class="img-responsive image_text" src="{% static 'ER_plotter/nvImage2.png' %}"></div>
           <form class="nav nav-sidebar" action="{% url 'search' %}" method="get">
             <h3 class="NvERTxInput">Search by gene name</h3>
-            {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF' %}<br/>
+            {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF or jgi|Nemve1|199320' %}<br/>
             <input type="submit" class="btn btn-primary" value="Search!">
           </form>
           <form class="nav nav-sidebar" action="{% url 'results' %}" method="post">

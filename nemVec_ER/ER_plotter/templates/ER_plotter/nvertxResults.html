@@ -73,12 +73,12 @@
         lineWidth: 2,
         intervals: { 'style':'sticks', lineWidth:1.5 },
         legend: 'right',
-        chartArea: {width: '60%'},
+        chartArea: {height:'70%', width: '70%', backgroundColor: '#f7f7f7'},
         hAxis: {
           title: 'Hours post amputation',
           ticks : [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
           },
-        vAxis: { title: {% if not log2 %}'log2(Counts per million + 1)'{% else %}'Counts per million'{% endif %} }
+        vAxis: { title: {% if not log2 %}'log2(counts per million + 1)'{% else %}'counts per million'{% endif %} }
     };
 
     regen_plot_div = document.getElementById('regen_plot_div');
@@ -187,14 +187,14 @@
         title: 'Embryonic expression',
         titleTextStyle: { fontSize: 20 },
         lineWidth: 2,
-        chartArea: {width: '60%'},
+        chartArea: {height:'70%', width: '70%', backgroundColor: '#f7f7f7'},
         intervals: { 'style':'sticks' , lineWidth:1.5 },
         legend: 'right',
         hAxis: {
           title: 'Hours post fertilization\n■ Helm / ▴ Fischer / ● Warner ',
           ticks : [0,6,12,24,48,72,96,120,144,168,192,240]
           },
-        vAxis: { title:'Counts per million' },
+        vAxis: { title:'log2(counts per million + 1)' },
         pointSize: 6,
         series: {
           0: {lineWidth: 0, pointShape: 'circle', color: '#3366cc', visibleInLegend: false},

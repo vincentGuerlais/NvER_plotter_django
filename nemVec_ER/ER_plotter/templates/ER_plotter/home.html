@@ -11,14 +11,12 @@
 {% block presentation_text %}
 <h2 class="sub-header delimiter"></h2>
 <h2 class="sub-header" id="Mfuzz_clusters">NvERTx - An embryogenesis & regeneration gene expression plotter</h2>
-<!--
+
 <div class="row">
-  <p class="text">Understanding the relationship between embryogenesis and regeneration is a long lasting question in regenerative biology as both developmental strategies lead to fully functional organisms. Modern functional genomics enables us today to re-address this question using integrative approaches that enable us to identify the similarities as well as importantly the regeneration specific elements that are potential candidates for regenerative medicine.</p>
-  <p class="text">The starlet sea anemone <em class="sp_name">Nematostella vectensis</em> (Anthozoa, Cnidaria) is a unique model to study <em class="em_blue">embryonic development</em> and <em class="em_blue">whole body regeneration</em> in the same organism. In complement to an existing <em class="em_blue">spatial gene expression</em> database, we present here a novel tool to mine simultaneously (re)-analyzed/normalized temporal RNAseq datasets for embryonic development and oral regeneration of <em class="sp_name">Nematostella vectensis</em>. Data can be accessed by searching for your gene of interest using a gene name or the NvERTx ID of your gene of interest, scrolling trough the gene list corresponding to a given expression clusters, or by using the integrated BLAST ® function.</p>
-  <p class="text">More information about:  <em class="sp_name">Nematostella vectensis</em> | <em class="em_blue">Embryogenesis</em> | <em class="em_blue">Regeneration</em> | <em class="em_blue">Spatial gene expression</em></p>
-  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <em class="em_blue">Helm et al. 2013, Tulin et al. 2013</em> </p>
+  <p class="text">Welcome to NvERTx, an embryonic and regenerative transcriptome exploration tool. To learn more about the assembly check out the <a href="{% url 'about' %}">About Page</a></p>
+  <p class="text">To get started you can enter a search term (gene name or JGI ID) in the sidebar or if you have a sequence you can BLAST it below. You can also explore the transcript clusters by clicking below.</p>
+  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <a href = "https://www.ncbi.nlm.nih.gov/pubmed/24907201">Fischer et al. 2014</a>,<a href = "https://www.ncbi.nlm.nih.gov/pubmed/23731568">Tulin et al. 2013</a>,and <a href = "https://www.ncbi.nlm.nih.gov/pubmed/23601508">Helm et al. 2013</a></p>
 </div>
--->
 {% endblock presentation_text %}
 
 
@@ -27,12 +25,13 @@
   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="row">
       <div class="col-md-12">
-        <div class="block col-md-7" id="cluster_block">
+        <div class="block">
           <h3 class="blockTitle">Mine co-expression clusters</h3>
           <a href="{% url 'mfuzz' %}"><button type="button" class="btn btn-default mfuzz_button"><img class="img-responsive" id="image_clust_home" src="{% static 'ER_plotter/home_clusters.png' %}"></button></a>
           </br>
         </div>
 
+<!--
         <div class="col-md-4 col-md-offset-1">
           <div class ="block col-md-12">
             <div class ="col-md-10">
@@ -67,7 +66,7 @@
               </form>
             </div>
           </div>
-
+-->
 
       </div>
 

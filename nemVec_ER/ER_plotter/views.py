@@ -1292,6 +1292,13 @@ def about(request):
 	convert_form = ConvertForm(request.POST or None)
 	
 	return render(request, 'ER_plotter/about.html', locals())
+	
+def faq(request):
+	gene_search_form = Gene_searchForm(request.GET or None)
+	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
+	
+	return render(request, 'ER_plotter/faq.html', locals())
 
 
 

@@ -8,11 +8,15 @@
 {% endblock head %}
 
 {% block presentation_text %}
+<h2 class="sub-header delimiter"></h2>
+<h2 class="sub-header" id="Mfuzz_clusters">Embryogenesis and Regeneration Mfuzz clusters </h2>
+<div class="row"> 
+  <p class="text">Using fuzzy c-means clustering, we regrouped temporal expression patterns during embryonic development as well as during oral regeneration of <em>Nematostella vectensis</em>. Clicking on a cluster will display all associated genes . Ticking a checkbox in the table then 'Compare!' will bring you to the results page of that transcript.</p>
+  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <a href = "https://www.ncbi.nlm.nih.gov/pubmed/24907201">Fischer et al. 2014</a>,<a href = "https://www.ncbi.nlm.nih.gov/pubmed/23731568">Tulin et al. 2013</a>,and <a href = "https://www.ncbi.nlm.nih.gov/pubmed/23601508">Helm et al. 2013</a></p>
+</div>
 {% endblock presentation_text %}
 
-
 {% block content %}
-
   <!-- Buttons -->
   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="sub-header" id="Mfuzz_clusters">Explore Mfuzz Clusters</h1>
@@ -80,14 +84,13 @@
             </tr>
           </thead>
           
-
           <tbody>
             {% for id in cluster_table %}
             <tr>
               <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
-              <td>{% if not id.Mfuzz_R_Clust or id.Mfuzz_R_Clust == "NA" %}{{ id.Mfuzz_R_Clust }}{% else %}<a href="mfuzz/{{ id.Mfuzz_R_Clust }}">{{ id.Mfuzz_R_Clust }}</a>{% endif %}</td>
+              <td>{% if not id.Mfuzz_R_Clust or id.Mfuzz_R_Clust == "NA" %}{{ id.Mfuzz_R_Clust }}{% else %}<a href="{{ id.Mfuzz_R_Clust }}">{{ id.Mfuzz_R_Clust }}</a>{% endif %}</td>
               <td>{% if id.Mfuzz_R_Score == -1 %}NA{% else %}{{ id.Mfuzz_R_Score }}{% endif %}</td>
-              <td>{% if not id.Mfuzz_E_Clust or id.Mfuzz_E_Clust == "NA" %}{{ id.Mfuzz_E_Clust }}{% else %}<a href="mfuzz/{{ id.Mfuzz_E_Clust }}">{{ id.Mfuzz_E_Clust }}</a>{% endif %}</td>
+              <td>{% if not id.Mfuzz_E_Clust or id.Mfuzz_E_Clust == "NA" %}{{ id.Mfuzz_E_Clust }}{% else %}<a href="{{ id.Mfuzz_E_Clust }}">{{ id.Mfuzz_E_Clust }}</a>{% endif %}</td>
               <td>{% if id.Mfuzz_E_Score == -1 %}NA{% else %}{{ id.Mfuzz_E_Score }}{% endif %}</td>
               <td>{% if id.Uniprot_ID == 'No_Uniprotmatch' %}{{ id.Uniprot_ID }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.Uniprot_ID }}">{{ id.Uniprot_ID }}</a>{% endif %}</td>
               <td>{{ id.Uniprot_Description }}</td>
@@ -166,4 +169,16 @@ jQuery(function(){
     });
 });
 </script>
+<!--
+<script type="text/javascript">
+jQuery(function(){
+    var max = 5;
+    var checkboxes = $('input[class="nvInput_checkboxes"]');
+	
+	document.getElementById('nvertx_1').value = var;
+    
+});
+</script>
+--->
+
 {% endblock js %}
