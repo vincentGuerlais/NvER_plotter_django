@@ -1,0 +1,36 @@
+#-*- coding: utf-8 -*-
+<!DOCTYPE html>
+{% extends "ER_plotter/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block presentation_text %}
+<h2 class="sub-header delimiter"></h2>
+<h2 class="sub-header" id="faq">Frequently Asked Questions</h2>
+<div class="row">
+<!--
+  <img class="img-responsive" id="EmbryoRegen" src="{% static 'ER_plotter/EmbryoRegen.png' %}">
+-->
+  <h4>How can i credit the images/ data I use?</h4>
+  <p class="text">The plots and sequences on this site are distributed under a creative commons <a href="https://creativecommons.org/licenses/">attribution</a> license. We ask that in publications, all four original data papers are cited: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <a href = "https://www.ncbi.nlm.nih.gov/pubmed/24907201">Fischer et al. 2014</a>,<a href = "https://www.ncbi.nlm.nih.gov/pubmed/23731568">Tulin et al. 2013</a>,and <a href = "https://www.ncbi.nlm.nih.gov/pubmed/23601508">Helm et al. 2013</a></p>
+  <h4>Why are there multiple NvERTx.4 IDs per 'gene'? </h4>
+  <p class="text">This transcriptome includes multiple transcripts per gene. These transcripts can include isoforms and SNPs. Therefore when searching for a gene name you will notice several NvERTx.4 matches that have equivalent annotations. 
+  Each match is a different transcript but if the best hit to Nemve1 is the same we consider them the same gene (and quantify them equally).</p>
+  <h4>Certain NvERTx.4 IDs have the exact same profile/ count</h4>
+  <p class="text">Given the multiple transcripts per gene described above, we quantified all genes that have the same top hit to Nemve1 equivalently. </p>
+  <h4>Certain NvERTx.4 IDs have the same Nemve1 hit but different or no hits to nr/uniprot</h4>
+  <p class="text">The transcript with a hit to Nemve1 but no hit to nr is likely a transcript containing a large untranslated region. 
+  This has to do with how the transcripts were annotated. The NvERTx trancsripts were compared to Nemve1 using blastn, but only the coding regions of each transcript were compared to nr or uniprot using blastp.</p>
+  <h4>My gene has a regeneration expression profile but no embryonic expression or vice versa</h4>
+  <p class="text">During quantification we employed a modest expression cutoff to remove lowly expressed genes. Therefore genes may be found in one dataset but not another in which it is lowly expressed.</p>
+</div>
+<h2 class="sub-header" id="About">Data Availability</h2>
+<div class="row">
+  <p class="text">Datasets are publicly available. The NvERTx.4 trinity assembly is available for download using <a href="NvERTx.4.fa.gz">this direct download link</a>. Raw sequencing reads from Fischer et al. 2014 (0-19Hpf hourly) and Tulin et al. 2013 (0,6,12,18,24Hpf) are available on the Woods Hole Open Access Server <a href="http://darchive.mblwhoilibrary.org/handle/1912/5981">here</a> and <a href="http://darchive.mblwhoilibrary.org/handle/1912/5613">here</a>. Raw sequencing reads from Helm et al. 2013 (2,7,12,24,120,240 Hpf) are available on the NCBI sequence read archive project number <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA189768/">PRJNA189768</a></p>
+</div>
+<h2 class="sub-header" id="About">About this site</h2>
+<div class="row">
+  <p class="text">This site was developed using the <a href="https://www.djangoproject.com/">Django</a> framework and coded by Vincent Guerlais and Jake Warner. To report bugs or request data, send us an email at: jwarner\at/unice.fr</p>
+</div>
+{% endblock presentation_text %}
+
+
