@@ -169,16 +169,24 @@ jQuery(function(){
     });
 });
 </script>
-<!--
 <script type="text/javascript">
-jQuery(function(){
-    var max = 5;
-    var checkboxes = $('input[class="nvInput_checkboxes"]');
-	
-	document.getElementById('nvertx_1').value = var;
-    
+var elem = $(".nvid-form-control");
+
+$(".nvInput_checkboxes").click(function(){
+	var val = $(this).val();
+    for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === val){
+    		elem[i].value = "";
+      	return;
+    	}
+  	}   
+  	for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === ""){
+    		elem[i].value = val;
+      	break;
+    	}
+  	}
 });
 </script>
---->
 
 {% endblock js %}

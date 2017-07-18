@@ -174,4 +174,23 @@ jQuery(function(){
     });
 });
 </script>
+<script type="text/javascript">
+var elem = $(".nvid-form-control");
+
+$(".nvInput_checkboxes").click(function(){
+	var val = $(this).val();
+    for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === val){
+    		elem[i].value = "";
+      	return;
+    	}
+  	}   
+  	for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === ""){
+    		elem[i].value = val;
+      	break;
+    	}
+  	}
+});
+</script>
 {% endblock js %}
