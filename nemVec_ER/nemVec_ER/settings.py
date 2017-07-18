@@ -26,7 +26,7 @@ SECRET_KEY = 'v5^-f&*wpj!q54*pu-gh*_(7gf%cuhfd3s#37qi=-a7-^$6()i'
 DEBUG = True
 
 #add hosts as needed
-ALLOWED_HOSTS = ['52.40.243.141','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['ircan.unice.fr','localhost','127.0.0.1']
 
 
 # Application definition
