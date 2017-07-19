@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css_mfuzz4.css' %}" />
 {% endblock head %}
 
+
 {% block presentation_text %}
 <h2 class="sub-header delimiter"></h2>
 <h2 class="sub-header" id="Mfuzz_clusters">Embryogenesis and Regeneration Mfuzz clusters </h2>
@@ -16,9 +17,12 @@
 </div>
 {% endblock presentation_text %}
 
+
 {% block content %}
+<div class="">
+
   <!-- Buttons -->
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <div class="infinite-container col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="sub-header" id="Mfuzz_clusters">Explore Mfuzz Clusters</h1>
     <div class="row placeholders">
       {% for cluster in clusters_list %}
@@ -37,7 +41,7 @@
 
     <h2 class="sub-header" id="Details">Details</h1>
     <p class="text-info">click on a row to view the other nr hits</p>
-
+<!--
     {% if cluster_table.has_other_pages %}
     <div class="text-center">
       <ul class="pagination">
@@ -65,12 +69,14 @@
       </ul>
     </div>
     {% endif %}
+-->
+    <div class="row  infinite-item">
 
-    <div class="row">
-      <form action="{% url 'results' %}" method="get">
-      <input type="submit" value="Compare !">
       <div class="table-responsive">
-        <table id="cluster_annot" class="table table-striped" cellspacing="0" width="100%">
+            <form action="{% url 'results' %}" method="get">
+      <input type="submit" value="Compare !">
+
+                  <table id="cluster_annot" class="table table-striped" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th>ID</th>
@@ -84,10 +90,10 @@
             </tr>
           </thead>
           
-          <tbody>
+          <tbody >
             {% for id in cluster_table %}
             <tr>
-              <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
+              <td class='td_id '><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
               <td>{% if not id.Mfuzz_R_Clust or id.Mfuzz_R_Clust == "NA" %}{{ id.Mfuzz_R_Clust }}{% else %}<a href="{{ id.Mfuzz_R_Clust }}">{{ id.Mfuzz_R_Clust }}</a>{% endif %}</td>
               <td>{% if id.Mfuzz_R_Score == -1 %}NA{% else %}{{ id.Mfuzz_R_Score }}{% endif %}</td>
               <td>{% if not id.Mfuzz_E_Clust or id.Mfuzz_E_Clust == "NA" %}{{ id.Mfuzz_E_Clust }}{% else %}<a href="{{ id.Mfuzz_E_Clust }}">{{ id.Mfuzz_E_Clust }}</a>{% endif %}</td>
@@ -101,14 +107,18 @@
               <td colspan="7" class="hidden_row"><p>{{ id.Other_nr_hits }}</p></td>
             </tr>
             {% endfor %}
-            <div>
-            </div>
           </tbody>
         </table>
-        <input type="submit" value="Compare !">
+                <input type="submit" value="Compare !">
         </form>
-      </div>
+        </div>
+          
+                  {% if cluster_table.has_next %}
+          <a class="infinite-more-link" href="?page={{ cluster_table.next_page_number }}">More</a>
+        {% endif %}
+
     </div>
+    
 
     {% if cluster_table.has_other_pages %}
     <div class="text-center">
@@ -129,20 +139,25 @@
           {% endfor %}
         {% endif %}
 
-        {% if cluster_table.has_next %}
-          <li><a href="?page={{ cluster_table.next_page_number }}#Details">&raquo;</a></li>
-        {% else %}
-          <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
       </ul>
     </div>
     {% endif %}
 <!----->
   </div>
 
+</div>
 {% endblock content %}
 
 {% block js %}
+
+    <script src="{% static 'ER_plotter/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/infinite.min.js' %}"></script>
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
+    });
+  </script>
 <script type="text/javascript">
 $(function() {
     $("td[colspan=1]").find("p").hide();
@@ -188,5 +203,4 @@ $(".nvInput_checkboxes").click(function(){
   	}
 });
 </script>
-
 {% endblock js %}
