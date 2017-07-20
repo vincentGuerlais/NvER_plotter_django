@@ -9,11 +9,12 @@
 {% block content %}
 
   <!-- Buttons -->
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <div class="infinite-container col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="sub-header" id="Mfuzz_clusters">Search results</h1>
     <p class="text-info">click on a row to view the other nr hits</p>
-    <div class="row">
+    <div class="row infinite-item">
       <div class="table-responsive">
+        <input type="submit" value="Compare !" id="secondaryButton" onclick="document.getElementById('primaryButton').click()" />
         <table id="cluster_annot" class="table table-striped" cellspacing="0" width="100%">
           <thead>
             <tr>
@@ -28,7 +29,7 @@
           <tbody>
             <form action="{% url 'results' %}" method="get">
             {% for id in search_result %}
-            <tr>
+            <tr class="clickable">
               <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
               <td>{{ id.Nemve1_tophit }}</td>
               <td>{{ id.Nemve1_e_val }}</td>
@@ -36,18 +37,20 @@
               <td>{{ id.Uniprot_Description }}</td>
               <td>{% if id.ncbi_link %}{{ id.ncbi_wo_link_beg }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ id.ncbi_link }}">{{ id.ncbi_link }}</a>|{{ id.ncbi_wo_link_end }}{% else %}None{% endif %}</td>
             </tr>
-            <tr>
-              <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-              <td colspan="6" class="hidden_row"><p>{{ id.Other_nr_hits }}</p></td>
+            <tr class="hidden_row">
+              <td colspan="1" >other nr_hits</td>
+              <td colspan="7" >{{ id.Other_nr_hits }}</td>
             </tr>
             {% endfor %}
-            <input type="submit" value="Compare !">
             </form>
           </tbody>
         </table>
+        {% if search_result.has_next %}
+          <a class="infinite-more-link" href="?gene_name={{ search_query }}&page={{ search_result.next_page_number }}">More</a>
+        {% endif %}
       </div>
     </div>
-
+<!--
     {% if search_result.has_other_pages %}
     <div class="text-center">
       <ul class="pagination">
@@ -75,43 +78,25 @@
       </ul>
     </div>
     {% endif %}
-
+-->
 
   </div>
 
 {% endblock content %}
 
 {% block js %}
-<script type="text/javascript">
-$(function() {
-    $("td[colspan=1]").find("p").hide();
-    $("td[colspan=6]").find("p").hide();
-    $("table").click(function(event) {
-        event.stopPropagation();
-        var $target = $(event.target);
-        if ( $target.closest("td").attr("colspan") < 2 ) {
-            $target.closest("tr").next().find("p").slideToggle();
-        } else {
-            $target.closest("tr").next().find("p").slideToggle();
-        }                    
+<!-- This block handles the infinite scroll-->
+<script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
     });
-});
 </script>
-<script type="text/javascript">
-jQuery(function(){
-    var max = 5;
-    var checkboxes = $('input[class="nvInput_checkboxes"]');
 
-    checkboxes.change(function(){
-        var current = checkboxes.filter(':checked').length;
-        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
-    });
-});
-</script>
+<!-- This block fills the form on clicking the checkboxes-->
 <script type="text/javascript">
 var elem = $(".nvid-form-control");
 
-$(".nvInput_checkboxes").click(function(){
+$("body").on("click", ".nvInput_checkboxes",function(){
 	var val = $(this).val();
     for(var i = 0, len = elem.length; i < len; i++){
   		if(elem[i].value === val){
@@ -125,6 +110,11 @@ $(".nvInput_checkboxes").click(function(){
       	break;
     	}
   	}
+});
+</script>
+<script type="text/javascript">
+$("body").on("click", ".clickable",function(){
+	$(this).next().toggle();
 });
 </script>
 {% endblock js %}

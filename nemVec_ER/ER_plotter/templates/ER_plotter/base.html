@@ -91,7 +91,7 @@
                 {{ nvertx_form.log2 }} Check for CPM (Counts per million)
               </label>
             </div>
-            <input type="submit" class="btn btn-primary" value="Plot!">
+            <input type="submit" class="btn btn-primary" value="Plot!" id="primaryButton" onclick="ExistingLogic()" />
           </form>
         </div>
         {% block content %}{% endblock content %}
@@ -112,7 +112,56 @@
         $('nav').removeClass('shrink');
       }
     });</script>
-    {% block js %}{% endblock js %}
+    
+    <!-- INFINITE SCROLL JS SHIT! -->
+    <script src="{% static 'ER_plotter/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/infinite.js' %}"></script>
+    {% block js %}
+<!--
+    <script src="{% static 'ER_plotter/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/infinite.js' %}"></script>
+	
+
+<script type="text/javascript">
+$(function() {
+    $("td[colspan=1]").find("p").hide();
+    $("td[colspan=7]").find("p").hide();
+    $("table").click(function(event) {
+        event.stopPropagation();
+        var $target = $(event.target);
+        if ( $target.closest("td").attr("colspan") < 2 ) {
+            $target.closest("tr").next().find("p").slideToggle();
+        } else {
+            $target.closest("tr").next().find("p").slideToggle();
+        }                    
+    });
+});
+</script>
+<script type="text/javascript">
+var elem = $(".nvid-form-control");
+
+$("body").on("click", ".nvInput_checkboxes",function(){
+	var val = $(this).val();
+    for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === val){
+    		elem[i].value = "";
+      	return;
+    	}
+  	}   
+  	for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === ""){
+    		elem[i].value = val;
+      	break;
+    	}
+  	}
+});
+</script>
+-->
+
+
+{% endblock js %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="/Users/vincent/Desktop/dER_plotter/nemVec_ER/ER_plotter/static/ER_plotter/bootStrap/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
