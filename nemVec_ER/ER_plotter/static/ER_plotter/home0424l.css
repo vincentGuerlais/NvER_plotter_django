@@ -298,3 +298,6 @@ nav.shrink img{
     margin-left: auto;
     margin-right: auto;
 }
+.hidden_row {
+  display:none
+}
