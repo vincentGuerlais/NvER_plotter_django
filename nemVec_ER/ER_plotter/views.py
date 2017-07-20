@@ -1233,17 +1233,28 @@ def mfuzzResults(request,mfuzz_nb):
 		except :
 			pass
 
-
+	#This is the original pagination i replaced to make the infinite scroll
+	
 	#pagination for the details
+	#page = request.GET.get('page', 1)
+	#paginator = diggPaginator.DiggPaginator(clusters_annotation, 50, body=5)
+	#try:
+	#	cluster_table = paginator.page(page)
+	#except PageNotAnInteger:
+	#	cluster_table = paginator.page(1)
+	#except EmptyPage:
+	#	cluster_table = paginator.page(paginator.num_pages)
+
+	#return render(request, 'ER_plotter/mfuzzResults.html', locals())
+
 	page = request.GET.get('page', 1)
-	paginator = diggPaginator.DiggPaginator(clusters_annotation, 50, body=5)
+	paginator = Paginator(clusters_annotation, 50)
 	try:
 		cluster_table = paginator.page(page)
 	except PageNotAnInteger:
 		cluster_table = paginator.page(1)
 	except EmptyPage:
-		cluster_table = paginator.page(paginator.num_pages)
-
+		ncluster_table = paginator.page(paginator.num_pages)
 	return render(request, 'ER_plotter/mfuzzResults.html', locals())
 
 def home(request):
@@ -1273,10 +1284,10 @@ def searchResults(request):
 			elem.ncbi_wo_link_end = split[2]
 		except :
 			pass
-
+	
 	#pagination for the details
 	page = request.GET.get('page', 1)
-	paginator = diggPaginator.DiggPaginator(search_result_all, 50, body=5)
+	paginator = Paginator(search_result_all, 50)
 	try:
 		search_result = paginator.page(page)
 	except PageNotAnInteger:
@@ -1285,6 +1296,18 @@ def searchResults(request):
 		search_result = paginator.page(paginator.num_pages)
 
 	return render(request, 'ER_plotter/searchResults.html', locals())
+
+	#pagination for the details
+	#page = request.GET.get('page', 1)
+	#paginator = diggPaginator.DiggPaginator(search_result_all, 50, body=5)
+	#try:
+	#	search_result = paginator.page(page)
+	#except PageNotAnInteger:
+	#	search_result = paginator.page(1)
+	#except EmptyPage:
+	#	search_result = paginator.page(paginator.num_pages)
+#
+#	return render(request, 'ER_plotter/searchResults.html', locals())
 
 def about(request):
 	gene_search_form = Gene_searchForm(request.GET or None)
@@ -1299,6 +1322,3 @@ def faq(request):
 	convert_form = ConvertForm(request.POST or None)
 	
 	return render(request, 'ER_plotter/faq.html', locals())
-
-
-
