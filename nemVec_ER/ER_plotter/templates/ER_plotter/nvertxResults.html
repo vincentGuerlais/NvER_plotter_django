@@ -76,7 +76,10 @@
         chartArea: {height:'70%', width: '70%', backgroundColor: '#f7f7f7'},
         hAxis: {
           title: 'Hours post amputation',
-          ticks : [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
+          ticks : [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144],
+          textStyle : { fontSize: 8 },
+          slantedText : true,
+          slantedTextAngle : 90
           },
         vAxis: { title: {% if not log2 %}'log2(counts per million + 1)'{% else %}'counts per million'{% endif %} }
     };
@@ -192,7 +195,10 @@
         legend: 'right',
         hAxis: {
           title: 'Hours post fertilization\n■ Helm / ▴ Fischer / ● Warner ',
-          ticks : [0,6,12,24,48,72,96,120,144,168,192,240]
+          ticks : [0,6,12,24,48,72,96,120,144,168,192,240],
+          textStyle : { fontSize: 8 },
+          slantedText : true,
+          slantedTextAngle : 90
           },
         vAxis: { title:'log2(counts per million + 1)' },
         pointSize: 6,
