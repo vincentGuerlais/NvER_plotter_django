@@ -266,16 +266,17 @@ def results(request):
 			annot_uniprot_description_1 = Annotation.objects.get(nvertx_id=nvertx_1).Uniprot_Description
 			annot_top_nr_hit_eval_1 = Annotation.objects.get(nvertx_id=nvertx_1).Top_nr_hit_eval
 			if annot_top_nr_hit_eval_1 != "NA" :
-				annot_top_nr_hit_eval_1_split = annot_top_nr_hit_eval_1.split('|',2)
-				annot_nr_beg_1 = annot_top_nr_hit_eval_1_split[0]
-				annot_nr_link_1 = annot_top_nr_hit_eval_1_split[1]
-				annot_nr_end_1 = annot_top_nr_hit_eval_1_split[2]
+				annot_top_nr_hit_eval_1_split = annot_top_nr_hit_eval_1.split('|',4)
+				annot_nr_beg_1 = annot_top_nr_hit_eval_1_split[0] + "|" + annot_top_nr_hit_eval_1_split[1] + "|" + annot_top_nr_hit_eval_1_split[2]
+				annot_nr_link_1 = annot_top_nr_hit_eval_1_split[3]
+				annot_nr_end_1 = annot_top_nr_hit_eval_1_split[4]
 				annot_other_nr_hits_1 = Annotation.objects.get(nvertx_id=nvertx_1).Other_nr_hits
 				nr_hit_graph_1 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_1).group(0)
 		except :
 			nvertx_1_annot_invalid = True
 		try :
 			ncbi_1 = annot_top_nr_hit_eval_1.split('|')[1]
+			prot_1 = annot_top_nr_hit_eval_1.split('|')[3]
 		except :
 			nvertx_1_links_invalid = True
 
@@ -485,16 +486,17 @@ def results(request):
 				annot_uniprot_description_2 = Annotation.objects.get(nvertx_id=nvertx_2).Uniprot_Description
 				annot_top_nr_hit_eval_2 = Annotation.objects.get(nvertx_id=nvertx_2).Top_nr_hit_eval
 				if annot_top_nr_hit_eval_2 != "NA" :
-					annot_top_nr_hit_eval_2_split = annot_top_nr_hit_eval_2.split('|',2)
-					annot_nr_beg_2 = annot_top_nr_hit_eval_2_split[0]
-					annot_nr_link_2 = annot_top_nr_hit_eval_2_split[1]
-					annot_nr_end_2 = annot_top_nr_hit_eval_2_split[2]
+					annot_top_nr_hit_eval_2_split = annot_top_nr_hit_eval_2.split('|',4)
+					annot_nr_beg_2 = annot_top_nr_hit_eval_2_split[0] + "|" + annot_top_nr_hit_eval_2_split[1] + "|" + annot_top_nr_hit_eval_2_split[2]
+					annot_nr_link_2 = annot_top_nr_hit_eval_2_split[3]
+					annot_nr_end_2 = annot_top_nr_hit_eval_2_split[4]
 					annot_other_nr_hits_2 = Annotation.objects.get(nvertx_id=nvertx_2).Other_nr_hits
 					nr_hit_graph_2 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_2).group(0)
 			except :
 				nvertx_2_annot_invalid = True
 			try :
 				ncbi_2 = annot_top_nr_hit_eval_2.split('|')[1]
+				prot_2 = annot_top_nr_hit_eval_1.split('|')[3]
 			except :
 				nvertx_2_links_invalid = True
 
@@ -704,16 +706,17 @@ def results(request):
 				annot_uniprot_description_3 = Annotation.objects.get(nvertx_id=nvertx_3).Uniprot_Description
 				annot_top_nr_hit_eval_3 = Annotation.objects.get(nvertx_id=nvertx_3).Top_nr_hit_eval
 				if annot_top_nr_hit_eval_3 != "NA" :
-					annot_top_nr_hit_eval_3_split = annot_top_nr_hit_eval_3.split('|',2)
-					annot_nr_beg_3 = annot_top_nr_hit_eval_3_split[0]
-					annot_nr_link_3 = annot_top_nr_hit_eval_3_split[1]
-					annot_nr_end_3 = annot_top_nr_hit_eval_3_split[2]
+					annot_top_nr_hit_eval_3_split = annot_top_nr_hit_eval_3.split('|',4)
+					annot_nr_beg_3 = annot_top_nr_hit_eval_3_split[0] + "|" + annot_top_nr_hit_eval_3_split[1] + "|" + annot_top_nr_hit_eval_3_split[2]
+					annot_nr_link_3 = annot_top_nr_hit_eval_3_split[3]
+					annot_nr_end_3 = annot_top_nr_hit_eval_3_split[4]
 					annot_other_nr_hits_3 = Annotation.objects.get(nvertx_id=nvertx_3).Other_nr_hits
 					nr_hit_graph_3 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_3).group(0)
 			except :
 				nvertx_3_annot_invalid = True
 			try :
 				ncbi_3 = annot_top_nr_hit_eval_3.split('|')[1]
+				prot_3 = annot_top_nr_hit_eval_1.split('|')[3]
 			except :
 				nvertx_3_links_invalid = True
 
@@ -923,16 +926,17 @@ def results(request):
 				annot_uniprot_description_4 = Annotation.objects.get(nvertx_id=nvertx_4).Uniprot_Description
 				annot_top_nr_hit_eval_4 = Annotation.objects.get(nvertx_id=nvertx_4).Top_nr_hit_eval
 				if annot_top_nr_hit_eval_4 != "NA" :
-					annot_top_nr_hit_eval_4_split = annot_top_nr_hit_eval_4.split('|',2)
-					annot_nr_beg_4 = annot_top_nr_hit_eval_4_split[0]
-					annot_nr_link_4 = annot_top_nr_hit_eval_4_split[1]
-					annot_nr_end_4 = annot_top_nr_hit_eval_4_split[2]
+					annot_top_nr_hit_eval_4_split = annot_top_nr_hit_eval_4.split('|',4)
+					annot_nr_beg_4 = annot_top_nr_hit_eval_4_split[0] + "|" + annot_top_nr_hit_eval_4_split[1] + "|" + annot_top_nr_hit_eval_4_split[2]
+					annot_nr_link_4 = annot_top_nr_hit_eval_4_split[3]
+					annot_nr_end_4 = annot_top_nr_hit_eval_4_split[4]
 					annot_other_nr_hits_4 = Annotation.objects.get(nvertx_id=nvertx_4).Other_nr_hits
 					nr_hit_graph_4 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_4).group(0)
 			except :
 				nvertx_4_annot_invalid = True
 			try :
 				ncbi_4 = annot_top_nr_hit_eval_4.split('|')[1]
+				prot_4 = annot_top_nr_hit_eval_1.split('|')[3]
 			except :
 				nvertx_4_links_invalid = True
 
@@ -1142,16 +1146,17 @@ def results(request):
 				annot_uniprot_description_5 = Annotation.objects.get(nvertx_id=nvertx_5).Uniprot_Description
 				annot_top_nr_hit_eval_5 = Annotation.objects.get(nvertx_id=nvertx_5).Top_nr_hit_eval
 				if annot_top_nr_hit_eval_5 != "NA" :
-					annot_top_nr_hit_eval_5_split = annot_top_nr_hit_eval_5.split('|',2)
-					annot_nr_beg_5 = annot_top_nr_hit_eval_5_split[0]
-					annot_nr_link_5 = annot_top_nr_hit_eval_5_split[1]
-					annot_nr_end_5 = annot_top_nr_hit_eval_5_split[2]
+					annot_top_nr_hit_eval_5_split = annot_top_nr_hit_eval_5.split('|',4)
+					annot_nr_beg_5 = annot_top_nr_hit_eval_5_split[0] + "|" + annot_top_nr_hit_eval_5_split[1] + "|" + annot_top_nr_hit_eval_5_split[2]
+					annot_nr_link_5 = annot_top_nr_hit_eval_5_split[3]
+					annot_nr_end_5 = annot_top_nr_hit_eval_5_split[4]
 					annot_other_nr_hits_5 = Annotation.objects.get(nvertx_id=nvertx_5).Other_nr_hits
 					nr_hit_graph_5 = re.search('[\[\- \w]+\]', annot_top_nr_hit_eval_5).group(0)
 			except :
 				nvertx_5_annot_invalid = True
 			try :
 				ncbi_5 = annot_top_nr_hit_eval_5.split('|')[1]
+				prot_5 = annot_top_nr_hit_eval_1.split('|')[3]
 			except :
 				nvertx_5_links_invalid = True
 

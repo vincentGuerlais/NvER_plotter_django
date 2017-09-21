@@ -782,9 +782,9 @@
               </div>
             </div>
             <div id="Annotations" class="tab-pane fade">
-              <table class="table table-striped">
-                <h3>Annotations</h3>
-                <p class="text-info">click on a row to view the other nr hits</p>
+              <h3>Annotations</h3>
+              <p class="text-info">click on a row to view the other nr hits</p>
+              <table id = "annotations" class="table table-striped">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -800,7 +800,7 @@
                   </tr>
                 </thead>
                 <tbody id="annot_table">
-                  <tr>
+                  <tr class="clickable">
                     <td>{{ nvertx_1 }}</td>
                     {% if not nvertx_1_annot_invalid %}
                     <td>{{ annot_nemve1_tophit_1 }}</td>
@@ -809,13 +809,13 @@
                     <td>{{ annot_mfuzz_r_score_1 }}</td>
                     <td>{% if annot_mfuzz_e_clust_1 == 'NA' %}{{ annot_mfuzz_e_clust_1 }}{% else %}<a href="mfuzz/{{ annot_mfuzz_e_clust_1 }}">{{ annot_mfuzz_e_clust_1 }}</a>{% endif %}</td>
                     <td>{{ annot_mfuzz_e_score_1 }}</td>
-                    <td>{% if annot_uniprot_id_1 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_1 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_1 }}">{{ annot_uniprot_id_1 }}</a>{% endif %}</td>
+                    <td>{% if annot_uniprot_id_1 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_1 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_1 }}" target="_blank">{{ annot_uniprot_id_1 }}</a>{% endif %}</td>
                     <td>{{ annot_uniprot_description_1 }}</td>
-                    <td>{% if annot_nr_link_1 %}{{ annot_nr_beg_1 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_1 }}">{{ annot_nr_link_1 }}</a>|{{ annot_nr_end_1 }}{% else %}None{% endif %}</td>
+                    <td>{% if annot_nr_link_1 %}{{ annot_nr_beg_1 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_1 }}" target="_blank">{{ annot_nr_link_1 }}</a>|{{ annot_nr_end_1 }}{% else %}None{% endif %}</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="9" class="hidden_row"><p>{{ annot_other_nr_hits_1 }}</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="9" ><p>{{ annot_other_nr_hits_1 }}</p></td>
                   </tr>
                     {% else %}
                     <td colspan='10'>No data</td>
@@ -826,7 +826,7 @@
                   </tr>
                     {% endif %}
                   {% if nvertx_2 %}
-                  <tr>
+                  <tr class="clickable">
                     <td>{{ nvertx_2 }}</td>
                     {% if not nvertx_2_annot_invalid %}
                     <td>{{ annot_nemve1_tophit_2 }}</td>
@@ -835,25 +835,25 @@
                     <td>{{ annot_mfuzz_r_score_2 }}</td>
                     <td>{% if annot_mfuzz_e_clust_2 == 'NA' %}{{ annot_mfuzz_e_clust_2 }}{% else %}<a href="mfuzz/{{ annot_mfuzz_e_clust_2 }}">{{ annot_mfuzz_e_clust_2 }}</a>{% endif %}</td>
                     <td>{{ annot_mfuzz_e_score_2 }}</td>
-                    <td>{% if annot_uniprot_id_2 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_2 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_2 }}">{{ annot_uniprot_id_2 }}</a>{% endif %}</td>
+                    <td>{% if annot_uniprot_id_2 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_2 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_2 }}" target="_blank">{{ annot_uniprot_id_2 }}</a>{% endif %}</td>
                     <td>{{ annot_uniprot_description_2 }}</td>
-                    <td>{% if annot_nr_link_2 %}{{ annot_nr_beg_2 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_2 }}">{{ annot_nr_link_2 }}</a>|{{ annot_nr_end_2 }}{% else %}None{% endif %}</td>
+                    <td>{% if annot_nr_link_2 %}{{ annot_nr_beg_2 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_2 }}" target="_blank">{{ annot_nr_link_2 }}</a>|{{ annot_nr_end_2 }}{% else %}None{% endif %}</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="9" class="hidden_row"><p>{{ annot_other_nr_hits_2 }}</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="9" ><p>{{ annot_other_nr_hits_2 }}</p></td>
                   </tr>
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="7" ><p>No data</p></td>
                   </tr>
                     {% endif %}
                   {% endif %}
                   {% if nvertx_3 %}
-                  <tr>
+                  <tr class="clickable">
                     <td>{{ nvertx_3 }}</td>
                     {% if not nvertx_3_annot_invalid %}
                     <td>{{ annot_nemve1_tophit_3 }}</td>
@@ -862,25 +862,25 @@
                     <td>{{ annot_mfuzz_r_score_3 }}</td>
                     <td>{% if annot_mfuzz_e_clust_3 == 'NA' %}{{ annot_mfuzz_e_clust_3 }}{% else %}<a href="mfuzz/{{ annot_mfuzz_e_clust_3 }}">{{ annot_mfuzz_e_clust_3 }}</a>{% endif %}</td>
                     <td>{{ annot_mfuzz_e_score_3 }}</td>
-                    <td>{% if annot_uniprot_id_3 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_3 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_3 }}">{{ annot_uniprot_id_3 }}</a>{% endif %}</td>
+                    <td>{% if annot_uniprot_id_3 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_3 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_3 }}" target="_blank">{{ annot_uniprot_id_3 }}</a>{% endif %}</td>
                     <td>{{ annot_uniprot_description_3 }}</td>
-                    <td>{% if annot_nr_link_3 %}{{ annot_nr_beg_3 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_3 }}">{{ annot_nr_link_3 }}</a>|{{ annot_nr_end_3 }}{% else %}None{% endif %}</td>
+                    <td>{% if annot_nr_link_3 %}{{ annot_nr_beg_3 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_3 }}" target="_blank">{{ annot_nr_link_3 }}</a>|{{ annot_nr_end_3 }}{% else %}None{% endif %}</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="9" class="hidden_row"><p>{{ annot_other_nr_hits_3 }}</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="9" ><p>{{ annot_other_nr_hits_2 }}</p></td>
                   </tr>
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="7" ><p>No data</p></td>
                   </tr>
                     {% endif %}
                   {% endif %}
                   {% if nvertx_4 %}
-                  <tr>
+                  <tr class="clickable">
                     <td>{{ nvertx_4 }}</td>
                     {% if not nvertx_4_annot_invalid %}
                     <td>{{ annot_nemve1_tophit_4 }}</td>
@@ -889,25 +889,25 @@
                     <td>{{ annot_mfuzz_r_score_4 }}</td>
                     <td>{% if annot_mfuzz_e_clust_4 == 'NA' %}{{ annot_mfuzz_e_clust_4 }}{% else %}<a href="mfuzz/{{ annot_mfuzz_e_clust_4 }}">{{ annot_mfuzz_e_clust_4 }}</a>{% endif %}</td>
                     <td>{{ annot_mfuzz_e_score_4 }}</td>
-                    <td>{% if annot_uniprot_id_4 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_4 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_4 }}">{{ annot_uniprot_id_4 }}</a>{% endif %}</td>
+                    <td>{% if annot_uniprot_id_4 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_4 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_4 }}" target="_blank">{{ annot_uniprot_id_4 }}</a>{% endif %}</td>
                     <td>{{ annot_uniprot_description_4 }}</td>
-                    <td>{% if annot_nr_link_4 %}{{ annot_nr_beg_4 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_4 }}">{{ annot_nr_link_4 }}</a>|{{ annot_nr_end_4 }}{% else %}None{% endif %}</td>
+                    <td>{% if annot_nr_link_4 %}{{ annot_nr_beg_4 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_4 }}" target="_blank">{{ annot_nr_link_4 }}</a>|{{ annot_nr_end_4 }}{% else %}None{% endif %}</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="9" class="hidden_row"><p>{{ annot_other_nr_hits_4 }}</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="9" ><p>{{ annot_other_nr_hits_2 }}</p></td>
                   </tr>
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="7" ><p>No data</p></td>
                   </tr>
                     {% endif %}
                   {% endif %}
                   {% if nvertx_5 %}
-                  <tr>
+                  <tr class="clickable">
                     <td>{{ nvertx_5 }}</td>
                     {% if not nvertx_5_annot_invalid %}
                     <td>{{ annot_nemve1_tophit_5 }}</td>
@@ -916,20 +916,20 @@
                     <td>{{ annot_mfuzz_r_score_5 }}</td>
                     <td>{% if annot_mfuzz_e_clust_5 == 'NA' %}{{ annot_mfuzz_e_clust_5 }}{% else %}<a href="mfuzz/{{ annot_mfuzz_e_clust_5 }}">{{ annot_mfuzz_e_clust_5 }}</a>{% endif %}</td>
                     <td>{{ annot_mfuzz_e_score_5 }}</td>
-                    <td>{% if annot_uniprot_id_5 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_5 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_5 }}">{{ annot_uniprot_id_5 }}</a>{% endif %}</td>
+                    <td>{% if annot_uniprot_id_5 == 'No_Uniprotmatch' %}{{ annot_uniprot_id_5 }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ annot_uniprot_id_5 }}" target="_blank">{{ annot_uniprot_id_5 }}</a>{% endif %}</td>
                     <td>{{ annot_uniprot_description_5 }}</td>
-                    <td>{% if annot_nr_link_5 %}{{ annot_nr_beg_5 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_5 }}">{{ annot_nr_link_5 }}</a>|{{ annot_nr_end_5 }}{% else %}None{% endif %}</td>
+                    <td>{% if annot_nr_link_5 %}{{ annot_nr_beg_5 }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ annot_nr_link_5 }}" target="_blank">{{ annot_nr_link_5 }}</a>|{{ annot_nr_end_5 }}{% else %}None{% endif %}</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="9" class="hidden_row"><p>{{ annot_other_nr_hits_5 }}</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="9" ><p>{{ annot_other_nr_hits_2 }}</p></td>
                   </tr>
                     {% else %}
                     <td colspan='8'>No data</td>
                   </tr>
-                  <tr>
-                    <td colspan="1" class="hidden_row"><p>other nr_hits</p></td>
-                    <td colspan="7" class="hidden_row"><p>No data</p></td>
+                  <tr class="hidden_row">
+                    <td colspan="1" ><p>other nr_hits</p></td>
+                    <td colspan="7" ><p>No data</p></td>
                   </tr>
                     {% endif %}
                   {% endif %}
@@ -986,6 +986,7 @@
                   <tr>
                     <th>ID</th>
                     <th>link</th>
+                    <th>PaperBlast</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -994,7 +995,8 @@
                     {% if nvertx_1_links_invalid %}
                     <td>No reference to NCBI found</td>
                     {% else %}
-                    <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_1 }}'>Link to PubMed ({{ ncbi_1 }})</a></td>
+                    <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_1 }}' target="_blank">Link to PubMed ({{ ncbi_1 }})</a></td>
+                    <td><a href='http://papers.genomics.lbl.gov/cgi-bin/litSearch.cgi?query={{ prot_1 }}' target="_blank">Link to PaperBlast ({{ prot_1 }})</a></td>
                     {% endif %}
                   </tr>
                   {% if nvertx_2 %}
@@ -1003,7 +1005,9 @@
                       {% if nvertx_2_links_invalid %}
                       <td>No reference to NCBI found</td>
                       {% else %}
-                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_2 }}'>Link to PubMed ({{ ncbi_2 }})</a></td>
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_2 }}' target="_blank">Link to PubMed ({{ ncbi_2 }})</a></td>
+                      <td><a href='http://papers.genomics.lbl.gov/cgi-bin/litSearch.cgi?query={{ prot_2 }}' target="_blank">Link to PaperBlast ({{ prot_2 }})</a></td>
+
                       {% endif %}
                   </tr>
                   {% endif %}
@@ -1013,7 +1017,9 @@
                       {% if nvertx_3_links_invalid %}
                       <td>No reference to NCBI found</td>
                       {% else %}
-                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_3 }}'>Link to PubMed ({{ ncbi_3 }})</a></td>
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_3 }}' target="_blank">Link to PubMed ({{ ncbi_3 }})</a></td>
+                      <td><a href='http://papers.genomics.lbl.gov/cgi-bin/litSearch.cgi?query={{ prot_3 }}' target="_blank">Link to PaperBlast ({{ prot_3 }})</a></td>
+
                       {% endif %}
                   </tr>
                   {% endif %}
@@ -1023,7 +1029,9 @@
                       {% if nvertx_4_links_invalid %}
                       <td>No reference to NCBI found</td>
                       {% else %}
-                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_4 }}'>Link to PubMed ({{ ncbi_4 }})</a></td>
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_4 }}' target="_blank">Link to PubMed ({{ ncbi_4 }})</a></td>
+                      <td><a href='http://papers.genomics.lbl.gov/cgi-bin/litSearch.cgi?query={{ prot_4 }}' target="_blank">Link to PaperBlast ({{ prot_4 }})</a></td>
+
                       {% endif %}
                   </tr>
                   {% endif %}
@@ -1033,7 +1041,9 @@
                       {% if nvertx_5_links_invalid %}
                       <td>No reference to NCBI found</td>
                       {% else %}
-                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_5 }}'>Link to PubMed ({{ ncbi_5 }})</a></td>
+                      <td><a href='https://www.ncbi.nlm.nih.gov/pubmed?LinkName=protein_pubmed&from_uid={{ ncbi_5 }}' target="_blank">Link to PubMed ({{ ncbi_5 }})</a></td>
+                      <td><a href='http://papers.genomics.lbl.gov/cgi-bin/litSearch.cgi?query={{ prot_5 }}' target="_blank">Link to PaperBlast ({{ prot_5 }})</a></td>
+
                       {% endif %}
                   </tr>
                   {% endif %}
@@ -1046,6 +1056,12 @@
 {% endblock content %}
 
 {% block js %}
+<script type="text/javascript">
+$("body").on("click", ".clickable",function(){
+	$(this).next().toggle();
+});
+</script>
+<!-- This is the old show/hide script
 <script type="text/javascript">
 $(function() {
     $("td[colspan=1]").find("p").hide();
@@ -1061,5 +1077,6 @@ $(function() {
     });
 });
 </script>
+-->
 {% endblock js %}
 
