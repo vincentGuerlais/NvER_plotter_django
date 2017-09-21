@@ -496,7 +496,7 @@ def results(request):
 				nvertx_2_annot_invalid = True
 			try :
 				ncbi_2 = annot_top_nr_hit_eval_2.split('|')[1]
-				prot_2 = annot_top_nr_hit_eval_1.split('|')[3]
+				prot_2 = annot_top_nr_hit_eval_2.split('|')[3]
 			except :
 				nvertx_2_links_invalid = True
 
@@ -716,7 +716,7 @@ def results(request):
 				nvertx_3_annot_invalid = True
 			try :
 				ncbi_3 = annot_top_nr_hit_eval_3.split('|')[1]
-				prot_3 = annot_top_nr_hit_eval_1.split('|')[3]
+				prot_3 = annot_top_nr_hit_eval_3.split('|')[3]
 			except :
 				nvertx_3_links_invalid = True
 
@@ -936,7 +936,7 @@ def results(request):
 				nvertx_4_annot_invalid = True
 			try :
 				ncbi_4 = annot_top_nr_hit_eval_4.split('|')[1]
-				prot_4 = annot_top_nr_hit_eval_1.split('|')[3]
+				prot_4 = annot_top_nr_hit_eval_4.split('|')[3]
 			except :
 				nvertx_4_links_invalid = True
 
@@ -1156,7 +1156,7 @@ def results(request):
 				nvertx_5_annot_invalid = True
 			try :
 				ncbi_5 = annot_top_nr_hit_eval_5.split('|')[1]
-				prot_5 = annot_top_nr_hit_eval_1.split('|')[3]
+				prot_5 = annot_top_nr_hit_eval_5.split('|')[3]
 			except :
 				nvertx_5_links_invalid = True
 
