@@ -1176,7 +1176,6 @@ def results(request):
 		if nvertx_5 :
 			multifasta = multifasta + '\n' + '>' + nvertx_5 + '\n' + sequence_fasta_5
 
-		print(multifasta)
 		#this chunk calls the MUSCLE alignment
 		#create temp file
     	tempin = tempfile.NamedTemporaryFile()
@@ -1186,7 +1185,7 @@ def results(request):
     	tempout = tempfile.NamedTemporaryFile()
     	tempin.seek(0)
     	#tempin.read()
-    	os.system("./muscle3.8.31 -in " + tempin.name + " -out " + tempout.name +" -html")
+    	os.system("/srv/www/htdocs/ER/NvER_plotter_django/nemVec_ER/muscle3.8.31 -in " + tempin.name + " -out " + tempout.name +" -html -quiet")
     	#close and remove file
     	tempout.seek(0)
     	out = tempout.read()
