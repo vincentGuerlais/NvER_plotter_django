@@ -251,6 +251,7 @@
       <li><a data-toggle="tab" href="#Annotations">Annotations</a></li>
       <li><a data-toggle="tab" href="#Fasta">Fasta</a></li>
       <li><a data-toggle="tab" href="#Links">Links</a></li>
+      <li><a data-toggle="tab" href="#Alignment">Alignment</a></li>
     </ul>
     <br/>
     <div class="tab-content">
@@ -1049,6 +1050,10 @@
                   {% endif %}
                 </tbody>
               </table>
+            </div>
+            <div id="Alignment" class="tab-content fade">
+                <h3>MUSCLE Alignment</h3>
+                {% autoescape off %}{{ out }}{% endautoescape %}
             </div>
           </div>
 

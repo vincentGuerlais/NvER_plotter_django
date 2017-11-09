@@ -5,6 +5,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Regen_SE, Mfuzz, Regen_log_SE, Embryo_SE
 from .forms import Gene_searchForm, NvERTxForm, ConvertForm
 import math, re, diggPaginator
+import os
+import sys
+import tempfile
 from blastplus import utils
 from blastplus.forms import BlastForm, TBlastnForm, BlastpForm, BlastxForm
 from blastplus.settings import BLAST_CORRECT_PARAMS
@@ -1159,6 +1162,36 @@ def results(request):
 				prot_5 = annot_top_nr_hit_eval_5.split('|')[3]
 			except :
 				nvertx_5_links_invalid = True
+		
+		#This chunk cats the multifastas
+		multifasta = ''
+		if nvertx_1 :
+			multifasta = '>' + nvertx_1 + '\n' + sequence_fasta_1
+		if nvertx_2 :
+			multifasta = multifasta + '\n' + '>' + nvertx_2 + '\n' + sequence_fasta_2
+		if nvertx_3 :
+			multifasta = multifasta + '\n' + '>' + nvertx_3 + '\n' + sequence_fasta_3
+		if nvertx_4 :
+			multifasta = multifasta + '\n' + '>' + nvertx_4 + '\n' + sequence_fasta_4
+		if nvertx_5 :
+			multifasta = multifasta + '\n' + '>' + nvertx_5 + '\n' + sequence_fasta_5
+
+		print(multifasta)
+		#this chunk calls the MUSCLE alignment
+		#create temp file
+    	tempin = tempfile.NamedTemporaryFile()
+    	#write the fasta to it
+    	tempin.write(multifasta)
+    	#create a temporary outfile
+    	tempout = tempfile.NamedTemporaryFile()
+    	tempin.seek(0)
+    	#tempin.read()
+    	os.system("./muscle3.8.31 -in " + tempin.name + " -out " + tempout.name +" -html")
+    	#close and remove file
+    	tempout.seek(0)
+    	out = tempout.read()
+    	tempout.close()
+    	tempin.close()
 
 	return render(request, 'ER_plotter/nvertxResults.html', locals())
 
